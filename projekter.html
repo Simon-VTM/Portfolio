@@ -60,21 +60,9 @@
     .card-link:focus-visible .card{ box-shadow:0 0 0 3px rgba(37,99,235,.35); }
     .actions{ display:none; } /* skjul gamle “Se detaljer”-knapper, hvis de står tilbage */
     
-       /* Semestre: 2 kolonner = 50/50 */
-    #semestre .grid{
-      display:grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr)); /* 50/50 */
-      gap:16px;
-    }
-    #semestre .grid > *{ min-width:0; }
-    
-    /* Valgfag: 3 kolonner = 1/3 hver */
-    #valgfag .grid{
-      display:grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr)); /* 50/50 */
-      gap:16px;
-    }
-    #valgfag .grid > *{ min-width:0; }
+    #semestre .grid{ grid-template-columns: repeat(2, minmax(0,1fr)); gap:16px; }
+    #valgfag  .grid{ grid-template-columns: repeat(2, minmax(0,1fr)); gap:16px; }
+    #semestre .grid > *, #valgfag .grid > *{ min-width:0; }
     
     /* Responsivt (valgfrit): tablet=2 kolonner, mobil=1 kolonne */
     @media (max-width:980px){
@@ -273,6 +261,7 @@
   </script>
 </body>
 </html>
+
 
 
 
