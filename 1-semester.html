@@ -23,31 +23,25 @@
     .chip{ padding:6px 10px; border-radius:999px; background:#eef2f7; font-size:12px; }
     footer{ text-align:center; padding:40px 24px; color:#475569; }
 
-     /* --- Galleri på detaljesiden --- */
-.gallery-section{ margin-top:24px; }
-.gallery-section h2{ margin:0 0 10px; }
-.gallery-section h3{ margin:18px 0 10px; font-size:18px; }
+            :root{ --space:20px; --radius:16px; --border:#e6e8eb; }
 
-.gallery-grid{
-  display:grid;
-  gap:12px;
-  grid-template-columns: repeat(auto-fill, minmax(220px,1fr));
-}
-.gallery-grid a{
-  display:block;
-  border:1px solid var(--border);
-  border-radius:12px;
-  overflow:hidden;
-  background:#fff;
-}
-.gallery-grid img{
-  width:100%;
-  aspect-ratio: 4/3;          /* ens kortstørrelse */
-  object-fit: cover;          /* beskærer lidt i thumb – original vises ved klik */
-  display:block;
-  transition: transform .15s ease;
-}
-.gallery-grid a:hover img{ transform: scale(1.02); }
+    main.grid{ display:grid; gap:20px; grid-template-columns: 2fr 1fr; }
+    @media (max-width:900px){ main.grid{ grid-template-columns:1fr; } }
+
+    /* gør en sektion til “kort” som de to øverste */
+    .card{ background:#fff; padding:var(--space); border-radius:var(--radius); }
+
+    /* fuld bredde inde i gridden (mellem venstre/højre kort – ikke kant-til-kant på siden) */
+    .full-span{ grid-column: 1 / -1; }
+
+    /* Galleri */
+    .gallery-section h2{ margin:0 0 10px; }
+    .gallery-section h3{ margin:18px 0 10px; font-size:18px; }
+    .gallery-grid{ display:grid; gap:12px; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); }
+    .gallery-grid a{ display:block; border:1px solid var(--border); border-radius:12px; overflow:hidden; background:#fff; text-decoration:none; color:inherit; }
+    .gallery-grid img{ width:100%; aspect-ratio:4/3; object-fit:cover; display:block; transition:transform .15s; }
+    .gallery-grid a:hover img{ transform:scale(1.02); }
+
 
   </style>
 </head>
@@ -71,59 +65,71 @@
   </header>
 
   <main class="grid">
-    <section>
-      <h2 style="margin-top:0;">Projektoversigt</h2>
-      <p>På første semester blev der arbejdet med et tværfagligt projekt, hvor opgaven var at projektere et enfamiliehus i 1½ plan – fra idé og skitse til myndighedsprojekt. Der blev opnået kendskab til grundlæggende byggetekniske discipliner, materialevalg, konstruktionsprincipper og bygningsfysik.</p>
+  <!-- Venstre kort -->
+  <section class="card">
+    <h2 style="margin-top:0;">Projektoversigt</h2>
+<p>På første semester blev der arbejdet med et tværfagligt projekt, hvor opgaven var at
+projektere et enfamiliehus i 1½ plan – fra idé og skitse til myndighedsprojekt.
+Der blev opnået kendskab til grundlæggende byggetekniske discipliner,
+materialevalg, konstruktionsprincipper og bygningsfysik.</p>
 
-      <h3>Nøgleopgaver</h3>
-      <ul>
-        <li>Idé, program og skitseforslag</li>
-        <li>Myndighedsprojekt i henhold til BR18</li>
-        <li>Bygningsfysik: U-værdier, kuldebroer, kondensrisiko</li>
-        <li>Materialevalg og konstruktionsprincipper</li>
-      </ul>
-    </section>
+<h3>Nøgleopgaver</h3>
+<ul>
+  <li>Idé, program og skitseforslag</li>
+  <li>Myndighedsprojekt i henhold til BR18</li>
+  <li>Bygningsfysik: U-værdier, kuldebroer, kondensrisiko</li>
+  <li>Materialevalg og konstruktionsprincipper</li>
+</ul>
+  </section>
 
-    <section>
-      <h2 style="margin-top:0;">Fakta</h2>
-      <ul>
-        <li><strong>Type:</strong> Enfamiliehus, 1½ plan</li>
-        <li><strong>Fokus:</strong> Discipliner, materialer, bygningsfysik</li>
-        <li><strong>Roller/værktøjer:</strong> Revit, tegninger, myndighed</li>
-      </ul>
-    </section>
-  </main>
-<section class="gallery-section" id="galleri">
-  <h2>Galleri</h2>
+  <!-- Højre kort -->
+  <section class="card">
+    <h2 style="margin-top:0;">Fakta</h2>
+<ul>
+  <li><strong>Type:</strong> Enfamiliehus, 1½ plan</li>
+  <li><strong>Fokus:</strong> Discipliner, materialer, bygningsfysik</li>
+  <li><strong>Roller/værktøjer:</strong> Revit, tegninger, myndighed</li>
+</ul>
+  </section>
 
-  <h3>Plan/snit-tegninger</h3>
-  <div class="gallery-grid">
-    <a href="billeder/1-semester" target="_blank" rel="noopener">
-      <picture>
-        <source type="image/avif" srcset="billeder/1-semester">
-        <source type="image/webp" srcset="billeder/1-semester">
-        <img src="billeder/1-semester" alt="Stueplan – 1. semester" loading="lazy">
-      </picture>
-    </a>
-    <a href="billeder/1-semester" target="_blank" rel="noopener">
-      <img src="billeder/1-semester" alt="Snit A-A – 1. semester" loading="lazy">
-    </a>
-  </div>
+  <!-- GALLERI: fuld bredde INDE i gridden -->
+  <section class="card gallery-section full-span" id="galleri">
+    <h2>Galleri</h2>
 
-  <h3>Tekniske-tegninger</h3>
-  <div class="gallery-grid">
-    <a href="billeder/1-semester" target="_blank" rel="noopener">
-      <img src="billeder/1-semester" alt="Detalje – tagfod" loading="lazy">
-    </a>
-  </div>
+    <h3>Plan/snit-tegninger</h3>
+    <div class="gallery-grid">
+      <a href="billeder/1-semester/plan-01.jpg" target="_blank" rel="noopener">
+        <img src="billeder/1-semester/plan-01.jpg" alt="Stueplan" loading="lazy">
+      </a>
+      <a href="billeder/1-semester/snit-a-a.jpg" target="_blank" rel="noopener">
+        <img src="billeder/1-semester/snit-a-a.jpg" alt="Snit A-A" loading="lazy">
+      </a>
+      <a href="billeder/1-semester/snit-b-b.jpg" target="_blank" rel="noopener">
+        <img src="billeder/1-semester/snit-b-b.jpg" alt="Snit B-B" loading="lazy">
+      </a>
+    </div>
 
-  <h3>Visualiseringer</h3>
-  <div class="gallery-grid">
-    <a href="billeder/1-semester" target="_blank" rel="noopener">
-      <img src="billeder/1-semester" alt="Visualisering – eksteriør" loading="lazy">
-    </a>
-  </div>
-</section>
+    <h3>Tekniske-tegninger</h3>
+    <div class="gallery-grid">
+      <a href="billeder/1-semester/detail-01.jpg" target="_blank" rel="noopener">
+        <img src="billeder/1-semester/detail-01.jpg" alt="Detalje – fundament/væg" loading="lazy">
+      </a>
+      <a href="billeder/1-semester/detail-02.jpg" target="_blank" rel="noopener">
+        <img src="billeder/1-semester/detail-02.jpg" alt="Detalje – tagfod" loading="lazy">
+      </a>
+    </div>
+
+    <h3>Visualiseringer</h3>
+    <div class="gallery-grid">
+      <a href="billeder/1-semester/vis-01.jpg" target="_blank" rel="noopener">
+        <img src="billeder/1-semester/vis-01.jpg" alt="Eksteriør – visualisering" loading="lazy">
+      </a>
+      <a href="billeder/1-semester/vis-02.jpg" target="_blank" rel="noopener">
+        <img src="billeder/1-semester/vis-02.jpg" alt="Interiør – visualisering" loading="lazy">
+      </a>
+    </div>
+  </section>
+</main>
 
   <footer>© 2025 Dit Navn</footer>
 </body>

@@ -23,31 +23,24 @@
     .chip{ padding:6px 10px; border-radius:999px; background:#eef2f7; font-size:12px; }
     footer{ text-align:center; padding:40px 24px; color:#475569; }
 
-     /* --- Galleri på detaljesiden --- */
-.gallery-section{ margin-top:24px; }
+     :root{ --space:20px; --radius:16px; --border:#e6e8eb; }
+
+main.grid{ display:grid; gap:20px; grid-template-columns: 2fr 1fr; }
+@media (max-width:900px){ main.grid{ grid-template-columns:1fr; } }
+
+/* gør en sektion til “kort” som de to øverste */
+.card{ background:#fff; padding:var(--space); border-radius:var(--radius); }
+
+/* fuld bredde inde i gridden (mellem venstre/højre kort – ikke kant-til-kant på siden) */
+.full-span{ grid-column: 1 / -1; }
+
+/* Galleri */
 .gallery-section h2{ margin:0 0 10px; }
 .gallery-section h3{ margin:18px 0 10px; font-size:18px; }
-
-.gallery-grid{
-  display:grid;
-  gap:12px;
-  grid-template-columns: repeat(auto-fill, minmax(220px,1fr));
-}
-.gallery-grid a{
-  display:block;
-  border:1px solid var(--border);
-  border-radius:12px;
-  overflow:hidden;
-  background:#fff;
-}
-.gallery-grid img{
-  width:100%;
-  aspect-ratio: 4/3;          /* ens kortstørrelse */
-  object-fit: cover;          /* beskærer lidt i thumb – original vises ved klik */
-  display:block;
-  transition: transform .15s ease;
-}
-.gallery-grid a:hover img{ transform: scale(1.02); }
+.gallery-grid{ display:grid; gap:12px; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); }
+.gallery-grid a{ display:block; border:1px solid var(--border); border-radius:12px; overflow:hidden; background:#fff; text-decoration:none; color:inherit; }
+.gallery-grid img{ width:100%; aspect-ratio:4/3; object-fit:cover; display:block; transition:transform .15s; }
+.gallery-grid a:hover img{ transform:scale(1.02); }
 
   </style>
 </head>
@@ -74,55 +67,75 @@
   </header>
 
   <main class="grid">
-    <section>
-      <h2 style="margin-top:0;">Projektoversigt</h2>
-      <p>På andet semester blev der arbejdet med et tværfagligt projekt, hvor opgaven var at projektere et tæt-lavt boligområde med tilhørende fælleshus. Projektet omfattede både boliger i to etager, heraf handicapvenlige enheder, samt fællesfaciliteter med kælder. Der blev arbejdet med situationsplaner, bygningsdesign, materialevalg, bæredygtighedsløsninger og tekniske installationer. Arbejdet omfattede faserne forslag, myndighedsprojekt og udbudsprojekt, med fokus på både arkitektonisk udtryk, funktionalitet, energikrav og opfyldelse af bygherrekrav.</p>
-      <h3>Nøgleopgaver</h3>
-      <ul>
-        <li>Stedanalyse og situationsplan</li>
-        <li>Boligtypologi og adgangsforhold (inkl. tilgængelighed)</li>
-        <li>Forslags-, myndigheds- og udbudsprojekt</li>
-        <li>Koordinering af tekniske installationer</li>
-      </ul>
-    </section>
+  <!-- Venstre kort -->
+  <section class="card">
+    <h2 style="margin-top:0;">Projektoversigt</h2>
+<p>På andet semester blev der projekteret et tæt-lavt boligområde med tilhørende
+fælleshus. Projektet omfattede boliger i to etager – heraf handicapvenlige
+enheder – samt fællesfaciliteter med kælder. Der blev arbejdet med
+situationsplaner, bygningsdesign, materialevalg, bæredygtighedsløsninger og
+tekniske installationer gennem faserne forslag, myndighed og udbud – med fokus
+på arkitektonisk udtryk, funktionalitet, energikrav og bygherrekrav.</p>
 
-    <section>
-      <h2 style="margin-top:0;">Fakta</h2>
-      <ul>
-        <li><strong>Type:</strong> Tæt-lav bebyggelse + fælleshus</li>
-        <li><strong>Fokus:</strong> Funktionalitet, energikrav, bygherrekrav</li>
-      </ul>
-    </section>
-  </main>
+<h3>Nøgleopgaver</h3>
+<ul>
+  <li>Stedanalyse og situationsplan</li>
+  <li>Boligtypologi, adgangsforhold og tilgængelighed</li>
+  <li>Projektering af fælleshus (kælder og fællesfunktioner)</li>
+  <li>Bæredygtighedstiltag og energikrav</li>
+  <li>Koordinering af tekniske installationer</li>
+  <li>Forslag-, myndigheds- og udbudsprojekt</li>
+</ul>
+  </section>
 
-    <section class="gallery-section" id="galleri">
-      <h2>Galleri</h2>
+  <!-- Højre kort -->
+  <section class="card">
+    <h2 style="margin-top:0;">Fakta</h2>
+<ul>
+  <li><strong>Type:</strong> Tæt-lav bebyggelse + fælleshus</li>
+  <li><strong>Fokus:</strong> Funktionalitet, energikrav, bygherrekrav</li>
+  <li><strong>Roller/værktøjer:</strong> Revit, energiberegning, installationer</li>
+</ul>
+  </section>
 
-      <h3>Plan/snit-tegninger</h3>
-      <div class="gallery-grid">
-        <a href="billeder/2-semester" target="_blank" rel="noopener">
-          <img src="billeder/2-semester" alt="Situationsplan – tæt-lavt" loading="lazy">
-        </a>
-        <a href="billeder/2-semester" target="_blank" rel="noopener">
-          <img src="billeder/2-semester" alt="Snit – fælleshus" loading="lazy">
-        </a>
-      </div>
+  <!-- GALLERI: fuld bredde INDE i gridden -->
+  <section class="card gallery-section full-span" id="galleri">
+    <h2>Galleri</h2>
 
-      <h3>Tekniske-tegninger</h3>
-      <div class="gallery-grid">
-        <a href="billeder/2-semester" target="_blank" rel="noopener">
-          <img src="billeder/2-semester" alt="Detalje – facade" loading="lazy">
-        </a>
-      </div>
+  <h3>Plan/snit-tegninger</h3>
+  <div class="gallery-grid">
+    <a href="billeder/2-semester/plan-01.jpg" target="_blank" rel="noopener">
+      <img src="billeder/2-semester/plan-01.jpg" alt="Situationsplan – tæt-lavt" loading="lazy">
+    </a>
+    <a href="billeder/2-semester/snit-01.jpg" target="_blank" rel="noopener">
+      <img src="billeder/2-semester/snit-01.jpg" alt="Snit – fælleshus" loading="lazy">
+    </a>
+    <a href="billeder/2-semester/snit-02.jpg" target="_blank" rel="noopener">
+      <img src="billeder/2-semester/snit-02.jpg" alt="Snit – bolig" loading="lazy">
+    </a>
+  </div>
 
-      <h3>Visualiseringer</h3>
-      <div class="gallery-grid">
-        <a href="billeder/2-semester" target="_blank" rel="noopener">
-          <img src="billeder/2-semester" alt="Visualisering – fælleshus" loading="lazy">
-        </a>
-      </div>
-    </section>
+  <h3>Tekniske-tegninger</h3>
+  <div class="gallery-grid">
+    <a href="billeder/2-semester/detail-01.jpg" target="_blank" rel="noopener">
+      <img src="billeder/2-semester/detail-01.jpg" alt="Detalje – facade" loading="lazy">
+    </a>
+    <a href="billeder/2-semester/detail-02.jpg" target="_blank" rel="noopener">
+      <img src="billeder/2-semester/detail-02.jpg" alt="Detalje – installationer" loading="lazy">
+    </a>
+  </div>
 
+  <h3>Visualiseringer</h3>
+  <div class="gallery-grid">
+    <a href="billeder/2-semester/vis-01.jpg" target="_blank" rel="noopener">
+      <img src="billeder/2-semester/vis-01.jpg" alt="Visualisering – fælleshus" loading="lazy">
+    </a>
+    <a href="billeder/2-semester/vis-02.jpg" target="_blank" rel="noopener">
+      <img src="billeder/2-semester/vis-02.jpg" alt="Visualisering – bebyggelse" loading="lazy">
+    </a>
+  </div>
+  </section>
+</main>
 
 
   <footer>© 2025 Dit Navn</footer>

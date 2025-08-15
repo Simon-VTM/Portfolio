@@ -17,31 +17,24 @@
     .chips{ display:flex; gap:8px; flex-wrap:wrap; margin-top:12px } .chip{ padding:6px 10px; border-radius:999px; background:#eef2f7; font-size:12px }
     footer{ text-align:center; padding:40px 24px; color:#475569 }
 
-     /* --- Galleri på detaljesiden --- */
-.gallery-section{ margin-top:24px; }
+     :root{ --space:20px; --radius:16px; --border:#e6e8eb; }
+
+main.grid{ display:grid; gap:20px; grid-template-columns: 2fr 1fr; }
+@media (max-width:900px){ main.grid{ grid-template-columns:1fr; } }
+
+/* gør en sektion til “kort” som de to øverste */
+.card{ background:#fff; padding:var(--space); border-radius:var(--radius); }
+
+/* fuld bredde inde i gridden (mellem venstre/højre kort – ikke kant-til-kant på siden) */
+.full-span{ grid-column: 1 / -1; }
+
+/* Galleri */
 .gallery-section h2{ margin:0 0 10px; }
 .gallery-section h3{ margin:18px 0 10px; font-size:18px; }
-
-.gallery-grid{
-  display:grid;
-  gap:12px;
-  grid-template-columns: repeat(auto-fill, minmax(220px,1fr));
-}
-.gallery-grid a{
-  display:block;
-  border:1px solid var(--border);
-  border-radius:12px;
-  overflow:hidden;
-  background:#fff;
-}
-.gallery-grid img{
-  width:100%;
-  aspect-ratio: 4/3;          /* ens kortstørrelse */
-  object-fit: cover;          /* beskærer lidt i thumb – original vises ved klik */
-  display:block;
-  transition: transform .15s ease;
-}
-.gallery-grid a:hover img{ transform: scale(1.02); }
+.gallery-grid{ display:grid; gap:12px; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); }
+.gallery-grid a{ display:block; border:1px solid var(--border); border-radius:12px; overflow:hidden; background:#fff; text-decoration:none; color:inherit; }
+.gallery-grid img{ width:100%; aspect-ratio:4/3; object-fit:cover; display:block; transition:transform .15s; }
+.gallery-grid a:hover img{ transform:scale(1.02); }
 
   </style>
 </head>
@@ -61,51 +54,74 @@
     </div>
   </div>
 </header>
-<main class="grid">
-  <section>
-    <h2 style="margin-top:0;">Projektoversigt</h2>
-    <p>På fjerde semester blev der arbejdet videre med projektet Graff’s Hus i Esbjerg – en randbebyggelse i fire etager med kælder, indeholdende butikker, restaurant, kontorer og boliger. Projektet tog udgangspunkt i dispositionsforslaget fra valgfaget <em>Fra byggeprogram til dispositionsforslag</em>, som blev videreudviklet til forslags-, myndigheds- og udbudsprojekt.</p>
-    <p>Der blev arbejdet med projektering efter BR18, DGNB-krav og bæredygtige løsninger. Projektet omfattede både konstruktionsmæssige løsninger og tekniske installationer, med særligt fokus på ventilation (dimensionering, aggregatplacering og kanalføring) samt koordinering med øvrige installationer.</p>
-    <h3>Leverancer</h3>
-    <ul>
-      <li>Hoved- og detailtegninger, statiske beregninger</li>
-      <li>Energiberegning, brandstrategi</li>
-      <li>Arbejdsmiljøplan (PSS), bygningsdelsbeskrivelser</li>
-    </ul>
-  </section>
-  <section>
-    <h2 style="margin-top:0;">Fakta</h2>
-    <ul>
-      <li><strong>Type:</strong> Blandet bybyggeri, 4 etager + kælder</li>
-      <li><strong>Fokus:</strong> DGNB, ventilation, koordinering</li>
-    </ul>
-  </section>
-</main>
 
-<section class="gallery-section" id="galleri">
+<main class="grid">
+  <!-- Venstre kort -->
+  <section class="card">
+    <h2 style="margin-top:0;">Projektoversigt</h2>
+<p>På fjerde semester blev dispositionsforslaget til Graff’s Hus i Esbjerg
+videreudviklet til forslag-, myndigheds- og udbudsprojekt. Randbebyggelse i fire
+etager med kælder, indeholdende butikker, restaurant, kontorer og boliger.
+Der blev projekteret efter BR18 og DGNB med fokus på bæredygtige materialer og
+konstruktioner. Særligt fokus lå på ventilation (dimensionering, placering og
+kanalføring) samt koordinering med øvrige installationer.</p>
+
+<h3>Nøgleopgaver</h3>
+<ul>
+  <li>Videreudvikling fra dispositionsforslag til myndighed og udbud</li>
+  <li>BR18-overholdelse og DGNB-krav</li>
+  <li>Ventilationsprojektering og installationskoordination</li>
+  <li>Hoved- og detailtegninger</li>
+  <li>Statiske beregninger og energiberegning</li>
+  <li>Brandstrategi, arbejdsmiljøplan og bygningsdelsbeskrivelser</li>
+</ul>
+  </section>
+
+  <!-- Højre kort -->
+  <section class="card">
+    <h2 style="margin-top:0;">Fakta</h2>
+<ul>
+  <li><strong>Type:</strong> Randbebyggelse i 4 etager m. kælder (erhverv + boliger)</li>
+  <li><strong>Fokus:</strong> BR18, DGNB, bæredygtige valg, ventilation/teknik</li>
+  <li><strong>Roller/værktøjer:</strong> Revit, energiramme, statik, brand</li>
+</ul>
+  </section>
+
+  <!-- GALLERI: fuld bredde INDE i gridden -->
+  <section class="card gallery-section full-span" id="galleri">
   <h2>Galleri</h2>
 
   <h3>Plan/snit-tegninger</h3>
   <div class="gallery-grid">
-    <a href="billeder/4-semester" target="_blank" rel="noopener">
-      <img src="billeder/4-semester" alt="Plan – Graff’s Hus" loading="lazy">
+    <a href="billeder/4-semester/plan-01.jpg" target="_blank" rel="noopener">
+      <img src="billeder/4-semester/plan-01.jpg" alt="Plan – Graff’s Hus" loading="lazy">
+    </a>
+    <a href="billeder/4-semester/snit-01.jpg" target="_blank" rel="noopener">
+      <img src="billeder/4-semester/snit-01.jpg" alt="Snit – Graff’s Hus" loading="lazy">
     </a>
   </div>
 
   <h3>Tekniske-tegninger</h3>
   <div class="gallery-grid">
-    <a href="billeder/4-semester" target="_blank" rel="noopener">
-      <img src="billeder/4-semester" alt="Ventilationsprincip" loading="lazy">
+    <a href="billeder/4-semester/detail-01.jpg" target="_blank" rel="noopener">
+      <img src="billeder/4-semester/detail-01.jpg" alt="Detalje – ventilation" loading="lazy">
+    </a>
+    <a href="billeder/4-semester/detail-02.jpg" target="_blank" rel="noopener">
+      <img src="billeder/4-semester/detail-02.jpg" alt="Detalje – brand/bygning" loading="lazy">
     </a>
   </div>
 
   <h3>Visualiseringer</h3>
   <div class="gallery-grid">
-    <a href="billeder/4-semester" target="_blank" rel="noopener">
-      <img src="billeder/4-semester" alt="Visualisering – hjørne" loading="lazy">
+    <a href="billeder/4-semester/vis-01.jpg" target="_blank" rel="noopener">
+      <img src="billeder/4-semester/vis-01.jpg" alt="Visualisering – hjørne" loading="lazy">
+    </a>
+    <a href="billeder/4-semester/vis-02.jpg" target="_blank" rel="noopener">
+      <img src="billeder/4-semester/vis-02.jpg" alt="Visualisering – gade" loading="lazy">
     </a>
   </div>
 </section>
+</main>
 
 <footer>© 2025 Dit Navn</footer>
 </body>

@@ -4,44 +4,33 @@
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Valgfag – Fra program til dispositionsforslag</title>
   <style>
-    :root{ --space:20px; --radius:16px; } body{ font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial; margin:0; color:#0f172a; background:#f8fafc }
-    header, main{ max-width:1000px; margin:0 auto; padding:24px } a{ color:#1f2937 }
+    :root{ --space:20px; --radius:16px; --border:#e6e8eb; }
+    body{ font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial; margin:0; color:#0f172a; background:#f8fafc }
+    header, main{ max-width:1000px; margin:0 auto; padding:24px }
+    a{ color:#1f2937 }
     .back{ display:inline-block; margin:8px 0 16px; text-decoration:none }
     .hero{ border-radius:var(--radius); overflow:hidden; background:#fff }
     .media{ aspect-ratio:16/9; background:linear-gradient(180deg,#f1f5f9,#fff) }
     .body{ padding:var(--space); background:#fff }
     .meta{ color:#000; font-size:18px; font-weight:600; margin-bottom:8px }
     h1{ margin:0 0 8px; font-size:28px }
-    section{ background:#fff; padding:var(--space); border-radius:var(--radius) }
-    .chips{ display:flex; gap:8px; flex-wrap:wrap; margin-top:12px } .chip{ padding:6px 10px; border-radius:999px; background:#eef2f7; font-size:12px }
+    /* kort + grid */
+    main.grid{ display:grid; gap:20px; grid-template-columns: 2fr 1fr; }
+    @media (max-width:900px){ main.grid{ grid-template-columns:1fr; } }
+    .card{ background:#fff; padding:var(--space); border-radius:var(--radius); }
+    .full-span{ grid-column: 1 / -1; }
+
+    /* Galleri */
+    .gallery-section h2{ margin:0 0 10px; }
+    .gallery-section h3{ margin:18px 0 10px; font-size:18px; }
+    .gallery-grid{ display:grid; gap:12px; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); }
+    .gallery-grid a{ display:block; border:1px solid var(--border); border-radius:12px; overflow:hidden; background:#fff; text-decoration:none; color:inherit; }
+    .gallery-grid img{ width:100%; aspect-ratio:4/3; object-fit:cover; display:block; transition:transform .15s; }
+    .gallery-grid a:hover img{ transform:scale(1.02); }
+
+    .chips{ display:flex; gap:8px; flex-wrap:wrap; margin-top:12px }
+    .chip{ padding:6px 10px; border-radius:999px; background:#eef2f7; font-size:12px }
     footer{ text-align:center; padding:40px 24px; color:#475569 }
-    
-    /* --- Galleri på detaljesiden --- */
-.gallery-section{ margin-top:24px; }
-.gallery-section h2{ margin:0 0 10px; }
-.gallery-section h3{ margin:18px 0 10px; font-size:18px; }
-
-.gallery-grid{
-  display:grid;
-  gap:12px;
-  grid-template-columns: repeat(auto-fill, minmax(220px,1fr));
-}
-.gallery-grid a{
-  display:block;
-  border:1px solid var(--border);
-  border-radius:12px;
-  overflow:hidden;
-  background:#fff;
-}
-.gallery-grid img{
-  width:100%;
-  aspect-ratio: 4/3;          /* ens kortstørrelse */
-  object-fit: cover;          /* beskærer lidt i thumb – original vises ved klik */
-  display:block;
-  transition: transform .15s ease;
-}
-.gallery-grid a:hover img{ transform: scale(1.02); }
-
   </style>
 </head>
 <body>
@@ -50,8 +39,7 @@
   <div class="hero">
     <div class="media">
       <img src="billeder/valgfag-dispositionsforslag.png" alt="Visualisering – Graff's Hus, Esbjerg"
-           loading="lazy" 
-           style="width:100%;height:100%;object-fit:contain;object-position:50% 50%;display:block;background:#fff;">
+           loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block;background:#fff;">
     </div>
     <div class="body">
       <div class="meta">Valgfag</div>
@@ -60,38 +48,51 @@
     </div>
   </div>
 </header>
-<main>
-  <section>
+
+<!-- VIGTIGT: alt indhold herunder ligger i den samme grid -->
+<main class="grid">
+
+  <!-- Beskrivelse i fuld bredde -->
+  <section class="card full-span">
     <h2 style="margin-top:0;">Beskrivelse</h2>
     <p>I valgfaget blev der, ud fra et bygherreprogram, udarbejdet et dispositionsforslag til et nybyggeri på en ledig grund i Esbjerg, kaldet Graff’s Hus. Byggeriet er en randbebyggelse i fire etager med kælder, indeholdende butikker, restaurant, kontorer og boliger.</p>
     <p>Projektet gik ud på at analysere byggeprogram og lokalplan, skitsere og projektere i henhold til BR18, med fokus på at realisere bygherrens idéer og krav. Der blev udarbejdet hovedtegninger, visualiseringer, materialebeskrivelser, økonomisk overslag, tidsplan samt dokumentation for bæredygtige og genbrugte materialer.</p>
   </section>
+
+  <!-- (Ingen højre Fakta-boks på denne side) -->
+
+  <!-- GALLERI: fuld bredde inde i gridden -->
+  <section class="card gallery-section full-span" id="galleri">
+    <h2>Galleri</h2>
+
+    <h3>Plan/snit-tegninger</h3>
+    <div class="gallery-grid">
+      <a href="billeder/valgfag/dispositionsforslag/plan-01.jpg" target="_blank" rel="noopener">
+        <img src="billeder/valgfag/dispositionsforslag/plan-01.jpg" alt="Plan – Graff’s Hus" loading="lazy">
+      </a>
+      <a href="billeder/valgfag/dispositionsforslag/snit-01.jpg" target="_blank" rel="noopener">
+        <img src="billeder/valgfag/dispositionsforslag/snit-01.jpg" alt="Snit – Graff’s Hus" loading="lazy">
+      </a>
+    </div>
+
+    <h3>Tekniske-tegninger</h3>
+    <div class="gallery-grid">
+      <a href="billeder/valgfag/dispositionsforslag/detail-01.jpg" target="_blank" rel="noopener">
+        <img src="billeder/valgfag/dispositionsforslag/detail-01.jpg" alt="Detalje – facade/materialer" loading="lazy">
+      </a>
+    </div>
+
+    <h3>Visualiseringer</h3>
+    <div class="gallery-grid">
+      <a href="billeder/valgfag/dispositionsforslag/vis-01.jpg" target="_blank" rel="noopener">
+        <img src="billeder/valgfag/dispositionsforslag/vis-01.jpg" alt="Visualisering – hjørne" loading="lazy">
+      </a>
+      <a href="billeder/valgfag/dispositionsforslag/vis-02.jpg" target="_blank" rel="noopener">
+        <img src="billeder/valgfag/dispositionsforslag/vis-02.jpg" alt="Visualisering – gade" loading="lazy">
+      </a>
+    </div>
+  </section>
 </main>
-
-<section class="gallery-section" id="galleri">
-  <h2>Galleri</h2>
-
-  <h3>Plan/snit-tegninger</h3>
-  <div class="gallery-grid">
-    <a href="billeder/valgfag-dis" target="_blank" rel="noopener">
-      <img src="billeder/valgfag-dis" alt="Plan – Graff’s Hus" loading="lazy">
-    </a>
-  </div>
-
-  <h3>Tekniske-tegninger</h3>
-  <div class="gallery-grid">
-    <a href="billeder/valgfag-dis" target="_blank" rel="noopener">
-      <img src="billeder/valgfag-dis" alt="Detalje – facade/materialer" loading="lazy">
-    </a>
-  </div>
-
-  <h3>Visualiseringer</h3>
-  <div class="gallery-grid">
-    <a href="billeder/valgfag-dis" target="_blank" rel="noopener">
-      <img src="billeder/valgfag-dis" alt="Visualisering – hjørne" loading="lazy">
-    </a>
-  </div>
-</section>
 
 <footer>© 2025 Dit Navn</footer>
 </body>
