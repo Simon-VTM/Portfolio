@@ -16,22 +16,31 @@
     .chips{ display:flex; gap:8px; flex-wrap:wrap; margin-top:12px } .chip{ padding:6px 10px; border-radius:999px; background:#eef2f7; font-size:12px }
     footer{ text-align:center; padding:40px 24px; color:#475569 }
 
-    /* Galleri */
+    /* --- Galleri på detaljesiden --- */
 .gallery-section{ margin-top:24px; }
+.gallery-section h2{ margin:0 0 10px; }
 .gallery-section h3{ margin:18px 0 10px; font-size:18px; }
+
 .gallery-grid{
-  display:grid; gap:12px;
+  display:grid;
+  gap:12px;
   grid-template-columns: repeat(auto-fill, minmax(220px,1fr));
 }
 .gallery-grid a{
-  display:block; border:1px solid #e6e8eb;
-  border-radius:12px; overflow:hidden; background:#fff;
+  display:block;
+  border:1px solid var(--border);
+  border-radius:12px;
+  overflow:hidden;
+  background:#fff;
 }
 .gallery-grid img{
-  width:100%; aspect-ratio:4/3; object-fit:cover; display:block;
+  width:100%;
+  aspect-ratio: 4/3;          /* ens kortstørrelse */
+  object-fit: cover;          /* beskærer lidt i thumb – original vises ved klik */
+  display:block;
   transition: transform .15s ease;
 }
-.gallery-grid a:hover img{ transform:scale(1.02); }
+.gallery-grid a:hover img{ transform: scale(1.02); }
 
   </style>
 </head>
