@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Projekter – Portfolio</title>
+  <title>Projekter – Dit Navn</title>
   <meta name="description" content="Oversigt over projekter: 1.–4. semester samt valgfag (Revit-modellering, Sikkerhed, Fra program til dispositionsforslag).">
   <style>
     :root{
@@ -40,7 +40,7 @@
     @media (max-width:980px){ .grid.three,.grid.two{grid-template-columns:1fr} }
 
     .card{border:1px solid var(--border); border-radius:18px; background:#fff; display:flex; flex-direction:column; overflow:hidden; height: 100%;}
-    .thumb{aspect-ratio:16/9; background:linear-gradient(180deg,#f8fafc,#fff); border-bottom:1px solid var(--border); flex-shrink: 0;}
+    .thumb{aspect-ratio:16/9; background:linear-gradient(180deg,#f8fafc,#fff); border-bottom:1px solid var(--border); flex-shrink: 0; min-height: 200px; display: flex; align-items: center; justify-content: center;}
     .inner{padding:16px; display: flex; flex-direction: column; flex: 1;}
     .meta{display:flex; align-items:center; gap:8px; color:#000; font-size:14px}
     .title{font-size:18px; font-weight:700; margin:6px 0}
@@ -50,10 +50,7 @@
     .grow{flex:1}
     .actions{display:flex; gap:10px; padding:14px 16px 16px}
     .ghost{border:1px solid var(--border); background:#fff; color:var(--text); padding:10px 12px; border-radius:10px; text-decoration:none}
-    .thumb img.fit-contain{ object-fit:contain; background:#fff }
-    .thumb img.pos-top{ object-position:50% 10% }
-    .thumb img.pos-center{ object-position:50% 50% }
-    .thumb img.pos-bottom{ object-position:50% 50% }
+    .thumb img{ width:100%; height:100%; object-fit:contain; object-position:50% 50%; display:block; background:#fff; }
     .card-link{ display:block; text-decoration:none; color:inherit; height: 100%;}
     .card{ cursor:pointer; transition:transform .08s ease, box-shadow .15s ease; }
     .card-link:hover .card{ transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,.08); }
@@ -82,7 +79,6 @@
         <div class="brand">Dit Navn</div>
         <div class="nav-links">
           <a href="index.html">Hjem</a>
-          <a href="#om">Om Mig</a>
           <a href="#" aria-current="page" style="font-weight:600">Projekter</a>
           <a href="index.html#kontakt">Kontakt</a>
         </div>
@@ -102,9 +98,7 @@
         <a class="card-link" href="1-semester.html">
         <article class="card" data-type="semester">
           <div class="thumb">
-            <img src="Rendering%201.png" alt="1. semester – parcelhus, render" 
-                  loading="lazy" 
-                  style="width:100%;height:100%;object-fit:contain;object-position:50% 50%;display:block;background:#fff;">
+            <img src="Rendering%201.png" alt="1. semester – parcelhus, render" loading="lazy">
           </div>
           <div class="inner">
             <div class="meta" style="font-size:20px; font-weight:600;">
@@ -123,11 +117,8 @@
         <!-- 2. semester -->
       <a class="card-link" href="2-semester.html">
         <article class="card" data-type="semester">
-          <div class="thumb" aria-hidden="true">
-            <img src="2-semester.jpg"
-                 alt="2. semester – tæt-lavt boligområde & fælleshus"
-                 loading="lazy"
-                 style="width:100%;height:100%;object-fit:contain;object-position:50% 50%;display:block;background:#fff;">
+          <div class="thumb">
+            <img src="2-semester.jpg" alt="2. semester – tæt-lavt boligområde & fælleshus" loading="lazy">
           </div>
           <div class="inner">
             <div class="meta" style="font-size:20px; font-weight:600;">
@@ -149,11 +140,8 @@
         <!-- 3. semester -->
       <a class="card-link" href="3-semester.html">
         <article class="card" data-type="semester">
-          <div class="thumb" aria-hidden="true">
-            <img src="3-semester.png"
-                 alt="3. semester – administrationsbygning og produktions-/lagerbygning"
-                 loading="lazy"
-                 style="width:100%;height:100%;object-fit:contain;object-position:50% 50%;display:block;background:#fff;">
+          <div class="thumb">
+            <img src="3-semester.png" alt="3. semester – administrationsbygning og produktions-/lagerbygning" loading="lazy">
           </div>
           <div class="inner">
             <div class="meta" style="font-size:20px; font-weight:600;">
@@ -174,10 +162,8 @@
         <!-- 4. semester -->
         <a class="card-link" href="4-semester.html">
         <article class="card" data-type="semester">
-          <div class="thumb" aria-hidden="true">
-            <img src="4-semester.jpg" alt="Visualisering – 4 semester"
-                 loading="lazy" 
-                 style="width:100%;height:100%;object-fit:contain;object-position:50% 50%;display:block;background:#fff;">
+          <div class="thumb">
+            <img src="4-semester.jpg" alt="4. semester – Graff's Hus Esbjerg" loading="lazy">
           </div>
           <div class="inner">
             <div class="meta" style="font-size:20px; font-weight:600;">
@@ -207,11 +193,7 @@
         <!-- Revit-modellering -->
         <a class="card-link" href="valgfag-revit.html">
               <article class="card" data-type="valgfag">
-                <div class="thumb" aria-hidden="true">
-                  <img src="Revit-modellering.png" alt="Visualisering – revit modellering"
-                       loading="lazy" 
-                       style="width:100%;height:100%;object-fit:contain;object-position:50% 50%;display:block;background:#fff;">
-                </div>
+                <div class="thumb" aria-hidden="true"></div>
                 <div class="inner">
                   <div class="meta" style="font-size:20px; font-weight:600;">
                     Valgfag: Revit-modellering
@@ -230,7 +212,9 @@
         <!-- Sikkerhed -->
         <a class="card-link" href="valgfag-sikkerhed.html">
                 <article class="card" data-type="valgfag">
-                  <div class="thumb" aria-hidden="true"></div>
+                  <div class="thumb">
+                    <!-- Placeholder for Sikkerhed image -->
+                  </div>
                   <div class="inner">
                     <div class="meta" style="font-size:20px; font-weight:600;">
                       Valgfag: Sikkerhed
@@ -249,12 +233,7 @@
         <!-- Fra byggeprogram til dispositionsforslag -->
         <a class="card-link" href="valgfag-dispositionsforslag.html">
               <article class="card" data-type="valgfag">
-                <div class="thumb" aria-hidden="true">
-                  <img src="valgfag-dispositionsforslag.png"
-                       alt="Graff's Hus – fra program til dispositionsforslag"
-                       loading="lazy"
-                       style="width:100%;height:100%;object-fit:contain;object-position:50% 50%;display:block;background:#fff;">
-                </div>
+                <div class="thumb" aria-hidden="true"></div>
                 <div class="inner">
                   <div class="meta" style="font-size:20px; font-weight:600;">
                     Valgfag: Fra byggeprogram til dispositionsforslag
@@ -288,7 +267,3 @@
   </script>
 </body>
 </html>
-
-
-
-
