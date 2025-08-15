@@ -50,6 +50,11 @@
     .grow{flex:1}
     .actions{display:flex; gap:10px; padding:14px 16px 16px}
     .ghost{border:1px solid var(--border); background:#fff; color:var(--text); padding:10px 12px; border-radius:10px; text-decoration:none}
+        /* Valgfrie helpers til billed-tilpasning */
+  .thumb img.fit-contain{ object-fit:contain; background:#fff }
+  .thumb img.pos-top{ object-position:50% 10% }
+  .thumb img.pos-center{ object-position:50% 50% }
+  .thumb img.pos-bottom{ object-position:50% 90% }
   </style>
 </head>
 <body>
@@ -205,5 +210,6 @@
   </script>
 </body>
 </html>
+
 
 
