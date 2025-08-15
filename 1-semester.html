@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>1. semester – Enfamiliehus i 1½ plan</title>
+  <meta name="description" content="1. semester projekt: enfamiliehus i 1½ plan fra idé og skitse til myndighedsprojekt." />
+  <style>
+    :root{ --bg:#ffffff; --text:#17202a; --muted:#5f6b7a; --border:#e6e8eb; --brand:#2563eb; --brand-2:#1d4ed8; --chip-bg:#eef2ff; --chip-b:#e0e7ff; --chip-t:#334155; }
+    *{ box-sizing:border-box }
+    body{ margin:0; font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Helvetica,Arial; color:var(--text); background:var(--bg) }
+    .container{ max-width:1100px; margin-inline:auto; padding-inline:20px }
+    header{ position:sticky; top:0; z-index:50; background:#ffffffd9; backdrop-filter:blur(8px); border-bottom:1px solid var(--border) }
+    nav{ display:flex; align-items:center; justify-content:space-between; padding:14px 0 }
+    .brand{ font-weight:700 }
+    .nav-links{ display:flex; gap:18px }
+    .nav-links a{ color:var(--text); text-decoration:none; padding:8px 10px; border-radius:10px }
+    .nav-links a:hover{ background:#f3f4f6 }
+
+    .hero{ padding:10px 0 22px }
+    .hero .media{ border:1px solid var(--border); border-radius:18px; overflow:hidden; background:#fff }
+    .hero .media .imgwrap{ aspect-ratio:16/9; }
+    .hero img{ width:100%; height:100%; object-fit:contain; display:block; background:#fff }
+
+    .grid{ display:grid; grid-template-columns:1.2fr .8fr; gap:24px }
+    @media (max-width:900px){ .grid{ grid-template-columns:1fr } }
+
+    h1{ font-size: clamp(26px, 5vw, 40px); line-height:1.2; margin:0 0 6px }
+    .meta{ color:#000; font-size:16px }
+    .lead{ color:var(--muted); margin:0 0 12px }
+
+    .card{ border:1px solid var(--border); border-radius:18px; background:#fff; overflow:hidden }
+    .inner{ padding:16px 18px }
+
+    .chips{ display:flex; flex-wrap:wrap; gap:8px; margin-top:10px }
+    .chip{ font-size:12px; color:var(--chip-t); background:var(--chip-bg); border:1px solid var(--chip-b); padding:5px 9px; border-radius:999px }
+
+    .back{ display:inline-flex; align-items:center; gap:8px; text-decoration:none; color:var(--text); border:1px solid var(--border); border-radius:12px; padding:8px 12px; background:#fff }
+    .back:hover{ background:#f3f4f6 }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="brand">Dit Navn</div>
+        <div class="nav-links">
+          <a href="index.html">Hjem</a>
+          <a href="projekter.html">Projekter</a>
+          <a href="index.html#kontakt">Kontakt</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div style="margin:12px 0 18px"><a class="back" href="projekter.html">← Tilbage til projekter</a></div>
+
+    <section class="hero">
+      <div class="media">
+        <div class="imgwrap">
+          <img src="Rendering%201.png" alt="1. semester – enfamiliehus i 1½ plan, render">
+        </div>
+      </div>
+    </section>
+
+    <section class="grid" style="margin-bottom:28px">
+      <div class="card">
+        <div class="inner">
+          <h1>1. semester • Enfamiliehus i 1½ plan</h1>
+          <p class="lead">Tværfagligt projekt fra idé og skitse til myndighedsprojekt.</p>
+          <p>På første semester blev der arbejdet med et tværfagligt projekt, hvor opgaven var at projektere et Enfamiliehus i 1½ plan – fra idé og skitse til myndighedsprojekt. Der blev opnået kendskab til grundlæggende byggetekniske discipliner, materialevalg, konstruktionsprincipper og bygningsfysik.</p>
+          <div class="chips">
+            <span class="chip">Myndighedsprojekt</span>
+            <span class="chip">Bygningsfysik</span>
+            <span class="chip">Materialevalg</span>
+          </div>
+        </div>
+      </div>
+
+      <aside class="card">
+        <div class="inner">
+          <h2 style="margin:0 0 8px; font-size:18px">Nøgledata</h2>
+          <ul style="margin:0; padding-left:18px">
+            <li>Bygningstype: Enfamiliehus, 1½ plan</li>
+            <li>Leverance: Myndighedsprojekt</li>
+            <li>Fokus: Konstruktionsprincipper og bygningsfysik</li>
+          </ul>
+          <h2 style="margin:16px 0 8px; font-size:18px">Rolle & opgaver</h2>
+          <ul style="margin:0; padding-left:18px">
+            <li>Udarbejdelse af hovedtegninger</li>
+            <li>Koordinering af materialevalg</li>
+            <li>Bygningsfysiske overvejelser (varme, fugt)</li>
+          </ul>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© <span id="y"></span> Dit Navn – 1. semester</div>
+  </footer>
+
+  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+</body>
+</html>
