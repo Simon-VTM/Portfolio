@@ -50,10 +50,15 @@
     .grow{flex:1}
     .actions{display:flex; gap:10px; padding:14px 16px 16px}
     .ghost{border:1px solid var(--border); background:#fff; color:var(--text); padding:10px 12px; border-radius:10px; text-decoration:none}
-  .thumb img.fit-contain{ object-fit:contain; background:#fff }
-  .thumb img.pos-top{ object-position:50% 10% }
-  .thumb img.pos-center{ object-position:50% 50% }
-  .thumb img.pos-bottom{ object-position:50% 50% }
+    .thumb img.fit-contain{ object-fit:contain; background:#fff }
+    .thumb img.pos-top{ object-position:50% 10% }
+    .thumb img.pos-center{ object-position:50% 50% }
+    .thumb img.pos-bottom{ object-position:50% 50% }
+    .card-link{ display:block; text-decoration:none; color:inherit; }
+    .card{ cursor:pointer; transition:transform .08s ease, box-shadow .15s ease; }
+    .card-link:hover .card{ transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,.08); }
+    .card-link:focus-visible .card{ box-shadow:0 0 0 3px rgba(37,99,235,.35); }
+    .actions{ display:none; } /* skjul gamle “Se detaljer”-knapper, hvis de står tilbage */
   </style>
 </head>
 <body>
@@ -79,11 +84,16 @@
       <h2>Semestre</h2>
       <div class="grid two">
         <!-- 1. semester -->
+        <a class="card-link" href="1-semester.html">
         <article class="card" data-type="semester">
-          <div class="thumb"><img src="Rendering%201.png" alt="1. semester – parcelhus, render" loading="lazy" style="width:100%;height:100%;object-fit:contain;object-position:50% 50%;display:block;background:#fff;"></div>
+          <div class="thumb">
+            <img src="Rendering%201.png" alt="1. semester – parcelhus, render" 
+                  loading="lazy" 
+                  style="width:100%;height:100%;object-fit:contain;object-position:50% 50%;display:block;background:#fff;">
+          </div>
           <div class="inner">
             <div class="meta" style="font-size:20px; font-weight:600;">
-              1. semester • Enfamiliehus i 1½ plan
+              1. semester • 1½ plan enfamiliehus 
             </div>
             <p class="text">På første semester blev der arbejdet med et tværfagligt projekt, hvor opgaven var at projektere et Enfamiliehus i 1½ plan – fra idé og skitse til myndighedsprojekt. Der blev opnået kendskab til grundlæggende byggetekniske discipliner, materialevalg, konstruktionsprincipper og bygningsfysik.</p>
             <div class="chips">
@@ -91,11 +101,9 @@
               <span class="chip">Bygningsfysik</span>
               <span class="chip">Materialevalg</span>
             </div>
-          <div class="grow"></div>
-          <div class="actions">
-            <a class="ghost" href="#">Se detaljer</a>
           </div>
         </article>
+        </a>
 
         <!-- 2. semester -->
         <article class="card" data-type="semester">
@@ -215,3 +223,4 @@
   </script>
 </body>
 </html>
+
