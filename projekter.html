@@ -59,6 +59,19 @@
     .card-link:hover .card{ transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,.08); }
     .card-link:focus-visible .card{ box-shadow:0 0 0 3px rgba(37,99,235,.35); }
     .actions{ display:none; } /* skjul gamle “Se detaljer”-knapper, hvis de står tilbage */
+        /* SEMESTRE = 2 lige brede kolonner */
+    #semestre .grid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr)); /* = 50/50 */
+      gap:16px;
+    }
+    /* sørg for at indholdet ikke tvinger kolonnen bredere */
+    #semestre .grid > *{ min-width:0; }
+    
+    /* Mobil: 1 kolonne */
+    @media (max-width:680px){
+      #semestre .grid{ grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -230,6 +243,7 @@
   </script>
 </body>
 </html>
+
 
 
 
