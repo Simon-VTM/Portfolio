@@ -15,6 +15,33 @@
     section{ background:#fff; padding:var(--space); border-radius:var(--radius) }
     .chips{ display:flex; gap:8px; flex-wrap:wrap; margin-top:12px } .chip{ padding:6px 10px; border-radius:999px; background:#eef2f7; font-size:12px }
     footer{ text-align:center; padding:40px 24px; color:#475569 }
+
+    /* --- Galleri på detaljesiden --- */
+.gallery-section{ margin-top:24px; }
+.gallery-section h2{ margin:0 0 10px; }
+.gallery-section h3{ margin:18px 0 10px; font-size:18px; }
+
+.gallery-grid{
+  display:grid;
+  gap:12px;
+  grid-template-columns: repeat(auto-fill, minmax(220px,1fr));
+}
+.gallery-grid a{
+  display:block;
+  border:1px solid var(--border);
+  border-radius:12px;
+  overflow:hidden;
+  background:#fff;
+}
+.gallery-grid img{
+  width:100%;
+  aspect-ratio: 4/3;          /* ens kortstørrelse */
+  object-fit: cover;          /* beskærer lidt i thumb – original vises ved klik */
+  display:block;
+  transition: transform .15s ease;
+}
+.gallery-grid a:hover img{ transform: scale(1.02); }
+
   </style>
 </head>
 <body>
@@ -37,3 +64,46 @@
   <section>
     <h2 style="margin-top:0;">Beskrivelse</h2>
     <p>I valgfaget Revit-modellering blev der projekteret et tiny house som modulbyggeri i træskelet. Projektet omfattede optimering af plads og funktioner, indretning med sovepladser
+    <section class="gallery-section" id="galleri">
+  <h2>Galleri</h2>
+
+  <h3>Plan/snit-tegninger</h3>
+  <div class="gallery-grid" aria-label="Plan og snit – Revit-modellering">
+    <!-- Byt filnavne til dine egne; klik åbner originalfil i ny fane -->
+    <a href="revit-plan-01.jpg" target="_blank" rel="noopener">
+      <img src="revit-plan-01.jpg" alt="Plan tegning – stueplan">
+    </a>
+    <a href="revit-snit-01.jpg" target="_blank" rel="noopener">
+      <img src="revit-snit-01.jpg" alt="Snit A-A">
+    </a>
+    <a href="revit-snit-02.jpg" target="_blank" rel="noopener">
+      <img src="revit-snit-02.jpg" alt="Snit B-B">
+    </a>
+  </div>
+
+  <h3>Tekniske-tegninger</h3>
+  <div class="gallery-grid" aria-label="Tekniske tegninger – Revit-modellering">
+    <a href="revit-detail-01.jpg" target="_blank" rel="noopener">
+      <img src="revit-detail-01.jpg" alt="Detalje – fundament/væg">
+    </a>
+    <a href="revit-detail-02.jpg" target="_blank" rel="noopener">
+      <img src="revit-detail-02.jpg" alt="Detalje – tagfod">
+    </a>
+    <a href="revit-install-01.jpg" target="_blank" rel="noopener">
+      <img src="revit-install-01.jpg" alt="Teknisk tegning – installation">
+    </a>
+  </div>
+
+  <h3>Visualiseringer</h3>
+  <div class="gallery-grid" aria-label="Visualiseringer – Revit-modellering">
+    <a href="revit-vis-01.jpg" target="_blank" rel="noopener">
+      <img src="revit-vis-01.jpg" alt="Eksteriør – perspektiv">
+    </a>
+    <a href="revit-vis-02.jpg" target="_blank" rel="noopener">
+      <img src="revit-vis-02.jpg" alt="Interiør – ophold">
+    </a>
+    <a href="revit-vis-03.jpg" target="_blank" rel="noopener">
+      <img src="revit-vis-03.jpg" alt="Eksteriør – aftenlys">
+    </a>
+  </div>
+</section>
