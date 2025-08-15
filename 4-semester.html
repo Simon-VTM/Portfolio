@@ -16,6 +16,24 @@
     section{ background:#fff; padding:var(--space); border-radius:var(--radius) }
     .chips{ display:flex; gap:8px; flex-wrap:wrap; margin-top:12px } .chip{ padding:6px 10px; border-radius:999px; background:#eef2f7; font-size:12px }
     footer{ text-align:center; padding:40px 24px; color:#475569 }
+
+    /* Galleri */
+.gallery-section{ margin-top:24px; }
+.gallery-section h3{ margin:18px 0 10px; font-size:18px; }
+.gallery-grid{
+  display:grid; gap:12px;
+  grid-template-columns: repeat(auto-fill, minmax(220px,1fr));
+}
+.gallery-grid a{
+  display:block; border:1px solid #e6e8eb;
+  border-radius:12px; overflow:hidden; background:#fff;
+}
+.gallery-grid img{
+  width:100%; aspect-ratio:4/3; object-fit:cover; display:block;
+  transition: transform .15s ease;
+}
+.gallery-grid a:hover img{ transform:scale(1.02); }
+
   </style>
 </head>
 <body>
@@ -54,6 +72,32 @@
     </ul>
   </section>
 </main>
+
+<section class="gallery-section" id="galleri">
+  <h2>Galleri</h2>
+
+  <h3>Plan/snit-tegninger</h3>
+  <div class="gallery-grid">
+    <a href="billeder/4-semester" target="_blank" rel="noopener">
+      <img src="billeder/4-semester" alt="Plan – Graff’s Hus" loading="lazy">
+    </a>
+  </div>
+
+  <h3>Tekniske-tegninger</h3>
+  <div class="gallery-grid">
+    <a href="billeder/4-semester" target="_blank" rel="noopener">
+      <img src="billeder/4-semester" alt="Ventilationsprincip" loading="lazy">
+    </a>
+  </div>
+
+  <h3>Visualiseringer</h3>
+  <div class="gallery-grid">
+    <a href="billeder/4-semester" target="_blank" rel="noopener">
+      <img src="billeder/4-semester" alt="Visualisering – hjørne" loading="lazy">
+    </a>
+  </div>
+</section>
+
 <footer>© 2025 Dit Navn</footer>
 </body>
 </html>
