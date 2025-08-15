@@ -54,6 +54,10 @@
   .thumb img.pos-top{ object-position:50% 10% }
   .thumb img.pos-center{ object-position:50% 50% }
   .thumb img.pos-bottom{ object-position:50% 50% }
+    /* ...din eksisterende CSS... */
+  .card-link{ display:block; text-decoration:none; color:inherit; border-radius:16px; }
+  .card-link:focus-visible{ outline:3px solid #2563eb; outline-offset:4px; }
+  .card{ cursor:pointer; }
   </style>
 </head>
 <body>
@@ -79,7 +83,7 @@
       <h2>Semestre</h2>
       <div class="grid two">
         <!-- 1. semester -->
-        <article class="card" data-type="semester">
+        <a class="card" data-type="semester">
           <div class="thumb"><img src="Rendering%201.png" alt="1. semester – parcelhus, render" loading="lazy" style="width:100%;height:100%;object-fit:contain;object-position:50% 50%;display:block;background:#fff;"></div>
           <div class="inner">
             <div class="meta" style="font-size:20px; font-weight:600;">
@@ -92,11 +96,7 @@
               <span class="chip">Materialevalg</span>
             </div>
           </div>
-          <div class="grow"></div>
-          <div class="actions">
-            <a class="ghost" href="#">Se detaljer</a>
-          </div>
-        </article>
+          </a>
 
         <!-- 2. semester -->
         <article class="card" data-type="semester">
@@ -216,6 +216,7 @@
   </script>
 </body>
 </html>
+
 
 
 
