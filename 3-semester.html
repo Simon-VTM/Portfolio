@@ -1,275 +1,483 @@
 <!doctype html>
 <html lang="da">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>3. semester – Administrationsbygning + produktions-/lagerbygning</title>
   <style>
     :root{ --space:20px; --radius:16px; --border:#e6e8eb; }
-    body{ font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial; margin:0; color:#0f172a; background:#f8fafc }
-    header, main{ max-width:1000px; margin:0 auto; padding:24px } a{ color:#1f2937 }
-    .back{ display:inline-block; margin:8px 0 16px; text-decoration:none }
-    .hero{ border-radius:var(--radius); overflow:hidden; background:#fff }
-    .media{ aspect-ratio:16/9; background:linear-gradient(180deg,#f1f5f9,#fff) }
-    .body{ padding:var(--space); background:#fff }
-    .meta{ color:#000; font-size:18px; font-weight:600; margin-bottom:8px }
-    h1{ margin:0 0 8px; font-size:28px }
-    .grid{ display:grid; gap:var(--space); grid-template-columns:1fr }
-    @media(min-width:900px){ .grid{ grid-template-columns:2fr 1fr } }
-    section{ background:#fff; padding:var(--space); border-radius:var(--radius) }
-    .chips{ display:flex; gap:8px; flex-wrap:wrap; margin-top:12px } .chip{ padding:6px 10px; border-radius:999px; background:#eef2f7; font-size:12px }
-    footer{ text-align:center; padding:40px 24px; color:#475569 }
+    body{ font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; margin:0; color:#0f172a; background:#f8fafc; }
+    header, main{ max-width:1000px; margin:0 auto; padding:24px; }
+    a{ color:#1f2937; }
+    .back{ display:inline-block; margin:8px 0 16px; text-decoration:none; }
+    .hero{ border-radius:var(--radius); overflow:hidden; background:#fff; }
+    .media{ aspect-ratio:16/9; background:linear-gradient(180deg,#f1f5f9,#fff); display:flex; align-items:center; justify-content:center; }
+    .media img{ width:100%; height:100%; object-fit:contain; background:#fff; display:block; }
+    .body{ padding:var(--space); background:#fff; }
+    .meta{ color:#000; font-size:18px; font-weight:600; margin-bottom:8px; }
+    h1{ margin:0 0 8px; font-size:28px; }
+    .grid{ display:grid; gap:var(--space); grid-template-columns: 1fr; }
+    @media(min-width:900px){ .grid{ grid-template-columns: 2fr 1fr; } }
+    section{ background:#fff; padding:var(--space); border-radius:var(--radius); }
+    .chips{ display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+    .chip{ padding:6px 10px; border-radius:999px; background:#eef2f7; font-size:12px; }
+    footer{ text-align:center; padding:40px 24px; color:#475569; }
 
-    /* kort + galleri-grid */
     main.grid{ display:grid; gap:20px; grid-template-columns: 2fr 1fr; }
     @media (max-width:900px){ main.grid{ grid-template-columns:1fr; } }
+
     .card{ background:#fff; padding:var(--space); border-radius:var(--radius); }
     .full-span{ grid-column: 1 / -1; }
 
+    /* Gallery */
     .gallery-section h2{ margin:0 0 10px; }
     .gallery-section h3{ margin:18px 0 10px; font-size:18px; }
     .gallery-grid{ display:grid; gap:12px; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); }
-    .gallery-grid a{ display:block; border:1px solid var(--border); border-radius:12px; overflow:hidden; background:#fff; text-decoration:none; color:inherit; cursor:zoom-in; }
+    .gallery-grid button{ 
+      display:block; border:1px solid var(--border); border-radius:12px; overflow:hidden; 
+      background:#fff; text-decoration:none; color:inherit; cursor:pointer; padding:0;
+      transition: transform 0.2s ease;
+    }
+    .gallery-grid button:hover{ transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
     .gallery-grid img{ width:100%; aspect-ratio:4/3; object-fit:cover; display:block; transition:transform .15s; }
-    .gallery-grid a:hover img{ transform:scale(1.02); }
+    .gallery-grid button:hover img{ transform:scale(1.02); }
 
-    /* LIGHTBOX (samme som 2. sem) */
-    .lb{
-      position:fixed; inset:0; display:none;
-      background:rgba(15,23,42,.92);
-      z-index:9999; color:#e5e7eb;
-      overflow:auto; cursor:zoom-out;
+    /* Modal (identisk med 2. semester) */
+    .modal-overlay{ 
+      position:fixed; top:0; left:0; width:100vw; height:100vh; 
+      background:rgba(0,0,0,0.9); z-index:1000; display:none;
+      backdrop-filter: blur(10px);
     }
-    .lb.open{ display:flex; }
-    .lb-inner{
-      margin:auto; padding:40px 64px; position:relative; min-height:100%;
+    .modal-overlay.active{ display:flex; align-items:center; justify-content:center; }
+    
+    .modal-content{ 
+      position:relative; width:100vw; height:100vh; 
+      display:flex; align-items:center; justify-content:center;
+      touch-action: pan-x pan-y pinch-zoom;
+      overflow: hidden;
+    }
+    
+    .modal-image{ 
+      max-width:100%; max-height:calc(100vh - 80px); object-fit:contain; 
+      transition: transform 0.3s ease;
+      transform-origin: center center;
+      cursor: grab;
+      margin-top: 40px;
+    }
+    
+    .modal-image:active{ cursor: grabbing; }
+
+    .modal-nav{ 
+      position:absolute; top:50%; transform:translateY(-50%); z-index:15;
+      background:rgba(255,255,255,0.2); border:2px solid rgba(255,255,255,0.3); border-radius:50%; 
+      width:54px; height:54px; font-size:24px; cursor:pointer; color:white;
+      backdrop-filter: blur(10px); transition: all 0.2s ease;
       display:flex; align-items:center; justify-content:center;
     }
-    .lb-img{
-      max-width:none; max-height:none; /* vis fil i original opløsning */
-      display:block;
-    }
-    /* hvis billedet er mindre end viewport, centrer det og undgå skalering */
-    .lb-stage{ display:inline-block; }
-
-    .lb-ui{
-      position:fixed; left:0; right:0; top:0;
-      display:flex; justify-content:space-between; align-items:center;
-      padding:10px 16px; pointer-events:none;
-    }
-    .lb-ui .left, .lb-ui .right{ pointer-events:auto; display:flex; gap:10px; align-items:center; }
-
-    .lb-btn{
-      border:1px solid #334155; background:#0b1220; color:#e5e7eb;
-      padding:8px 12px; border-radius:10px; text-decoration:none; cursor:pointer;
-    }
-
-    .lb-nav{
-      position:fixed; inset:0; display:flex; justify-content:space-between; align-items:center; pointer-events:none;
-    }
-    .lb-arrow{
-      pointer-events:auto; width:48px; height:48px; border-radius:50%;
-      background:#0b1220; border:1px solid #334155; color:#e5e7eb;
+    .modal-nav:hover{ background:rgba(255,255,255,0.3); transform:translateY(-50%) scale(1.1); }
+    .modal-nav.prev{ left:30px; }
+    .modal-nav.next{ right:30px; }
+    
+    .modal-close{ 
+      position:absolute; top:20px; right:20px; z-index:20;
+      background:rgba(255,255,255,0.2); border:2px solid rgba(255,255,255,0.3); border-radius:50%; 
+      width:44px; height:44px; font-size:24px; cursor:pointer; color:white;
+      backdrop-filter: blur(10px); transition: all 0.2s ease;
       display:flex; align-items:center; justify-content:center;
-      position:relative; margin:0 14px; cursor:pointer;
     }
-    .lb-caption{ position:fixed; bottom:14px; left:0; right:0; text-align:center; font-size:14px; color:#cbd5e1; padding:0 14px; }
+    .modal-close:hover{ background:rgba(255,255,255,0.3); transform: scale(1.1); }
+
+    .modal-counter{ 
+      position:absolute; bottom:20px; left:50%; transform:translateX(-50%);
+      background:rgba(0,0,0,0.7); color:white; padding:8px 16px; 
+      border-radius:20px; font-size:14px; backdrop-filter: blur(10px);
+    }
+
+    .modal-title{ 
+      position:absolute; top:0; left:0; right:0; z-index:10;
+      background:linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 70%, transparent 100%); 
+      color:white; padding:20px; font-size:16px; font-weight:500;
+      backdrop-filter: blur(10px);
+    }
+
+    @media (max-width: 768px) {
+      .modal-nav{ width:44px; height:44px; font-size:20px; }
+      .modal-nav.prev{ left:15px; }
+      .modal-nav.next{ right:15px; }
+      .modal-title{ padding:15px; font-size:14px; }
+      .modal-image{ max-height:calc(100vh - 60px); margin-top: 30px; }
+    }
   </style>
 </head>
 <body>
-<header>
-  <a class="back" href="projekter.html">← Tilbage til projekter</a>
-  <div class="hero">
-    <div class="media">
-      <img src="billeder/3-semester.png" alt="Visualisering – administrationsbygning og produktions-/lagerbygning"
-            loading="lazy" 
-            style="width:100%;height:100%;object-fit:contain;object-position:50% 50%;display:block;background:#fff;">
+  <header>
+    <a class="back" href="projekter.html">← Tilbage til projekter</a>
+    <div class="hero">
+      <div class="media">
+        <img src="billeder/3-semester.png"
+             alt="Visualisering – administrationsbygning og produktions-/lagerbygning"
+             loading="lazy">
+      </div>
+      <div class="body">
+        <div class="meta">3. semester • Tværfagligt projekt</div>
+        <h1>Administrationsbygning i træ + produktions-/lagerbygning</h1>
+        <div class="chips">
+          <span class="chip">Træelementer</span><span class="chip">Grønt tag</span>
+          <span class="chip">Betonsandwich</span><span class="chip">Udbud</span><span class="chip">Udførelse</span>
+        </div>
+      </div>
     </div>
-    <div class="body">
-      <div class="meta">3. semester • Tværfagligt projekt</div>
-      <h1>Administrationsbygning i træ + produktions-/lagerbygning</h1>
-      <div class="chips"><span class="chip">Træelementer</span><span class="chip">Grønt tag</span><span class="chip">Betonsandwich</span><span class="chip">Udbud</span><span class="chip">Udførelse</span></div>
-    </div>
-  </div>
-</header>
+  </header>
 
-<main class="grid">
-  <!-- Venstre kort -->
-  <section class="card">
-    <h2 style="margin-top:0;">Projektoversigt</h2>
-    <p>Der blev projekteret en administrationsbygning i to etager opført i
-    præfabrikerede træelementer med grønt tag, hvor facadekravet var min. 25 %
-    træbaserede materialer og elementer designet til 1:1-genbrug. Derudover blev der
-    projekteret en produktions- og lagerbygning i én etage med højt til loftet,
-    opført i præfabrikerede betonsandwichelementer og betonelement-tag.
-    Arbejdet gik fra forslag over myndighed og udbud til udførelsesprojekt.</p>
+  <main class="grid">
+    <section class="card">
+      <h2 style="margin-top:0;">Projektoversigt</h2>
+      <p>Der blev projekteret en administrationsbygning i to etager opført i
+      præfabrikerede træelementer med grønt tag, hvor facadekravet var min. 25 %
+      træbaserede materialer og elementer designet til 1:1-genbrug. Derudover blev der
+      projekteret en produktions- og lagerbygning i én etage med højt til loftet,
+      opført i præfabrikerede betonsandwichelementer og betonelement-tag.
+      Arbejdet gik fra forslag over myndighed og udbud til udførelsesprojekt.</p>
 
-    <h3>Nøgleopgaver</h3>
-    <ul>
-      <li>Elementprojektering i træ (facader, dæk, vægge, tag)</li>
-      <li>Design for adskillelse og 1:1-genbrug</li>
-      <li>Grønt tag og bygningsfysik</li>
-      <li>Projektering af hal i betonsandwichelementer</li>
-      <li>Samlingsdetaljer, beskrivelser og mængder</li>
-      <li>Udbuds- og udførelsesprojekt</li>
-    </ul>
-  </section>
+      <h3>Nøgleopgaver</h3>
+      <ul>
+        <li>Elementprojektering i træ (facader, dæk, vægge, tag)</li>
+        <li>Design for adskillelse og 1:1-genbrug</li>
+        <li>Grønt tag og bygningsfysik</li>
+        <li>Projektering af hal i betonsandwichelementer</li>
+        <li>Samlingsdetaljer, beskrivelser og mængder</li>
+        <li>Udbuds- og udførelsesprojekt</li>
+      </ul>
+    </section>
 
-  <!-- Højre kort -->
-  <section class="card">
-    <h2 style="margin-top:0;">Fakta</h2>
-    <ul>
-      <li><strong>Type:</strong> Administrationsbygning + produktions-/lagerbygning</li>
-      <li><strong>Fokus:</strong> Præfabrikation, materialevalg (træ/beton), bæredygtighed</li>
-      <li><strong>Roller/værktøjer:</strong> Revit, elementdetaljer, beskrivelser</li>
-    </ul>
-  </section>
+    <section class="card">
+      <h2 style="margin-top:0;">Fakta</h2>
+      <ul>
+        <li><strong>Type:</strong> Administrationsbygning + produktions-/lagerbygning</li>
+        <li><strong>Fokus:</strong> Præfabrikation, materialevalg (træ/beton), bæredygtighed</li>
+        <li><strong>Roller/værktøjer:</strong> Revit, elementdetaljer, beskrivelser</li>
+      </ul>
+    </section>
 
-  <!-- GALLERI: fuld bredde INDE i gridden -->
-  <section class="card gallery-section full-span" id="galleri">
-    <h2>Galleri</h2>
+    <section class="card gallery-section full-span" id="galleri">
+      <h2>Galleri</h2>
 
-    <h3>Plan-tegninger</h3>
-    <div class="gallery-grid">
-      <a href="billeder/3-semester/K01_H1_E0X_N001_Beliggenhedsplan.jpg">
-        <img src="billeder/3-semester/K01_H1_E0X_N001_Beliggenhedsplan.jpg" alt="Beliggenhedsplan" loading="lazy">
-      </a>
-      <a href="billeder/3-semester/snit-01.jpg">
-        <img src="billeder/3-semester/snit-01.jpg" alt="Snit – produktionshal" loading="lazy">
-      </a>
-      <a href="billeder/3-semester/snit-02.jpg">
-        <img src="billeder/3-semester/snit-02.jpg" alt="Snit – lager" loading="lazy">
-      </a>
-    </div>
+      <h3>Plan-tegninger</h3>
+      <div class="gallery-grid">
+        <button type="button" data-src="billeder/3-semester/K01_H1_E0X_N001_Beliggenhedsplan.jpg" data-title="Beliggenhedsplan">
+          <img src="billeder/3-semester/K01_H1_E0X_N001_Beliggenhedsplan.jpg" alt="Beliggenhedsplan" loading="lazy">
+        </button>
+        <button type="button" data-src="billeder/3-semester/K01_H1_E0X_N003_Spildevandsplan.jpg" data-title="Spildevandsplan">
+          <img src="billeder/3-semester/K01_H1_E0X_N003_Spildevandsplan.jpg" alt="Spildevandsplan" loading="lazy">
+        </button>
+        <button type="button" data-src="billeder/3-semester/K01_H1_E0X_N004_Regnvandsplan.jpg" data-title="Regnvandsplan">
+          <img src="billeder/3-semester/K01_H1_E0X_N004_Regnvandsplan.jpg" alt="Regnvandsplan" loading="lazy">
+        </button>
+      </div>
 
-    <h3>Facade- og Snit-tegninger</h3>
-    <div class="gallery-grid">
-      <a href="billeder/3-semester/plan-01.jpg">
-        <img src="billeder/3-semester/plan-01.jpg" alt="Plan – administrationsbygning" loading="lazy">
-      </a>
-      <a href="billeder/3-semester/snit-01.jpg">
-        <img src="billeder/3-semester/snit-01.jpg" alt="Snit – produktionshal" loading="lazy">
-      </a>
-      <a href="billeder/3-semester/snit-02.jpg">
-        <img src="billeder/3-semester/snit-02.jpg" alt="Snit – lager" loading="lazy">
-      </a>
-    </div>
+      <h3>Facade- og Snit-tegninger</h3>
+      <div class="gallery-grid">
+        <button type="button" data-src="billeder/3-semester/plan-01.jpg" data-title="Plan – administrationsbygning">
+          <img src="billeder/3-semester/plan-01.jpg" alt="Plan – administrationsbygning" loading="lazy">
+        </button>
+        <button type="button" data-src="billeder/3-semester/snit-01.jpg" data-title="Snit – produktionshal">
+          <img src="billeder/3-semester/snit-01.jpg" alt="Snit – produktionshal" loading="lazy">
+        </button>
+        <button type="button" data-src="billeder/3-semester/snit-02.jpg" data-title="Snit – lager">
+          <img src="billeder/3-semester/snit-02.jpg" alt="Snit – lager" loading="lazy">
+        </button>
+      </div>
 
-    <h3>Tekniske-tegninger</h3>
-    <div class="gallery-grid">
-      <a href="billeder/3-semester/detail-01.jpg">
-        <img src="billeder/3-semester/detail-01.jpg" alt="Detalje – træelement/facade" loading="lazy">
-      </a>
-      <a href="billeder/3-semester/detail-02.jpg">
-        <img src="billeder/3-semester/detail-02.jpg" alt="Detalje – betonsandwich" loading="lazy">
-      </a>
-    </div>
+      <h3>Tekniske-tegninger</h3>
+      <div class="gallery-grid">
+        <button type="button" data-src="billeder/3-semester/K01_H2_E0X_N008_Facade Øst og Vest.jpg" data-title="Facade Øst og Vest">
+          <img src="billeder/3-semester/K01_H2_E0X_N008_Facade Øst og Vest.jpg" alt="Facade Øst og Vest" loading="lazy">
+        </button>
+        <button type="button" data-src="billeder/3-semester/K01_H2_E0X_N007_Facade Nord & Syd.jpg" data-title="Facade Nord og Syd">
+          <img src="billeder/3-semester/K01_H2_E0X_N007_Facade Nord & Syd.jpg" alt="Facade Nord og Syd" loading="lazy">
+        </button>
+      </div>
 
-    <h3>Visualiseringer</h3>
-    <div class="gallery-grid">
-      <a href="billeder/3-semester/vis-01.jpg">
-        <img src="billeder/3-semester/vis-01.jpg" alt="Visualisering – administrationsbygning" loading="lazy">
-      </a>
-      <a href="billeder/3-semester/vis-02.jpg">
-        <img src="billeder/3-semester/vis-02.jpg" alt="Visualisering – hal" loading="lazy">
-      </a>
-    </div>
-  </section>
-</main>
+      <h3>Visualiseringer</h3>
+      <div class="gallery-grid">
+        <button type="button" data-src="billeder/3-semester/vis-01.jpg" data-title="Visualisering – administrationsbygning">
+          <img src="billeder/3-semester/vis-01.jpg" alt="Visualisering – administrationsbygning" loading="lazy">
+        </button>
+        <button type="button" data-src="billeder/3-semester/vis-02.jpg" data-title="Visualisering – hal">
+          <img src="billeder/3-semester/vis-02.jpg" alt="Visualisering – hal" loading="lazy">
+        </button>
+      </div>
+    </section>
+  </main>
 
-<!-- LIGHTBOX markup -->
-<div class="lb" id="lb" aria-hidden="true">
-  <div class="lb-ui">
-    <div class="left">
-      <button class="lb-btn" id="lb-close" title="Luk (Esc)">Luk</button>
-    </div>
-    <div class="right">
-      <span id="lb-count"></span>
-      <a class="lb-btn" id="lb-open" href="#" target="_blank" rel="noopener">Åbn original</a>
-    </div>
-  </div>
-  <div class="lb-nav">
-    <button class="lb-arrow" id="lb-prev" title="Forrige (←)">&#10094;</button>
-    <button class="lb-arrow" id="lb-next" title="Næste (→)">&#10095;</button>
-  </div>
-  <div class="lb-inner">
-    <div class="lb-stage">
-      <img class="lb-img" id="lb-img" alt="">
+  <!-- Modal -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-content">
+      <img class="modal-image" id="modalImage" src="" alt="">
+      <button class="modal-nav prev" id="prevBtn">‹</button>
+      <button class="modal-nav next" id="nextBtn">›</button>
+      <button class="modal-close" id="closeBtn">×</button>
+      <div class="modal-counter" id="modalCounter">1 / 1</div>
+      <div class="modal-title" id="modalTitle">Image Title</div>
     </div>
   </div>
-  <div class="lb-caption" id="lb-cap"></div>
-</div>
 
-<footer>© 2025 Dit Navn</footer>
+  <footer>© 2025 Dit Navn</footer>
 
-<script>
-(() => {
-  const scope = document.querySelector('#galleri');
-  if(!scope) return;
-
-  const links = Array.from(scope.querySelectorAll('.gallery-grid a'));
-  const lb    = document.getElementById('lb');
-  const img   = document.getElementById('lb-img');
-  const cap   = document.getElementById('lb-cap');
-  const cnt   = document.getElementById('lb-count');
-  const openL = document.getElementById('lb-open');
-  const btnClose = document.getElementById('lb-close');
-  const btnPrev  = document.getElementById('lb-prev');
-  const btnNext  = document.getElementById('lb-next');
-
-  let idx = 0;
-
-  function show(i){
-    idx = (i + links.length) % links.length;
-    const a = links[idx];
-    const alt = a.querySelector('img')?.alt || '';
-    const href = a.getAttribute('href');
-
-    // vis original-fil i overlay – ingen nedskalering
-    img.src = '';
-    img.src = href;
-    img.alt = alt;
-    openL.href = href;
-    cap.textContent = alt;
-    cnt.textContent = (idx+1) + ' / ' + links.length;
-  }
-
-  function open(i){
-    show(i);
-    lb.classList.add('open');
-    lb.setAttribute('aria-hidden','false');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function close(){
-    lb.classList.remove('open');
-    lb.setAttribute('aria-hidden','true');
-    document.body.style.overflow = '';
-  }
-
-  links.forEach((a,i) => {
-    a.addEventListener('click', (e) => {
-      e.preventDefault();
-      open(i);
+  <script>
+    class SwipeableGallery {
+      constructor() {
+        this.currentIndex = 0;
+        this.images = [];
+        this.touchStartX = 0;
+        this.touchEndX = 0;
+        this.touchStartY = 0;
+        this.touchEndY = 0;
+        this.scale = 1;
+        this.translateX = 0;
+        this.translateY = 0;
+        this.isDragging = false;
+        this.lastPinchDistance = 0;
+        
+        this.modal = document.getElementById('modalOverlay');
+        this.modalImage = document.getElementById('modalImage');
+        this.prevBtn = document.getElementById('prevBtn');
+        this.nextBtn = document.getElementById('nextBtn');
+        this.closeBtn = document.getElementById('closeBtn');
+        this.counter = document.getElementById('modalCounter');
+        this.title = document.getElementById('modalTitle');
+        
+        this.initEventListeners();
+      }
+      
+      initEventListeners() {
+        // Gallery buttons - get ALL images on the page
+        document.querySelectorAll('[data-src]').forEach((btn, index) => {
+          btn.addEventListener('click', (e) => {
+            this.openModal(index);
+          });
+        });
+        
+        // Modal controls
+        this.prevBtn.addEventListener('click', () => this.showPrevious());
+        this.nextBtn.addEventListener('click', () => this.showNext());
+        this.closeBtn.addEventListener('click', () => this.closeModal());
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+          if (!this.modal.classList.contains('active')) return;
+          
+          switch(e.key) {
+            case 'ArrowLeft': this.showPrevious(); break;
+            case 'ArrowRight': this.showNext(); break;
+            case 'Escape': this.closeModal(); break;
+          }
+        });
+        
+        // Touch/swipe events
+        this.modal.addEventListener('touchstart', (e) => {
+          if (e.touches.length === 1) {
+            this.touchStartX = e.touches[0].clientX;
+            this.touchStartY = e.touches[0].clientY;
+            this.isDragging = true;
+          } else if (e.touches.length === 2) {
+            this.lastPinchDistance = this.getPinchDistance(e.touches);
+          }
+        });
+        
+        this.modal.addEventListener('touchmove', (e) => {
+          if (e.touches.length === 1 && this.isDragging && this.scale > 1) {
+            e.preventDefault();
+            const deltaX = e.touches[0].clientX - this.touchStartX;
+            const deltaY = e.touches[0].clientY - this.touchStartY;
+            this.translateX += deltaX;
+            this.translateY += deltaY;
+            this.updateImageTransform();
+            this.touchStartX = e.touches[0].clientX;
+            this.touchStartY = e.touches[0].clientY;
+          } else if (e.touches.length === 2) {
+            e.preventDefault();
+            const pinchDistance = this.getPinchDistance(e.touches);
+            const scaleChange = pinchDistance / this.lastPinchDistance;
+            this.scale = Math.min(Math.max(this.scale * scaleChange, 0.5), 3);
+            
+            // Auto-center when zooming out to 1.0 or less
+            if (this.scale <= 1) {
+              this.scale = 1;
+              this.translateX = 0;
+              this.translateY = 0;
+            }
+            
+            this.updateImageTransform();
+            this.lastPinchDistance = pinchDistance;
+          }
+        });
+        
+        this.modal.addEventListener('touchend', (e) => {
+          if (e.touches.length === 0) {
+            this.touchEndX = e.changedTouches[0].clientX;
+            this.touchEndY = e.changedTouches[0].clientY;
+            this.isDragging = false;
+            if (this.scale === 1) {
+              this.handleSwipe();
+            }
+          }
+        });
+        
+        // Mouse wheel zoom
+        this.modal.addEventListener('wheel', (e) => {
+          e.preventDefault();
+          const zoomFactor = e.deltaY > 0 ? 0.9 : 1.1;
+          this.scale = Math.min(Math.max(this.scale * zoomFactor, 0.5), 3);
+          
+          // Auto-center when zooming out to 1.0 or less
+          if (this.scale <= 1) {
+            this.scale = 1;
+            this.translateX = 0;
+            this.translateY = 0;
+          }
+          
+          this.updateImageTransform();
+        });
+        
+        // Mouse drag (desktop)
+        this.modalImage.addEventListener('mousedown', (e) => {
+          if (this.scale > 1) {
+            this.isDragging = true;
+            this.touchStartX = e.clientX;
+            this.touchStartY = e.clientY;
+            e.preventDefault();
+          }
+        });
+        
+        document.addEventListener('mousemove', (e) => {
+          if (this.isDragging && this.scale > 1) {
+            const deltaX = e.clientX - this.touchStartX;
+            const deltaY = e.clientY - this.touchStartY;
+            this.translateX += deltaX;
+            this.translateY += deltaY;
+            this.updateImageTransform();
+            this.touchStartX = e.clientX;
+            this.touchStartY = e.clientY;
+          }
+        });
+        
+        document.addEventListener('mouseup', () => {
+          this.isDragging = false;
+        });
+        
+        // Double-click to reset zoom and center
+        this.modalImage.addEventListener('dblclick', () => {
+          this.scale = 1;
+          this.translateX = 0;
+          this.translateY = 0;
+          this.updateImageTransform();
+        });
+        
+        // Click outside to close (click anywhere in the dark area)
+        this.modal.addEventListener('click', (e) => {
+          // Close if clicking on the modal overlay (dark area) but not on the image or controls
+          if (e.target === this.modal || e.target.classList.contains('modal-content')) {
+            this.closeModal();
+          }
+        });
+      }
+      
+      openModal(clickedIndex) {
+        // Get ALL images on the page (not grouped by gallery)
+        this.images = Array.from(document.querySelectorAll('[data-src]'));
+        this.currentIndex = clickedIndex;
+        
+        // Reset zoom and position
+        this.scale = 1;
+        this.translateX = 0;
+        this.translateY = 0;
+        
+        this.showImage();
+        this.modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+      
+      closeModal() {
+        this.modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+      
+      showPrevious() {
+        this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
+        this.scale = 1;
+        this.translateX = 0;
+        this.translateY = 0;
+        this.showImage();
+      }
+      
+      showNext() {
+        this.currentIndex = (this.currentIndex + 1) % this.images.length;
+        this.scale = 1;
+        this.translateX = 0;
+        this.translateY = 0;
+        this.showImage();
+      }
+      
+      showImage() {
+        const currentImage = this.images[this.currentIndex];
+        this.modalImage.src = currentImage.dataset.src;
+        this.modalImage.alt = currentImage.dataset.title;
+        this.title.textContent = currentImage.dataset.title;
+        this.counter.textContent = `${this.currentIndex + 1} / ${this.images.length}`;
+        
+        // Reset transform
+        this.updateImageTransform();
+        
+        // Show/hide navigation buttons
+        this.prevBtn.style.display = this.images.length > 1 ? 'flex' : 'none';
+        this.nextBtn.style.display = this.images.length > 1 ? 'flex' : 'none';
+      }
+      
+      updateImageTransform() {
+        // Add smooth transition when returning to center
+        if (this.scale === 1 && (this.translateX !== 0 || this.translateY !== 0)) {
+          this.modalImage.style.transition = 'transform 0.3s ease';
+        } else {
+          this.modalImage.style.transition = 'transform 0.1s ease';
+        }
+        
+        this.modalImage.style.transform = `translate(${this.translateX}px, ${this.translateY}px) scale(${this.scale})`;
+        
+        // Reset transition after animation
+        if (this.scale === 1) {
+          setTimeout(() => {
+            this.modalImage.style.transition = 'transform 0.1s ease';
+          }, 300);
+        }
+      }
+      
+      getPinchDistance(touches) {
+        const dx = touches[0].clientX - touches[1].clientX;
+        const dy = touches[0].clientY - touches[1].clientY;
+        return Math.sqrt(dx * dx + dy * dy);
+      }
+      
+      handleSwipe() {
+        const swipeThreshold = 50;
+        const swipeDistance = this.touchEndX - this.touchStartX;
+        const swipeDistanceY = Math.abs(this.touchEndY - this.touchStartY);
+        
+        // Only handle horizontal swipes when not zoomed and vertical swipe is minimal
+        if (Math.abs(swipeDistance) > swipeThreshold && swipeDistanceY < 100 && this.scale === 1) {
+          if (swipeDistance > 0) {
+            this.showPrevious();
+          } else {
+            this.showNext();
+          }
+        }
+      }
+    }
+    
+    // Initialize gallery when DOM is loaded
+    document.addEventListener('DOMContentLoaded', () => {
+      new SwipeableGallery();
     });
-  });
-
-  btnClose.addEventListener('click', close);
-  btnPrev.addEventListener('click', () => show(idx-1));
-  btnNext.addEventListener('click', () => show(idx+1));
-
-  // klik i baggrunden lukker
-  lb.addEventListener('click', (e) => {
-    if(e.target === lb) close();
-  });
-
-  // tastatur
-  window.addEventListener('keydown', (e) => {
-    if(!lb.classList.contains('open')) return;
-    if(e.key === 'Escape') close();
-    if(e.key === 'ArrowRight') show(idx+1);
-    if(e.key === 'ArrowLeft')  show(idx-1);
-  });
-})();
-</script>
+  </script>
 </body>
 </html>
