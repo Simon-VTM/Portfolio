@@ -73,6 +73,54 @@
 
     /* Responsive */
     @media (max-width:900px){ .hero-inner{grid-template-columns:1fr} .grid.two{grid-template-columns:1fr} }
+
+    /* ===== CV / Resume ===== */
+.resume{ padding:24px 0 40px }
+.resume .resume-title{
+  display:flex; align-items:center; gap:.6rem;
+  font-size:clamp(20px,3.4vw,26px); margin:0 0 14px;
+}
+.resume .resume-title .emoji{ font-size:1.1em }
+
+.resume-group{ display:grid; gap:14px; margin:20px 0 34px }
+.resume-item{
+  --accent: var(--brand);
+  border:1px solid var(--border);
+  border-left:6px solid var(--accent);
+  border-radius:14px;
+  background:#fff;
+  box-shadow:0 6px 18px rgba(2,6,23,.06);
+  padding:14px 16px;
+}
+.resume-item .head{
+  display:flex; justify-content:space-between; align-items:flex-start; gap:12px;
+  margin-bottom:6px;
+}
+.resume-item .role{
+  font-weight:700; color:#1f3a8a; /* blå titel */
+}
+.resume-item .org{ color:#475569; font-size:14px; }
+.resume-item .date{ color:#64748b; font-size:13px; white-space:nowrap; }
+.resume-item .points{
+  margin:8px 0 0 0; padding-left:18px; color:#0f172a;
+}
+.resume-item .points li{ margin:4px 0 }
+.resume-item .points li::marker{ color:var(--accent) }
+
+/* accent-farver pr. gruppe (som på referencebilledet) */
+.resume-group.edu   .resume-item{ --accent:#7c3aed; }  /* lilla */
+.resume-group.work  .resume-item{ --accent:#10b981; }  /* grøn */
+.resume-group.courses .resume-item{ --accent:#f59e0b; }  /* gul/orange */
+.resume-group.other .resume-item{ --accent:#070bf1; }  /* blå */
+
+/* responsiv: læg dato under titel på små skærme */
+@media (max-width:560px){
+  .resume-item .head{ flex-direction:column; align-items:flex-start }
+  .resume-item .date{ margin-top:4px }
+}
+
+
+
   </style>
 </head>
 <body>
@@ -153,6 +201,147 @@ udfordringer.</p>
       </div>
     </section>
 
+<!-- CV / RESUME -->
+<section id="cv" class="resume container">
+  <!-- Uddannelser -->
+  <h2 class="resume-title"><span class="emoji">🎓</span>Uddannelser</h2>
+  <div class="resume-group edu">
+    <article class="resume-item">
+      <div class="head">
+        <div>
+          <div class="role">Bygningskonstruktør</div>
+          <div class="org">Erhvervsakademi Sydvest (EASV), Esbjerg</div>
+        </div>
+        <div class="date">2023 – nu</div>
+      </div>
+      <ul class="points">
+        <li>Fokus: projektering, bygningsfysik, materialer.</li>
+        <li>Projektforløb: 1.–4. semester (se projektsiden).</li>
+      </ul>
+    </article>
+
+    <article class="resume-item">
+      <div class="head">
+        <div>
+          <div class="role">Højere Teknisk Eksamen</div>
+          <div class="org">Rybners Teknisk Gymnasium, Esbjerg</div>
+        </div>
+        <div class="date">2018 – 2021</div>
+      </div>
+      <ul class="points">
+        <li>Jeg gik på teknologi- og designlinjen og havde faget Byg og energi, 
+          hvor jeg arbejdede med landmåling, afsætning af et hus og opførelse af et hjørne af et sommerhus. 
+          Det var her, jeg for alvor fik interessen for byggeri og tømrerfaget.</li>
+      </ul>
+    </article>
+  </div>
+
+  <!-- Erhvervserfaring -->
+  <h2 class="resume-title"><span class="emoji">💼</span>Erhvervserfaring</h2>
+  <div class="resume-group work">
+    <article class="resume-item">
+      <div class="head">
+        <div>
+          <div class="role">Ufaglært tømrer</div>
+          <div class="org">Poul K. Poulsen, Gørding</div>
+        </div>
+        <div class="date">2021 – 2024</div>
+      </div>
+      <ul class="points">
+        <li>Jeg har arbejdet som ufaglært tømrer hos en mindre tømrervirksomhed i Gørding, 
+          hvor jeg har været involveret i alt fra nybyggeri af enfamiliehuse og landbrugsbyggeri til renoveringsprojekter og mindre opgaver.</li>
+      </ul>
+    </article>
+
+
+
+  </div>
+
+  <!-- Kurser -->
+  <h2 class="resume-title"><span class="emoji">🧰</span>Kurser</h2>
+  <div class="resume-group courses">
+    <article class="resume-item">
+      <div class="head">
+        <div>
+          <div class="role">Arbejdsmiljøkoordinator (AMK)</div>
+          <div class="org">Erhvervsakademi Sydvest (EASV), Esbjerg</div>
+        </div>
+        <div class="date">2025</div>
+      </div>
+      <ul class="points">
+        <li>Uddannelsen har givet mig en dybere forståelse for arbejdsmiljøet og sikkerheden på byggepladsen – både hvordan man allerede i projekteringsfasen kan forebygge ulykker, 
+          og hvordan man håndterer og løser udfordringer, der opstår under byggeprocessen.</li>
+      </ul>
+    </article>
+
+
+
+  </div>
+
+  <!-- Anden erhvervserfaring -->
+  <h2 class="resume-title"><span class="emoji">💼</span>Anden erhvervserfaring</h2>
+  <div class="resume-group other">
+    <article class="resume-item">
+      <div class="head">
+        <div>
+          <div class="role">IT-supporter</div>
+          <div class="org">ASOM-NET, Vejen</div>
+        </div>
+        <div class="date">2021 – nu</div>
+      </div>
+      <ul class="points">
+        <li>Jeg arbejder hos ASOM-Net som IT-supporter, hvor jeg hjælper med fejlsøgning af TV, internet og VoIP for over 75.000 kunder. 
+          Derudover koordinerer jeg opkald, der skal eskaleres, og laver interne vejledninger til fejlfinding.</li>
+      </ul>
+    </article>
+
+    <article class="resume-item">
+      <div class="head">
+        <div>
+          <div class="role">Manager hos Burger King</div>
+          <div class="org">Burger King, Ribe</div>
+        </div>
+        <div class="date">2018 – 2021</div>
+      </div>
+      <ul class="points">
+        <li>Jeg har arbejdet som manager hos Burger King, hvor jeg stod for koordinering af medarbejdere i dag- og aftenvagter. 
+          Mine opgaver omfattede blandt andet planlægning af arbejdsopgaver, oplæring af nye medarbejdere, 
+          kvalitetssikring af service og produkter samt håndtering af drift og kundeservice i travle perioder.</li>
+      </ul>
+    </article>
+
+  <article class="resume-item">
+      <div class="head">
+        <div>
+          <div class="role">Ungmedarbejder hos Burger King</div>
+          <div class="org">Burger King, Ribe</div>
+        </div>
+        <div class="date">2016 – 2018</div>
+      </div>
+      <ul class="points">
+        <li>Jeg har arbejdet som ungmedarbejder hos Burger King, 
+            hvor jeg hjalp med kundebetjening, tilberedning af mad, 
+            rengøring og generelle opgaver i restauranten.</li>
+      </ul>
+    </article>
+
+  <article class="resume-item">
+      <div class="head">
+        <div>
+          <div class="role">Ungmedarbejder inden for landbrug</div>
+          <div class="org">Landbrug, Jernvedlund</div>
+        </div>
+        <div class="date">2013 – 2016</div>
+      </div>
+      <ul class="points">
+        <li>Jeg har arbejdet som ungarbejder inden for landbrug, hvor jeg hjalp med pasning af dyr, 
+          vedligeholdelse af bygninger og maskiner samt generelle forefaldende opgaver.</li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+
     <!-- KONTAKT -->
     <section id="kontakt">
       <div class="card">
@@ -163,13 +352,7 @@ udfordringer.</p>
             <li class="contact-item">
               <div>
                 <strong>Mail</strong><br>
-                <a href="mailto:ditnavn@example.com">ditnavn@example.com</a>
-              </div>
-            </li>
-            <li class="contact-item">
-              <div>
-                <strong>Telefon</strong><br>
-                <a href="tel:+4512345678">+45 12 34 56 78</a>
+                <a href="mailto:simmoe01@easv365.dk">simmoe01@easv365.dk</a>
               </div>
             </li>
             <li class="contact-item">
