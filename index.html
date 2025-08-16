@@ -32,7 +32,25 @@
     .btn{display:inline-flex; align-items:center; gap:.5rem; padding:12px 16px; border-radius:12px; text-decoration:none; font-weight:600}
     .btn-primary{background:linear-gradient(180deg,var(--brand),var(--brand-2)); color:#fff}
     .btn-ghost{border:1px solid var(--border); color:var(--text)}
-    .mock{border:1px solid var(--border); border-radius:18px; min-height:240px; background:linear-gradient(180deg,#f8fafc,#fff)}
+    
+    /* Profile Image */
+    .profile-container{
+      border:1px solid var(--border); 
+      border-radius:18px; 
+      overflow:hidden;
+      background:linear-gradient(180deg,#f8fafc,#fff);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:240px;
+    }
+    .profile-image{
+      width:100%; 
+      height:100%; 
+      object-fit:cover; 
+      display:block;
+      min-height:240px;
+    }
 
     /* Sections */
     section{padding:24px 0 40px}
@@ -61,7 +79,7 @@
   <header>
     <div class="container">
       <nav>
-        <div class="brand">Dit Navn</div>
+        <div class="brand">Portfolio Simon Vad Møller</div>
         <div class="nav-links">
           <a href="#hjem">Hjem</a>
           <a href="#om">Om Mig</a>
@@ -77,15 +95,24 @@
     <section class="hero">
       <div class="hero-inner">
         <div>
-          <h1>Dit Navn</h1>
+          <h1>Simon Vad Møller</h1>
           <p class="subtitle">Bygningskonstruktør</p>
-          <p class="lead">Jeg skaber solide, funktionelle og moderne løsninger – fra parcelhuse til erhvervsbyggeri. Her finder du en kort introduktion og direkte kontakt. Projekter ligger på en separat side.</p>
+          <p class="lead">Mit navn er Simon Møller, og jeg læser til bygningskonstruktør på
+5. semester.
+Jeg har del års erfaring indenfor tømrerfaget og lidt
+ledelseserfaring. Jeg arbejder struktureret og målrettet, er
+detaljeorienteret og har stærke kompetencer inden for digitale
+værktøjer og bæredygtige løsninger i byggeriet.
+Jeg bidrager med faglighed og gåpåmod, og jeg er altid klar på nye
+udfordringer.</p>
           <div class="buttons">
             <a class="btn btn-primary" href="projekter.html">Se mine projekter</a>
             <a class="btn btn-ghost" href="#kontakt">Kontakt mig</a>
           </div>
         </div>
-        <div class="mock" aria-hidden="true"></div>
+        <div class="profile-container">
+          <img src="billeder/Migselv2.jpg" alt="Dit Navn - Profil billede" class="profile-image" loading="lazy">
+        </div>
       </div>
     </section>
 
@@ -94,26 +121,27 @@
       <div class="card">
         <div class="inner">
           <h2>Om Mig</h2>
-          <p class="section-lead">Kort om din profil, fokus og erfaring. Du kan bruge dette afsnit til at beskrive din tilgang og hvad du bringer til et projekt.</p>
+          <p class="section-lead">Jeg er en aktiv person, der nyder at holde sig i gang, både fysisk og mentalt. Jeg interesserer mig
+                                  for IT og teknologi, og bruger gerne tid på at lære nye programmer og følge med i,
+                                  hvad der rører sig i den digitaleverden.
+                                </p>
           <div class="grid two">
             <div>
               <h3 style="margin:0 0 6px; font-size:18px">Profil</h3>
-              <p>Bygningskonstruktørstuderende med fokus på projektering, planlægning og tekniske installationer. Vant til at arbejde struktureret i alle faser – fra idé til udførelse.</p>
+              <p>Bygningskonstruktørstuderende med fokus på projektering, planlægning og tekniske tegninger. Vant til at arbejde struktureret i alle faser – fra idé til udførelse.</p>
               <div class="tags" aria-label="Kompetencer">
-                <span class="tag">Projektledelse</span>
-                <span class="tag">Konstruktion</span>
-                <span class="tag">Tekniske installationer</span>
-                <span class="tag">Ventilation</span>
+                <span class="tag">Konstruktioner</span>
+                <span class="tag">Tekniske tegninger</span>
+                <span class="tag">Detaljeorienteret</span>
+                <span class="tag">Gåpåmod</span>
+                <span class="tag">Arbejdsmiljøkoordinator P & B</span>
               </div>
             </div>
             <div>
               <h3 style="margin:0 0 6px; font-size:18px">Værktøjer</h3>
-              <p>AutoCAD / Revit, Office/Excel, GitHub Pages til dokumentation og deling. Arbejder tværfagligt med fokus på kvalitet i leverancer.</p>
+              <p>Revit / Be18 / AutoCAD / LCAbyg / LCCbyg / Tactplan / MS Project / Twinmotion / Office-pakken</p>
               <div class="tags">
-                <span class="tag">AutoCAD/Revit</span>
-                <span class="tag">Excel</span>
-                <span class="tag">BR18</span>
-                <span class="tag">YBL18</span>
+                
               </div>
             </div>
           </div>
@@ -147,7 +175,9 @@
             <li class="contact-item">
               <div>
                 <strong>LinkedIn</strong><br>
-                <a href="#">link-til-profil</a>
+                <a href="https://www.linkedin.com/in/simon-vad-theilmann-m%C3%B8ller-314436267/" target="_blank" rel="noopener">
+                link-til-profil
+                </a>
               </div>
             </li>
           </ul>
@@ -158,7 +188,7 @@
 
   <footer>
     <div class="container">
-      © <span id="y"></span> Dit Navn – Bygningskonstruktør
+      © <span id="y"></span> Simon Vad Møller – Bygningskonstruktør
     </div>
   </footer>
 
