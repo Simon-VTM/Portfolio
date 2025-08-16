@@ -4,7 +4,8 @@
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <title>3. semester – Administrationsbygning + produktions-/lagerbygning</title>
   <style>
-    :root{ --space:20px; --radius:16px; } body{ font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial; margin:0; color:#0f172a; background:#f8fafc }
+    :root{ --space:20px; --radius:16px; --border:#e6e8eb; }
+    body{ font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial; margin:0; color:#0f172a; background:#f8fafc }
     header, main{ max-width:1000px; margin:0 auto; padding:24px } a{ color:#1f2937 }
     .back{ display:inline-block; margin:8px 0 16px; text-decoration:none }
     .hero{ border-radius:var(--radius); overflow:hidden; background:#fff }
@@ -12,31 +13,66 @@
     .body{ padding:var(--space); background:#fff }
     .meta{ color:#000; font-size:18px; font-weight:600; margin-bottom:8px }
     h1{ margin:0 0 8px; font-size:28px }
-    .grid{ display:grid; gap:var(--space); grid-template-columns:1fr } @media(min-width:900px){ .grid{ grid-template-columns:2fr 1fr } }
+    .grid{ display:grid; gap:var(--space); grid-template-columns:1fr }
+    @media(min-width:900px){ .grid{ grid-template-columns:2fr 1fr } }
     section{ background:#fff; padding:var(--space); border-radius:var(--radius) }
     .chips{ display:flex; gap:8px; flex-wrap:wrap; margin-top:12px } .chip{ padding:6px 10px; border-radius:999px; background:#eef2f7; font-size:12px }
     footer{ text-align:center; padding:40px 24px; color:#475569 }
 
-     :root{ --space:20px; --radius:16px; --border:#e6e8eb; }
+    /* kort + galleri-grid */
+    main.grid{ display:grid; gap:20px; grid-template-columns: 2fr 1fr; }
+    @media (max-width:900px){ main.grid{ grid-template-columns:1fr; } }
+    .card{ background:#fff; padding:var(--space); border-radius:var(--radius); }
+    .full-span{ grid-column: 1 / -1; }
 
-main.grid{ display:grid; gap:20px; grid-template-columns: 2fr 1fr; }
-@media (max-width:900px){ main.grid{ grid-template-columns:1fr; } }
+    .gallery-section h2{ margin:0 0 10px; }
+    .gallery-section h3{ margin:18px 0 10px; font-size:18px; }
+    .gallery-grid{ display:grid; gap:12px; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); }
+    .gallery-grid a{ display:block; border:1px solid var(--border); border-radius:12px; overflow:hidden; background:#fff; text-decoration:none; color:inherit; cursor:zoom-in; }
+    .gallery-grid img{ width:100%; aspect-ratio:4/3; object-fit:cover; display:block; transition:transform .15s; }
+    .gallery-grid a:hover img{ transform:scale(1.02); }
 
-/* gør en sektion til “kort” som de to øverste */
-.card{ background:#fff; padding:var(--space); border-radius:var(--radius); }
+    /* LIGHTBOX (samme som 2. sem) */
+    .lb{
+      position:fixed; inset:0; display:none;
+      background:rgba(15,23,42,.92);
+      z-index:9999; color:#e5e7eb;
+      overflow:auto; cursor:zoom-out;
+    }
+    .lb.open{ display:flex; }
+    .lb-inner{
+      margin:auto; padding:40px 64px; position:relative; min-height:100%;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .lb-img{
+      max-width:none; max-height:none; /* vis fil i original opløsning */
+      display:block;
+    }
+    /* hvis billedet er mindre end viewport, centrer det og undgå skalering */
+    .lb-stage{ display:inline-block; }
 
-/* fuld bredde inde i gridden (mellem venstre/højre kort – ikke kant-til-kant på siden) */
-.full-span{ grid-column: 1 / -1; }
+    .lb-ui{
+      position:fixed; left:0; right:0; top:0;
+      display:flex; justify-content:space-between; align-items:center;
+      padding:10px 16px; pointer-events:none;
+    }
+    .lb-ui .left, .lb-ui .right{ pointer-events:auto; display:flex; gap:10px; align-items:center; }
 
-/* Galleri */
-.gallery-section h2{ margin:0 0 10px; }
-.gallery-section h3{ margin:18px 0 10px; font-size:18px; }
-.gallery-grid{ display:grid; gap:12px; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); }
-.gallery-grid a{ display:block; border:1px solid var(--border); border-radius:12px; overflow:hidden; background:#fff; text-decoration:none; color:inherit; }
-.gallery-grid img{ width:100%; aspect-ratio:4/3; object-fit:cover; display:block; transition:transform .15s; }
-.gallery-grid a:hover img{ transform:scale(1.02); }
+    .lb-btn{
+      border:1px solid #334155; background:#0b1220; color:#e5e7eb;
+      padding:8px 12px; border-radius:10px; text-decoration:none; cursor:pointer;
+    }
 
-
+    .lb-nav{
+      position:fixed; inset:0; display:flex; justify-content:space-between; align-items:center; pointer-events:none;
+    }
+    .lb-arrow{
+      pointer-events:auto; width:48px; height:48px; border-radius:50%;
+      background:#0b1220; border:1px solid #334155; color:#e5e7eb;
+      display:flex; align-items:center; justify-content:center;
+      position:relative; margin:0 14px; cursor:pointer;
+    }
+    .lb-caption{ position:fixed; bottom:14px; left:0; right:0; text-align:center; font-size:14px; color:#cbd5e1; padding:0 14px; }
   </style>
 </head>
 <body>
@@ -55,78 +91,185 @@ main.grid{ display:grid; gap:20px; grid-template-columns: 2fr 1fr; }
     </div>
   </div>
 </header>
+
 <main class="grid">
   <!-- Venstre kort -->
   <section class="card">
     <h2 style="margin-top:0;">Projektoversigt</h2>
-<p>Der blev projekteret en administrationsbygning i to etager opført i
-præfabrikerede træelementer med grønt tag, hvor facadekravet var min. 25 %
-træbaserede materialer og elementer designet til 1:1-genbrug. Derudover blev der
-projekteret en produktions- og lagerbygning i én etage med højt til loftet,
-opført i præfabrikerede betonsandwichelementer og betonelement-tag.
-Arbejdet gik fra forslag over myndighed og udbud til udførelsesprojekt.</p>
+    <p>Der blev projekteret en administrationsbygning i to etager opført i
+    præfabrikerede træelementer med grønt tag, hvor facadekravet var min. 25 %
+    træbaserede materialer og elementer designet til 1:1-genbrug. Derudover blev der
+    projekteret en produktions- og lagerbygning i én etage med højt til loftet,
+    opført i præfabrikerede betonsandwichelementer og betonelement-tag.
+    Arbejdet gik fra forslag over myndighed og udbud til udførelsesprojekt.</p>
 
-<h3>Nøgleopgaver</h3>
-<ul>
-  <li>Elementprojektering i træ (facader, dæk, vægge, tag)</li>
-  <li>Design for adskillelse og 1:1-genbrug</li>
-  <li>Grønt tag og bygningsfysik</li>
-  <li>Projektering af hal i betonsandwichelementer</li>
-  <li>Samlingsdetaljer, beskrivelser og mængder</li>
-  <li>Udbuds- og udførelsesprojekt</li>
-</ul>
+    <h3>Nøgleopgaver</h3>
+    <ul>
+      <li>Elementprojektering i træ (facader, dæk, vægge, tag)</li>
+      <li>Design for adskillelse og 1:1-genbrug</li>
+      <li>Grønt tag og bygningsfysik</li>
+      <li>Projektering af hal i betonsandwichelementer</li>
+      <li>Samlingsdetaljer, beskrivelser og mængder</li>
+      <li>Udbuds- og udførelsesprojekt</li>
+    </ul>
   </section>
 
   <!-- Højre kort -->
   <section class="card">
     <h2 style="margin-top:0;">Fakta</h2>
-<ul>
-  <li><strong>Type:</strong> Administrationsbygning + produktions-/lagerbygning</li>
-  <li><strong>Fokus:</strong> Præfabrikation, materialevalg (træ/beton), bæredygtighed</li>
-  <li><strong>Roller/værktøjer:</strong> Revit, elementdetaljer, beskrivelser</li>
-</ul>
+    <ul>
+      <li><strong>Type:</strong> Administrationsbygning + produktions-/lagerbygning</li>
+      <li><strong>Fokus:</strong> Præfabrikation, materialevalg (træ/beton), bæredygtighed</li>
+      <li><strong>Roller/værktøjer:</strong> Revit, elementdetaljer, beskrivelser</li>
+    </ul>
   </section>
 
   <!-- GALLERI: fuld bredde INDE i gridden -->
   <section class="card gallery-section full-span" id="galleri">
-  <h2>Galleri</h2>
+    <h2>Galleri</h2>
 
-  <h3>Plan/snit-tegninger</h3>
-  <div class="gallery-grid">
-    <a href="billeder/3-semester/plan-01.jpg" target="_blank" rel="noopener">
-      <img src="billeder/3-semester/plan-01.jpg" alt="Plan – administrationsbygning" loading="lazy">
-    </a>
-    <a href="billeder/3-semester/snit-01.jpg" target="_blank" rel="noopener">
-      <img src="billeder/3-semester/snit-01.jpg" alt="Snit – produktionshal" loading="lazy">
-    </a>
-    <a href="billeder/3-semester/snit-02.jpg" target="_blank" rel="noopener">
-      <img src="billeder/3-semester/snit-02.jpg" alt="Snit – lager" loading="lazy">
-    </a>
-  </div>
+    <h3>Plan-tegninger</h3>
+    <div class="gallery-grid">
+      <a href="billeder/3-semester/K01_H1_E0X_N001_Beliggenhedsplan.jpg">
+        <img src="billeder/3-semester/K01_H1_E0X_N001_Beliggenhedsplan.jpg" alt="Beliggenhedsplan" loading="lazy">
+      </a>
+      <a href="billeder/3-semester/snit-01.jpg">
+        <img src="billeder/3-semester/snit-01.jpg" alt="Snit – produktionshal" loading="lazy">
+      </a>
+      <a href="billeder/3-semester/snit-02.jpg">
+        <img src="billeder/3-semester/snit-02.jpg" alt="Snit – lager" loading="lazy">
+      </a>
+    </div>
 
-  <h3>Tekniske-tegninger</h3>
-  <div class="gallery-grid">
-    <a href="billeder/3-semester/detail-01.jpg" target="_blank" rel="noopener">
-      <img src="billeder/3-semester/detail-01.jpg" alt="Detalje – træelement/facade" loading="lazy">
-    </a>
-    <a href="billeder/3-semester/detail-02.jpg" target="_blank" rel="noopener">
-      <img src="billeder/3-semester/detail-02.jpg" alt="Detalje – betonsandwich" loading="lazy">
-    </a>
-  </div>
+    <h3>Facade- og Snit-tegninger</h3>
+    <div class="gallery-grid">
+      <a href="billeder/3-semester/plan-01.jpg">
+        <img src="billeder/3-semester/plan-01.jpg" alt="Plan – administrationsbygning" loading="lazy">
+      </a>
+      <a href="billeder/3-semester/snit-01.jpg">
+        <img src="billeder/3-semester/snit-01.jpg" alt="Snit – produktionshal" loading="lazy">
+      </a>
+      <a href="billeder/3-semester/snit-02.jpg">
+        <img src="billeder/3-semester/snit-02.jpg" alt="Snit – lager" loading="lazy">
+      </a>
+    </div>
 
-  <h3>Visualiseringer</h3>
-  <div class="gallery-grid">
-    <a href="billeder/3-semester/vis-01.jpg" target="_blank" rel="noopener">
-      <img src="billeder/3-semester/vis-01.jpg" alt="Visualisering – administrationsbygning" loading="lazy">
-    </a>
-    <a href="billeder/3-semester/vis-02.jpg" target="_blank" rel="noopener">
-      <img src="billeder/3-semester/vis-02.jpg" alt="Visualisering – hal" loading="lazy">
-    </a>
-  </div>
-</section>
+    <h3>Tekniske-tegninger</h3>
+    <div class="gallery-grid">
+      <a href="billeder/3-semester/detail-01.jpg">
+        <img src="billeder/3-semester/detail-01.jpg" alt="Detalje – træelement/facade" loading="lazy">
+      </a>
+      <a href="billeder/3-semester/detail-02.jpg">
+        <img src="billeder/3-semester/detail-02.jpg" alt="Detalje – betonsandwich" loading="lazy">
+      </a>
+    </div>
+
+    <h3>Visualiseringer</h3>
+    <div class="gallery-grid">
+      <a href="billeder/3-semester/vis-01.jpg">
+        <img src="billeder/3-semester/vis-01.jpg" alt="Visualisering – administrationsbygning" loading="lazy">
+      </a>
+      <a href="billeder/3-semester/vis-02.jpg">
+        <img src="billeder/3-semester/vis-02.jpg" alt="Visualisering – hal" loading="lazy">
+      </a>
+    </div>
+  </section>
 </main>
 
+<!-- LIGHTBOX markup -->
+<div class="lb" id="lb" aria-hidden="true">
+  <div class="lb-ui">
+    <div class="left">
+      <button class="lb-btn" id="lb-close" title="Luk (Esc)">Luk</button>
+    </div>
+    <div class="right">
+      <span id="lb-count"></span>
+      <a class="lb-btn" id="lb-open" href="#" target="_blank" rel="noopener">Åbn original</a>
+    </div>
+  </div>
+  <div class="lb-nav">
+    <button class="lb-arrow" id="lb-prev" title="Forrige (←)">&#10094;</button>
+    <button class="lb-arrow" id="lb-next" title="Næste (→)">&#10095;</button>
+  </div>
+  <div class="lb-inner">
+    <div class="lb-stage">
+      <img class="lb-img" id="lb-img" alt="">
+    </div>
+  </div>
+  <div class="lb-caption" id="lb-cap"></div>
+</div>
 
 <footer>© 2025 Dit Navn</footer>
+
+<script>
+(() => {
+  const scope = document.querySelector('#galleri');
+  if(!scope) return;
+
+  const links = Array.from(scope.querySelectorAll('.gallery-grid a'));
+  const lb    = document.getElementById('lb');
+  const img   = document.getElementById('lb-img');
+  const cap   = document.getElementById('lb-cap');
+  const cnt   = document.getElementById('lb-count');
+  const openL = document.getElementById('lb-open');
+  const btnClose = document.getElementById('lb-close');
+  const btnPrev  = document.getElementById('lb-prev');
+  const btnNext  = document.getElementById('lb-next');
+
+  let idx = 0;
+
+  function show(i){
+    idx = (i + links.length) % links.length;
+    const a = links[idx];
+    const alt = a.querySelector('img')?.alt || '';
+    const href = a.getAttribute('href');
+
+    // vis original-fil i overlay – ingen nedskalering
+    img.src = '';
+    img.src = href;
+    img.alt = alt;
+    openL.href = href;
+    cap.textContent = alt;
+    cnt.textContent = (idx+1) + ' / ' + links.length;
+  }
+
+  function open(i){
+    show(i);
+    lb.classList.add('open');
+    lb.setAttribute('aria-hidden','false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close(){
+    lb.classList.remove('open');
+    lb.setAttribute('aria-hidden','true');
+    document.body.style.overflow = '';
+  }
+
+  links.forEach((a,i) => {
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      open(i);
+    });
+  });
+
+  btnClose.addEventListener('click', close);
+  btnPrev.addEventListener('click', () => show(idx-1));
+  btnNext.addEventListener('click', () => show(idx+1));
+
+  // klik i baggrunden lukker
+  lb.addEventListener('click', (e) => {
+    if(e.target === lb) close();
+  });
+
+  // tastatur
+  window.addEventListener('keydown', (e) => {
+    if(!lb.classList.contains('open')) return;
+    if(e.key === 'Escape') close();
+    if(e.key === 'ArrowRight') show(idx+1);
+    if(e.key === 'ArrowLeft')  show(idx-1);
+  });
+})();
+</script>
 </body>
 </html>
