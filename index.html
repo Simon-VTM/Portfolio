@@ -3,124 +3,146 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dit Navn – Bygningskonstruktør</title>
+  <title>Simon Vad Møller – Bygningskonstruktør</title>
   <meta name="description" content="Forside til portfolio – Om mig, Projekter-link og Kontakt.">
   <style>
     :root{
       --bg:#ffffff; --text:#17202a; --muted:#5f6b7a; --border:#e6e8eb; --brand:#2563eb; --brand-2:#1d4ed8;
     }
     *{box-sizing:border-box}
-    html,body{height:100%}
-    body{margin:0; font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Helvetica,Arial; color:var(--text); background:var(--bg)}
+    html,body{height:100%; margin:0; padding:0}
+    body{font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Helvetica,Arial; color:var(--text); background:#f8fafc}
     .container{max-width:1100px; margin-inline:auto; padding-inline:20px}
 
+    /* Enhanced Background Sections */
+    .bg-section-1 { background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); }
+    .bg-section-2 { background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%); }
+    .bg-section-3 { background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%); }
+    .bg-section-4 { background: linear-gradient(135deg, #cbd5e1 0%, #94a3b8 100%); }
+    .bg-section-5 { background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); }
+
     /* Nav */
-    header{position:sticky; top:0; z-index:50; background:#fffcc0; background:#ffffffd9; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border-bottom:1px solid var(--border)}
-    nav{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
-    .brand{font-weight:700; letter-spacing:.2px}
+    header{position:sticky; top:0; z-index:50; background:rgba(255,255,255,0.95); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom:1px solid var(--border); box-shadow: 0 4px 20px rgba(0,0,0,0.08)}
+    nav{display:flex; align-items:center; justify-content:space-between; padding:16px 0}
+    .brand{font-weight:700; letter-spacing:.2px; color:var(--brand-2)}
     .nav-links{display:flex; gap:18px}
-    .nav-links a{color:var(--text); text-decoration:none; padding:8px 10px; border-radius:10px}
-    .nav-links a:hover{background:#f3f4f6}
+    .nav-links a{color:var(--text); text-decoration:none; padding:10px 16px; border-radius:12px; transition:all 0.3s ease}
+    .nav-links a:hover{background:rgba(37,99,235,0.1); color:var(--brand-2); transform:translateY(-1px)}
 
     /* Hero */
-    .hero{padding:64px 0 32px}
-    .hero-inner{display:grid; grid-template-columns:1.2fr .8fr; gap:36px; align-items:center}
-    h1{font-size: clamp(34px, 5.5vw, 56px); line-height:1.1; margin:0 0 8px}
-    .subtitle{color:var(--brand-2); font-weight:600; margin:0 0 14px}
-    .lead{color:var(--muted); margin:0 0 22px}
-    .buttons{display:flex; flex-wrap:wrap; gap:12px}
-    .btn{display:inline-flex; align-items:center; gap:.5rem; padding:12px 16px; border-radius:12px; text-decoration:none; font-weight:600}
-    .btn-primary{background:linear-gradient(180deg,var(--brand),var(--brand-2)); color:#fff}
-    .btn-ghost{border:1px solid var(--border); color:var(--text)}
+    .hero{padding:80px 0 60px}
+    .hero-inner{display:grid; grid-template-columns:1.2fr .8fr; gap:40px; align-items:center}
+    h1{font-size: clamp(36px, 5.5vw, 58px); line-height:1.1; margin:0 0 12px; background:linear-gradient(135deg, var(--brand), var(--brand-2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text}
+    .subtitle{color:var(--brand-2); font-weight:700; margin:0 0 16px; font-size:clamp(18px, 3vw, 22px)}
+    .lead{color:var(--muted); margin:0 0 28px; font-size:clamp(16px, 2.5vw, 18px); line-height:1.7}
+    .buttons{display:flex; flex-wrap:wrap; gap:14px}
+    .btn{display:inline-flex; align-items:center; gap:.6rem; padding:14px 20px; border-radius:14px; text-decoration:none; font-weight:600; transition:all 0.3s ease; box-shadow:0 4px 16px rgba(0,0,0,0.1)}
+    .btn-primary{background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#fff; box-shadow:0 6px 20px rgba(37,99,235,0.3)}
+    .btn-primary:hover{transform:translateY(-2px); box-shadow:0 8px 25px rgba(37,99,235,0.4)}
+    .btn-ghost{border:2px solid var(--border); color:var(--text); background:rgba(255,255,255,0.8); backdrop-filter:blur(8px)}
+    .btn-ghost:hover{background:rgba(255,255,255,0.95); transform:translateY(-2px); border-color:var(--brand)}
     
     /* Profile Image */
     .profile-container{
-      border:1px solid var(--border); 
-      border-radius:18px; 
+      border:2px solid rgba(255,255,255,0.8); 
+      border-radius:24px; 
       overflow:hidden;
-      background:linear-gradient(180deg,#f8fafc,#fff);
+      background:linear-gradient(135deg,rgba(255,255,255,0.9),rgba(248,250,252,0.9));
       display:flex;
       align-items:center;
       justify-content:center;
-      min-height:240px;
+      min-height:280px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.15);
+      backdrop-filter:blur(10px);
     }
     .profile-image{
       width:100%; 
       height:100%; 
       object-fit:cover; 
       display:block;
-      min-height:240px;
+      min-height:280px;
     }
 
     /* Sections */
-    section{padding:24px 0 40px}
-    h2{font-size: clamp(22px, 3.6vw, 30px); margin:0 0 8px}
-    .section-lead{color:var(--muted); margin:0 0 18px}
-    .grid{display:grid; gap:16px}
+    section{padding:50px 0}
+    .section-padding { padding:60px 0 }
+    h2{font-size: clamp(24px, 3.6vw, 32px); margin:0 0 12px; color:var(--brand-2); font-weight:700}
+    .section-lead{color:var(--muted); margin:0 0 24px; font-size:clamp(16px, 2.5vw, 18px); line-height:1.6}
+    .grid{display:grid; gap:20px}
     .grid.two{grid-template-columns:1fr 1fr}
-    .card{border:1px solid var(--border); border-radius:18px; background:#fff}
-    .card .inner{padding:20px}
+    .card{border:1px solid rgba(255,255,255,0.5); border-radius:20px; background:rgba(255,255,255,0.8); backdrop-filter:blur(10px); box-shadow:0 8px 25px rgba(0,0,0,0.1); transition:all 0.3s ease}
+    .card:hover{transform:translateY(-3px); box-shadow:0 12px 35px rgba(0,0,0,0.15)}
+    .card .inner{padding:28px}
 
-    .tags{display:flex; flex-wrap:wrap; gap:8px; margin-top:8px}
-    .tag{font-size:13px; color:#334155; background:#eef2ff; border:1px solid #e0e7ff; padding:6px 10px; border-radius:999px}
+    .tags{display:flex; flex-wrap:wrap; gap:10px; margin-top:12px}
+    .tag{font-size:13px; color:#1e40af; background:rgba(239,246,255,0.8); border:1px solid rgba(59,130,246,0.2); padding:8px 14px; border-radius:999px; font-weight:500; backdrop-filter:blur(4px)}
 
     /* Contact */
-    .contact-list{list-style:none; padding:0; margin:0; display:grid; gap:10px}
-    .contact-item{display:flex; align-items:center; gap:12px; padding:14px 16px; border:1px solid var(--border); border-radius:14px; background:#fcfcfd}
-    .contact-item a{color:inherit}
+    .contact-list{list-style:none; padding:0; margin:0; display:grid; gap:14px}
+    .contact-item{display:flex; align-items:center; gap:16px; padding:18px 20px; border:1px solid rgba(255,255,255,0.5); border-radius:16px; background:rgba(255,255,255,0.7); backdrop-filter:blur(8px); transition:all 0.3s ease}
+    .contact-item:hover{transform:translateY(-2px); background:rgba(255,255,255,0.9); box-shadow:0 6px 20px rgba(0,0,0,0.1)}
+    .contact-item a{color:var(--brand-2); text-decoration:none; font-weight:500}
 
-    footer{border-top:1px solid var(--border); padding:22px 0 40px; color:var(--muted); font-size:14px}
+    footer{border-top:1px solid rgba(255,255,255,0.3); padding:28px 0 50px; color:var(--muted); font-size:14px; background:rgba(248,250,252,0.5)}
 
     /* Responsive */
-    @media (max-width:900px){ .hero-inner{grid-template-columns:1fr} .grid.two{grid-template-columns:1fr} }
+    @media (max-width:900px){ 
+      .hero-inner{grid-template-columns:1fr} 
+      .grid.two{grid-template-columns:1fr}
+      .hero{padding:60px 0 40px}
+    }
 
     /* ===== CV / Resume ===== */
-.resume{ padding:24px 0 40px }
-.resume .resume-title{
-  display:flex; align-items:center; gap:.6rem;
-  font-size:clamp(20px,3.4vw,26px); margin:0 0 14px;
-}
-.resume .resume-title .emoji{ font-size:1.1em }
+    .resume{ padding:50px 0 }
+    .resume .resume-title{
+      display:flex; align-items:center; gap:.8rem;
+      font-size:clamp(22px,3.4vw,28px); margin:0 0 18px; color:var(--brand-2); font-weight:700;
+    }
+    .resume .resume-title .emoji{ font-size:1.2em }
 
-.resume-group{ display:grid; gap:14px; margin:20px 0 34px }
-.resume-item{
-  --accent: var(--brand);
-  border:1px solid var(--border);
-  border-left:6px solid var(--accent);
-  border-radius:14px;
-  background:#fff;
-  box-shadow:0 6px 18px rgba(2,6,23,.06);
-  padding:14px 16px;
-}
-.resume-item .head{
-  display:flex; justify-content:space-between; align-items:flex-start; gap:12px;
-  margin-bottom:6px;
-}
-.resume-item .role{
-  font-weight:700; color:#1f3a8a; /* blå titel */
-}
-.resume-item .org{ color:#475569; font-size:14px; }
-.resume-item .date{ color:#64748b; font-size:13px; white-space:nowrap; }
-.resume-item .points{
-  margin:8px 0 0 0; padding-left:18px; color:#0f172a;
-}
-.resume-item .points li{ margin:4px 0 }
-.resume-item .points li::marker{ color:var(--accent) }
+    .resume-group{ display:grid; gap:16px; margin:24px 0 40px }
+    .resume-item{
+      --accent: var(--brand);
+      border:1px solid rgba(255,255,255,0.5);
+      border-left:5px solid var(--accent);
+      border-radius:16px;
+      background:rgba(255,255,255,0.8);
+      backdrop-filter:blur(10px);
+      box-shadow:0 6px 20px rgba(0,0,0,0.08);
+      padding:18px 20px;
+      transition:all 0.3s ease;
+    }
+    .resume-item:hover{
+      transform:translateY(-2px);
+      box-shadow:0 10px 30px rgba(0,0,0,0.12);
+      background:rgba(255,255,255,0.95);
+    }
+    .resume-item .head{
+      display:flex; justify-content:space-between; align-items:flex-start; gap:16px;
+      margin-bottom:8px;
+    }
+    .resume-item .role{
+      font-weight:700; color:var(--brand-2); font-size:18px;
+    }
+    .resume-item .org{ color:#475569; font-size:15px; margin-top:2px; }
+    .resume-item .date{ color:#64748b; font-size:14px; white-space:nowrap; font-weight:500; }
+    .resume-item .points{
+      margin:12px 0 0 0; padding-left:20px; color:#1e293b; line-height:1.6;
+    }
+    .resume-item .points li{ margin:6px 0 }
+    .resume-item .points li::marker{ color:var(--accent) }
 
-/* accent-farver pr. gruppe (som på referencebilledet) */
-.resume-group.edu   .resume-item{ --accent:#7c3aed; }  /* lilla */
-.resume-group.work  .resume-item{ --accent:#10b981; }  /* grøn */
-.resume-group.courses .resume-item{ --accent:#f59e0b; }  /* gul/orange */
-.resume-group.other .resume-item{ --accent:#070bf1; }  /* blå */
+    /* accent-farver pr. gruppe */
+    .resume-group.edu   .resume-item{ --accent:#7c3aed; }  /* lilla */
+    .resume-group.work  .resume-item{ --accent:#10b981; }  /* grøn */
+    .resume-group.courses .resume-item{ --accent:#f59e0b; }  /* gul/orange */
+    .resume-group.other .resume-item{ --accent:#0ea5e9; }  /* blå */
 
-/* responsiv: læg dato under titel på små skærme */
-@media (max-width:560px){
-  .resume-item .head{ flex-direction:column; align-items:flex-start }
-  .resume-item .date{ margin-top:4px }
-}
-
-
-
+    /* responsiv: læg dato under titel på små skærme */
+    @media (max-width:560px){
+      .resume-item .head{ flex-direction:column; align-items:flex-start }
+      .resume-item .date{ margin-top:6px }
+    }
   </style>
 </head>
 <body>
@@ -138,235 +160,213 @@
     </div>
   </header>
 
-  <main id="hjem" class="container">
-    <!-- HERO -->
-    <section class="hero">
-      <div class="hero-inner">
-        <div>
-          <h1>Simon Vad Møller</h1>
-          <p class="subtitle">Bygningskonstruktør</p>
-          <p class="lead">Mit navn er Simon Møller, og jeg læser til bygningskonstruktør på
-5. semester.
-Jeg har del års erfaring indenfor tømrerfaget og lidt
-ledelseserfaring. Jeg arbejder struktureret og målrettet, er
-detaljeorienteret og har stærke kompetencer inden for digitale
-værktøjer og bæredygtige løsninger i byggeriet.
-Jeg bidrager med faglighed og gåpåmod, og jeg er altid klar på nye
-udfordringer.</p>
-          <div class="buttons">
-            <a class="btn btn-primary" href="projekter.html">Se mine projekter</a>
-            <a class="btn btn-ghost" href="#kontakt">Kontakt mig</a>
-          </div>
-        </div>
-        <div class="profile-container">
-          <img src="billeder/Migselv2.jpg" alt="Dit Navn - Profil billede" class="profile-image" loading="lazy">
-        </div>
-      </div>
-    </section>
-
-    <!-- OM MIG -->
-    <section id="om">
-      <div class="card">
-        <div class="inner">
-          <h2>Om Mig</h2>
-          <p class="section-lead">Jeg er en aktiv person, der nyder at holde sig i gang, både fysisk og mentalt. Jeg interesserer mig
-                                  for IT og teknologi, og bruger gerne tid på at lære nye programmer og følge med i,
-                                  hvad der rører sig i den digitaleverden.
-                                </p>
-          <div class="grid two">
-            <div>
-              <h3 style="margin:0 0 6px; font-size:18px">Profil</h3>
-              <p>Bygningskonstruktørstuderende med fokus på projektering, planlægning og tekniske tegninger. Vant til at arbejde struktureret i alle faser – fra idé til udførelse.</p>
-              <div class="tags" aria-label="Kompetencer">
-                <span class="tag">Konstruktioner</span>
-                <span class="tag">Tekniske tegninger</span>
-                <span class="tag">Detaljeorienteret</span>
-                <span class="tag">Gåpåmod</span>
-                <span class="tag">Arbejdsmiljøkoordinator P & B</span>
-              </div>
-            </div>
-            <div>
-              <h3 style="margin:0 0 6px; font-size:18px">Værktøjer</h3>
-              <p>Revit / Be18 / AutoCAD / LCAbyg / LCCbyg / Tactplan / MS Project / Twinmotion / Office-pakken</p>
-              <div class="tags">
-                
-              </div>
+  <main>
+    <!-- HERO SECTION -->
+    <div class="bg-section-1">
+      <section id="hjem" class="hero container">
+        <div class="hero-inner">
+          <div>
+            <h1>Simon Vad Møller</h1>
+            <p class="subtitle">Bygningskonstruktør</p>
+            <p class="lead">Mit navn er Simon Møller, og jeg læser til bygningskonstruktør på 5. semester. Jeg har del års erfaring indenfor tømrerfaget og lidt ledelseserfaring. Jeg arbejder struktureret og målrettet, er detaljeorienteret og har stærke kompetencer inden for digitale værktøjer og bæredygtige løsninger i byggeriet. Jeg bidrager med faglighed og gåpåmod, og jeg er altid klar på nye udfordringer.</p>
+            <div class="buttons">
+              <a class="btn btn-primary" href="projekter.html">Se mine projekter</a>
+              <a class="btn btn-ghost" href="#kontakt">Kontakt mig</a>
             </div>
           </div>
-          <div style="margin-top:18px" class="buttons">
-            <a class="btn btn-primary" href="projekter.html">Se projekter</a>
-            <a class="btn btn-ghost" href="#kontakt">Kontakt</a>
+          <div class="profile-container">
+            <img src="billeder/Migselv2.jpg" alt="Simon Vad Møller - Profil billede" class="profile-image" loading="lazy">
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
 
-<!-- CV / RESUME -->
-<section id="cv" class="resume container">
-  <!-- Uddannelser -->
-  <h2 class="resume-title"><span class="emoji">🎓</span>Uddannelser</h2>
-  <div class="resume-group edu">
-    <article class="resume-item">
-      <div class="head">
-        <div>
-          <div class="role">Bygningskonstruktør</div>
-          <div class="org">Erhvervsakademi Sydvest (EASV), Esbjerg</div>
-        </div>
-        <div class="date">2023 – nu</div>
-      </div>
-      <ul class="points">
-        <li>Fokus: projektering, bygningsfysik, materialer.</li>
-        <li>Projektforløb: 1.–4. semester (se projektsiden).</li>
-      </ul>
-    </article>
-
-    <article class="resume-item">
-      <div class="head">
-        <div>
-          <div class="role">Højere Teknisk Eksamen</div>
-          <div class="org">Rybners Teknisk Gymnasium, Esbjerg</div>
-        </div>
-        <div class="date">2018 – 2021</div>
-      </div>
-      <ul class="points">
-        <li>Jeg gik på teknologi- og designlinjen og havde faget Byg og energi, 
-          hvor jeg arbejdede med landmåling, afsætning af et hus og opførelse af et hjørne af et sommerhus. 
-          Det var her, jeg for alvor fik interessen for byggeri og tømrerfaget.</li>
-      </ul>
-    </article>
-  </div>
-
-  <!-- Erhvervserfaring -->
-  <h2 class="resume-title"><span class="emoji">💼</span>Erhvervserfaring</h2>
-  <div class="resume-group work">
-    <article class="resume-item">
-      <div class="head">
-        <div>
-          <div class="role">Ufaglært tømrer</div>
-          <div class="org">Poul K. Poulsen, Gørding</div>
-        </div>
-        <div class="date">2021 – 2024</div>
-      </div>
-      <ul class="points">
-        <li>Jeg har arbejdet som ufaglært tømrer hos en mindre tømrervirksomhed i Gørding, 
-          hvor jeg har været involveret i alt fra nybyggeri af enfamiliehuse og landbrugsbyggeri til renoveringsprojekter og mindre opgaver.</li>
-      </ul>
-    </article>
-
-
-
-  </div>
-
-  <!-- Kurser -->
-  <h2 class="resume-title"><span class="emoji">🧰</span>Kurser</h2>
-  <div class="resume-group courses">
-    <article class="resume-item">
-      <div class="head">
-        <div>
-          <div class="role">Arbejdsmiljøkoordinator (AMK)</div>
-          <div class="org">Erhvervsakademi Sydvest (EASV), Esbjerg</div>
-        </div>
-        <div class="date">2025</div>
-      </div>
-      <ul class="points">
-        <li>Uddannelsen har givet mig en dybere forståelse for arbejdsmiljøet og sikkerheden på byggepladsen – både hvordan man allerede i projekteringsfasen kan forebygge ulykker, 
-          og hvordan man håndterer og løser udfordringer, der opstår under byggeprocessen.</li>
-      </ul>
-    </article>
-
-
-
-  </div>
-
-  <!-- Anden erhvervserfaring -->
-  <h2 class="resume-title"><span class="emoji">💼</span>Anden erhvervserfaring</h2>
-  <div class="resume-group other">
-    <article class="resume-item">
-      <div class="head">
-        <div>
-          <div class="role">IT-supporter</div>
-          <div class="org">ASOM-NET, Vejen</div>
-        </div>
-        <div class="date">2021 – nu</div>
-      </div>
-      <ul class="points">
-        <li>Jeg arbejder hos ASOM-Net som IT-supporter, hvor jeg hjælper med fejlsøgning af TV, internet og VoIP for over 75.000 kunder. 
-          Derudover koordinerer jeg opkald, der skal eskaleres, og laver interne vejledninger til fejlfinding.</li>
-      </ul>
-    </article>
-
-    <article class="resume-item">
-      <div class="head">
-        <div>
-          <div class="role">Manager hos Burger King</div>
-          <div class="org">Burger King, Ribe</div>
-        </div>
-        <div class="date">2018 – 2021</div>
-      </div>
-      <ul class="points">
-        <li>Jeg har arbejdet som manager hos Burger King, hvor jeg stod for koordinering af medarbejdere i dag- og aftenvagter. 
-          Mine opgaver omfattede blandt andet planlægning af arbejdsopgaver, oplæring af nye medarbejdere, 
-          kvalitetssikring af service og produkter samt håndtering af drift og kundeservice i travle perioder.</li>
-      </ul>
-    </article>
-
-  <article class="resume-item">
-      <div class="head">
-        <div>
-          <div class="role">Ungmedarbejder hos Burger King</div>
-          <div class="org">Burger King, Ribe</div>
-        </div>
-        <div class="date">2016 – 2018</div>
-      </div>
-      <ul class="points">
-        <li>Jeg har arbejdet som ungmedarbejder hos Burger King, 
-            hvor jeg hjalp med kundebetjening, tilberedning af mad, 
-            rengøring og generelle opgaver i restauranten.</li>
-      </ul>
-    </article>
-
-  <article class="resume-item">
-      <div class="head">
-        <div>
-          <div class="role">Ungmedarbejder inden for landbrug</div>
-          <div class="org">Landbrug, Jernvedlund</div>
-        </div>
-        <div class="date">2013 – 2016</div>
-      </div>
-      <ul class="points">
-        <li>Jeg har arbejdet som ungarbejder inden for landbrug, hvor jeg hjalp med pasning af dyr, 
-          vedligeholdelse af bygninger og maskiner samt generelle forefaldende opgaver.</li>
-      </ul>
-    </article>
-  </div>
-</section>
-
-
-    <!-- KONTAKT -->
-    <section id="kontakt">
-      <div class="card">
-        <div class="inner">
-          <h2>Kontakt</h2>
-          <p class="section-lead">Kontakt mig gerne på mail eller telefon.</p>
-          <ul class="contact-list">
-            <li class="contact-item">
+    <!-- OM MIG SECTION -->
+    <div class="bg-section-2">
+      <section id="om" class="section-padding container">
+        <div class="card">
+          <div class="inner">
+            <h2>Om Mig</h2>
+            <p class="section-lead">Jeg er en aktiv person, der nyder at holde sig i gang, både fysisk og mentalt. Jeg interesserer mig for IT og teknologi, og bruger gerne tid på at lære nye programmer og følge med i, hvad der rører sig i den digitale verden.</p>
+            <div class="grid two">
               <div>
-                <strong>Mail</strong><br>
-                <a href="mailto:simmoe01@easv365.dk">simmoe01@easv365.dk</a>
+                <h3 style="margin:0 0 8px; font-size:20px; color:var(--brand-2); font-weight:600">Profil</h3>
+                <p>Bygningskonstruktørstuderende med fokus på projektering, planlægning og tekniske tegninger. Vant til at arbejde struktureret i alle faser – fra idé til udførelse.</p>
+                <div class="tags" aria-label="Kompetencer">
+                  <span class="tag">Konstruktioner</span>
+                  <span class="tag">Tekniske tegninger</span>
+                  <span class="tag">Detaljeorienteret</span>
+                  <span class="tag">Gåpåmod</span>
+                  <span class="tag">Arbejdsmiljøkoordinator P & B</span>
+                </div>
               </div>
-            </li>
-            <li class="contact-item">
               <div>
-                <strong>LinkedIn</strong><br>
-                <a href="https://www.linkedin.com/in/simon-vad-theilmann-m%C3%B8ller-314436267/" target="_blank" rel="noopener">
-                link-til-profil
-                </a>
+                <h3 style="margin:0 0 8px; font-size:20px; color:var(--brand-2); font-weight:600">Værktøjer</h3>
+                <p>Revit / Be18 / AutoCAD / LCAbyg / LCCbyg / Tactplan / MS Project / Twinmotion / Office-pakken</p>
               </div>
-            </li>
-          </ul>
+            </div>
+            <div style="margin-top:24px" class="buttons">
+              <a class="btn btn-primary" href="projekter.html">Se projekter</a>
+              <a class="btn btn-ghost" href="#kontakt">Kontakt</a>
+            </div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
+
+    <!-- CV / RESUME SECTION -->
+    <div class="bg-section-3">
+      <section id="cv" class="resume container">
+        <!-- Uddannelser -->
+        <h2 class="resume-title"><span class="emoji">🎓</span>Uddannelser</h2>
+        <div class="resume-group edu">
+          <article class="resume-item">
+            <div class="head">
+              <div>
+                <div class="role">Bygningskonstruktør</div>
+                <div class="org">Erhvervsakademi Sydvest (EASV), Esbjerg</div>
+              </div>
+              <div class="date">2023 – nu</div>
+            </div>
+            <ul class="points">
+              <li>Fokus: projektering, bygningsfysik, materialer.</li>
+              <li>Projektforløb: 1.–4. semester (se projektsiden).</li>
+            </ul>
+          </article>
+
+          <article class="resume-item">
+            <div class="head">
+              <div>
+                <div class="role">Højere Teknisk Eksamen</div>
+                <div class="org">Rybners Teknisk Gymnasium, Esbjerg</div>
+              </div>
+              <div class="date">2018 – 2021</div>
+            </div>
+            <ul class="points">
+              <li>Jeg gik på teknologi- og designlinjen og havde faget Byg og energi, hvor jeg arbejdede med landmåling, afsætning af et hus og opførelse af et hjørne af et sommerhus. Det var her, jeg for alvor fik interessen for byggeri og tømrerfaget.</li>
+            </ul>
+          </article>
+        </div>
+
+        <!-- Erhvervserfaring -->
+        <h2 class="resume-title"><span class="emoji">💼</span>Erhvervserfaring</h2>
+        <div class="resume-group work">
+          <article class="resume-item">
+            <div class="head">
+              <div>
+                <div class="role">Ufaglært tømrer</div>
+                <div class="org">Poul K. Poulsen, Gørding</div>
+              </div>
+              <div class="date">2021 – 2024</div>
+            </div>
+            <ul class="points">
+              <li>Jeg har arbejdet som ufaglært tømrer hos en mindre tømrervirksomhed i Gørding, hvor jeg har været involveret i alt fra nybyggeri af enfamiliehuse og landbrugsbyggeri til renoveringsprojekter og mindre opgaver.</li>
+            </ul>
+          </article>
+        </div>
+
+        <!-- Kurser -->
+        <h2 class="resume-title"><span class="emoji">🧰</span>Kurser</h2>
+        <div class="resume-group courses">
+          <article class="resume-item">
+            <div class="head">
+              <div>
+                <div class="role">Arbejdsmiljøkoordinator (AMK)</div>
+                <div class="org">Erhvervsakademi Sydvest (EASV), Esbjerg</div>
+              </div>
+              <div class="date">2025</div>
+            </div>
+            <ul class="points">
+              <li>Uddannelsen har givet mig en dybere forståelse for arbejdsmiljøet og sikkerheden på byggepladsen – både hvordan man allerede i projekteringsfasen kan forebygge ulykker, og hvordan man håndterer og løser udfordringer, der opstår under byggeprocessen.</li>
+            </ul>
+          </article>
+        </div>
+
+        <!-- Anden erhvervserfaring -->
+        <h2 class="resume-title"><span class="emoji">💼</span>Anden erhvervserfaring</h2>
+        <div class="resume-group other">
+          <article class="resume-item">
+            <div class="head">
+              <div>
+                <div class="role">IT-supporter</div>
+                <div class="org">ASOM-NET, Vejen</div>
+              </div>
+              <div class="date">2021 – nu</div>
+            </div>
+            <ul class="points">
+              <li>Jeg arbejder hos ASOM-Net som IT-supporter, hvor jeg hjælper med fejlsøgning af TV, internet og VoIP for over 75.000 kunder. Derudover koordinerer jeg opkald, der skal eskaleres, og laver interne vejledninger til fejlfinding.</li>
+            </ul>
+          </article>
+
+          <article class="resume-item">
+            <div class="head">
+              <div>
+                <div class="role">Manager hos Burger King</div>
+                <div class="org">Burger King, Ribe</div>
+              </div>
+              <div class="date">2018 – 2021</div>
+            </div>
+            <ul class="points">
+              <li>Jeg har arbejdet som manager hos Burger King, hvor jeg stod for koordinering af medarbejdere i dag- og aftenvagter. Mine opgaver omfattede blandt andet planlægning af arbejdsopgaver, oplæring af nye medarbejdere, kvalitetssikring af service og produkter samt håndtering af drift og kundeservice i travle perioder.</li>
+            </ul>
+          </article>
+
+          <article class="resume-item">
+            <div class="head">
+              <div>
+                <div class="role">Ungmedarbejder hos Burger King</div>
+                <div class="org">Burger King, Ribe</div>
+              </div>
+              <div class="date">2016 – 2018</div>
+            </div>
+            <ul class="points">
+              <li>Jeg har arbejdet som ungmedarbejder hos Burger King, hvor jeg hjalp med kundebetjening, tilberedning af mad, rengøring og generelle opgaver i restauranten.</li>
+            </ul>
+          </article>
+
+          <article class="resume-item">
+            <div class="head">
+              <div>
+                <div class="role">Ungmedarbejder inden for landbrug</div>
+                <div class="org">Landbrug, Jernvedlund</div>
+              </div>
+              <div class="date">2013 – 2016</div>
+            </div>
+            <ul class="points">
+              <li>Jeg har arbejdet som ungarbejder inden for landbrug, hvor jeg hjalp med pasning af dyr, vedligeholdelse af bygninger og maskiner samt generelle forefaldende opgaver.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <!-- KONTAKT SECTION -->
+    <div class="bg-section-5">
+      <section id="kontakt" class="section-padding container">
+        <div class="card">
+          <div class="inner">
+            <h2>Kontakt</h2>
+            <p class="section-lead">Kontakt mig gerne på mail</p>
+            <ul class="contact-list">
+              <li class="contact-item">
+                <div>
+                  <strong>Mail</strong><br>
+                  <a href="mailto:simmoe01@easv365.dk">simmoe01@easv365.dk</a>
+                </div>
+              </li>
+              <li class="contact-item">
+                <div>
+                  <strong>LinkedIn</strong><br>
+                  <a href="https://www.linkedin.com/in/simon-vad-theilmann-m%C3%B8ller-314436267/" target="_blank" rel="noopener">
+                  Simon Vad Theilmann Møller
+                  </a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
   </main>
 
   <footer>
