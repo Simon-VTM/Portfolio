@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>2. semester – Tæt-lavt boligområde & fælleshus</title>
   <style>
-    :root{ --space:20px; --radius:16px; }
+    :root{ --space:20px; --radius:16px; --border:#e6e8eb; }
     body{ font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; margin:0; color:#0f172a; background:#f8fafc; }
     header, main{ max-width:1000px; margin:0 auto; padding:24px; }
     a{ color:#1f2937; }
@@ -23,25 +23,90 @@
     .chip{ padding:6px 10px; border-radius:999px; background:#eef2f7; font-size:12px; }
     footer{ text-align:center; padding:40px 24px; color:#475569; }
 
-     :root{ --space:20px; --radius:16px; --border:#e6e8eb; }
+    main.grid{ display:grid; gap:20px; grid-template-columns: 2fr 1fr; }
+    @media (max-width:900px){ main.grid{ grid-template-columns:1fr; } }
 
-main.grid{ display:grid; gap:20px; grid-template-columns: 2fr 1fr; }
-@media (max-width:900px){ main.grid{ grid-template-columns:1fr; } }
+    .card{ background:#fff; padding:var(--space); border-radius:var(--radius); }
+    .full-span{ grid-column: 1 / -1; }
 
-/* gør en sektion til “kort” som de to øverste */
-.card{ background:#fff; padding:var(--space); border-radius:var(--radius); }
+    /* Gallery */
+    .gallery-section h2{ margin:0 0 10px; }
+    .gallery-section h3{ margin:18px 0 10px; font-size:18px; }
+    .gallery-grid{ display:grid; gap:12px; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); }
+    .gallery-grid button{ 
+      display:block; border:1px solid var(--border); border-radius:12px; overflow:hidden; 
+      background:#fff; text-decoration:none; color:inherit; cursor:pointer; padding:0;
+      transition: transform 0.2s ease;
+    }
+    .gallery-grid button:hover{ transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .gallery-grid img{ width:100%; aspect-ratio:4/3; object-fit:cover; display:block; transition:transform .15s; }
+    .gallery-grid button:hover img{ transform:scale(1.02); }
 
-/* fuld bredde inde i gridden (mellem venstre/højre kort – ikke kant-til-kant på siden) */
-.full-span{ grid-column: 1 / -1; }
+    /* Modal */
+    .modal-overlay{ 
+      position:fixed; top:0; left:0; width:100vw; height:100vh; 
+      background:rgba(0,0,0,0.9); z-index:1000; display:none;
+      backdrop-filter: blur(10px);
+    }
+    .modal-overlay.active{ display:flex; align-items:center; justify-content:center; }
+    
+    .modal-content{ 
+      position:relative; width:100vw; height:100vh; 
+      display:flex; align-items:center; justify-content:center;
+      touch-action: pan-x pan-y pinch-zoom;
+      overflow: hidden;
+    }
+    
+    .modal-image{ 
+      max-width:100%; max-height:calc(100vh - 80px); object-fit:contain; 
+      transition: transform 0.3s ease;
+      transform-origin: center center;
+      cursor: grab;
+      margin-top: 40px;
+    }
+    
+    .modal-image:active{ cursor: grabbing; }
 
-/* Galleri */
-.gallery-section h2{ margin:0 0 10px; }
-.gallery-section h3{ margin:18px 0 10px; font-size:18px; }
-.gallery-grid{ display:grid; gap:12px; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); }
-.gallery-grid a{ display:block; border:1px solid var(--border); border-radius:12px; overflow:hidden; background:#fff; text-decoration:none; color:inherit; }
-.gallery-grid img{ width:100%; aspect-ratio:4/3; object-fit:cover; display:block; transition:transform .15s; }
-.gallery-grid a:hover img{ transform:scale(1.02); }
+    .modal-nav{ 
+      position:absolute; top:50%; transform:translateY(-50%); z-index:15;
+      background:rgba(255,255,255,0.2); border:2px solid rgba(255,255,255,0.3); border-radius:50%; 
+      width:54px; height:54px; font-size:24px; cursor:pointer; color:white;
+      backdrop-filter: blur(10px); transition: all 0.2s ease;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .modal-nav:hover{ background:rgba(255,255,255,0.3); transform:translateY(-50%) scale(1.1); }
+    .modal-nav.prev{ left:30px; }
+    .modal-nav.next{ right:30px; }
+    
+    .modal-close{ 
+      position:absolute; top:20px; right:20px; z-index:20;
+      background:rgba(255,255,255,0.2); border:2px solid rgba(255,255,255,0.3); border-radius:50%; 
+      width:44px; height:44px; font-size:24px; cursor:pointer; color:white;
+      backdrop-filter: blur(10px); transition: all 0.2s ease;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .modal-close:hover{ background:rgba(255,255,255,0.3); transform: scale(1.1); }
 
+    .modal-counter{ 
+      position:absolute; bottom:20px; left:50%; transform:translateX(-50%);
+      background:rgba(0,0,0,0.7); color:white; padding:8px 16px; 
+      border-radius:20px; font-size:14px; backdrop-filter: blur(10px);
+    }
+
+    .modal-title{ 
+      position:absolute; top:0; left:0; right:0; z-index:10;
+      background:linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 70%, transparent 100%); 
+      color:white; padding:20px; font-size:16px; font-weight:500;
+      backdrop-filter: blur(10px);
+    }
+
+    @media (max-width: 768px) {
+      .modal-nav{ width:44px; height:44px; font-size:20px; }
+      .modal-nav.prev{ left:15px; }
+      .modal-nav.next{ right:15px; }
+      .modal-title{ padding:15px; font-size:14px; }
+      .modal-image{ max-height:calc(100vh - 60px); margin-top: 30px; }
+    }
   </style>
 </head>
 <body>
@@ -67,77 +132,360 @@ main.grid{ display:grid; gap:20px; grid-template-columns: 2fr 1fr; }
   </header>
 
   <main class="grid">
-  <!-- Venstre kort -->
-  <section class="card">
-    <h2 style="margin-top:0;">Projektoversigt</h2>
-<p>På andet semester blev der projekteret et tæt-lavt boligområde med tilhørende
-fælleshus. Projektet omfattede boliger i to etager – heraf handicapvenlige
-enheder – samt fællesfaciliteter med kælder. Der blev arbejdet med
-situationsplaner, bygningsdesign, materialevalg, bæredygtighedsløsninger og
-tekniske installationer gennem faserne forslag, myndighed og udbud – med fokus
-på arkitektonisk udtryk, funktionalitet, energikrav og bygherrekrav.</p>
+    <section class="card">
+      <h2 style="margin-top:0;">Projektoversigt</h2>
+      <p>På andet semester blev der projekteret et tæt-lavt boligområde med tilhørende
+      fælleshus. Projektet omfattede boliger i to etager – heraf handicapvenlige
+      enheder – samt fællesfaciliteter med kælder. Der blev arbejdet med
+      situationsplaner, bygningsdesign, materialevalg, bæredygtighedsløsninger og
+      tekniske installationer gennem faserne forslag, myndighed og udbud – med fokus
+      på arkitektonisk udtryk, funktionalitet, energikrav og bygherrekrav.</p>
 
-<h3>Nøgleopgaver</h3>
-<ul>
-  <li>Stedanalyse og situationsplan</li>
-  <li>Boligtypologi, adgangsforhold og tilgængelighed</li>
-  <li>Projektering af fælleshus (kælder og fællesfunktioner)</li>
-  <li>Bæredygtighedstiltag og energikrav</li>
-  <li>Koordinering af tekniske installationer</li>
-  <li>Forslag-, myndigheds- og udbudsprojekt</li>
-</ul>
-  </section>
+      <h3>Nøgleopgaver</h3>
+      <ul>
+        <li>Stedanalyse og situationsplan</li>
+        <li>Boligtypologi, adgangsforhold og tilgængelighed</li>
+        <li>Projektering af fælleshus (kælder og fællesfunktioner)</li>
+        <li>Bæredygtighedstiltag og energikrav</li>
+        <li>Koordinering af tekniske installationer</li>
+        <li>Forslag-, myndigheds- og udbudsprojekt</li>
+      </ul>
+    </section>
 
-  <!-- Højre kort -->
-  <section class="card">
-    <h2 style="margin-top:0;">Fakta</h2>
-<ul>
-  <li><strong>Type:</strong> Tæt-lav bebyggelse + fælleshus</li>
-  <li><strong>Fokus:</strong> Funktionalitet, energikrav, bygherrekrav</li>
-  <li><strong>Roller/værktøjer:</strong> Revit, energiberegning, installationer</li>
-</ul>
-  </section>
+    <section class="card">
+      <h2 style="margin-top:0;">Fakta</h2>
+      <ul>
+        <li><strong>Type:</strong> Tæt-lav bebyggelse + fælleshus</li>
+        <li><strong>Fokus:</strong> Funktionalitet, energikrav, bygherrekrav</li>
+        <li><strong>Roller/værktøjer:</strong> Revit, energiberegning, installationer</li>
+      </ul>
+    </section>
 
-  <!-- GALLERI: fuld bredde INDE i gridden -->
-  <section class="card gallery-section full-span" id="galleri">
-    <h2>Galleri</h2>
+    <section class="card gallery-section full-span" id="galleri">
+      <h2>Galleri</h2>
 
-  <h3>Plan/snit-tegninger</h3>
-  <div class="gallery-grid">
-    <a href="billeder/2-semester/plan-01.jpg" target="_blank" rel="noopener">
-      <img src="billeder/2-semester/plan-01.jpg" alt="Situationsplan – tæt-lavt" loading="lazy">
-    </a>
-    <a href="billeder/2-semester/snit-01.jpg" target="_blank" rel="noopener">
-      <img src="billeder/2-semester/snit-01.jpg" alt="Snit – fælleshus" loading="lazy">
-    </a>
-    <a href="billeder/2-semester/snit-02.jpg" target="_blank" rel="noopener">
-      <img src="billeder/2-semester/snit-02.jpg" alt="Snit – bolig" loading="lazy">
-    </a>
+      <h3>Plan-tegninger</h3>
+      <div class="gallery-grid">
+        <button type="button" data-src="billeder/2-semester/K01-H1-E0X-N001-Beliggenhedsplan.jpg" data-title="Beliggenhedsplan">
+          <img src="billeder/2-semester/K01-H1-E0X-N001-Beliggenhedsplan.jpg" alt="Beliggenhedsplan" loading="lazy">
+        </button>
+        <button type="button" data-src="billeder/2-semester/K01-H1-EST-N001-Stueplan-målplan.jpg" data-title="Stueplan-Målplan">
+          <img src="billeder/2-semester/K01-H1-EST-N001-Stueplan-målplan.jpg" alt="Stueplan-Målplan" loading="lazy">
+        </button>
+        <button type="button" data-src="billeder/2-semester/K01-H1-E0X-N003-Kloakplan.jpg" data-title="Kloakplan">
+          <img src="billeder/2-semester/K01-H1-E0X-N003-Kloakplan.jpg" alt="Kloakplan" loading="lazy">
+        </button>
+        <button type="button" data-src="billeder/2-semester/K01-H1-E0X-N004-Regnvandsplan.jpg" data-title="Kloakplan">
+          <img src="billeder/2-semester/K01-H1-E0X-N004-Regnvandsplan.jpg" alt="Kloakplan" loading="lazy">
+        </button>
+        <button type="button" data-src="billeder/2-semester/K01-H1-E0X-N003-Kloakplan.jpg" data-title="Kloakplan">
+          <img src="billeder/2-semester/K01-H1-E0X-N003-Kloakplan.jpg" alt="Kloakplan" loading="lazy">
+        </button>
+      </div>
+
+<h3>Facade- og Snit-tegninger</h3>
+      <div class="gallery-grid">
+        <button type="button" data-src="billeder/2-semester/K01-H2-E0X-N001-Facade-Ost-og-vest.jpg" data-title="Facade Øst og Vest">
+          <img src="billeder/2-semester/K01-H2-E0X-N001-Facade-Ost-og-vest.jpg" alt="Facade Øst og Vest" loading="lazy">
+        </button>
+        <button type="button" data-src="billeder/2-semester/K01-H2-E0X-N002-Facade-Nord-og-Syd.jpg" data-title="Facade Nord og Syd">
+          <img src="billeder/2-semester/K01-H2-E0X-N002-Facade-Nord-og-Syd.jpg" alt="Facade Nord og Syd" loading="lazy">
+        </button>
+        <button type="button" data-src="billeder/2-semester/K01-H3-E0X-N001-Snit-A-A.jpg" data-title="Snit A-A">
+          <img src="billeder/2-semester/K01-H3-E0X-N001-Snit-A-A.jpg" alt="Snit A-A" loading="lazy">
+        </button>
+        <button type="button" data-src="billeder/2-semester/K01-H3-E0X-N002-Snit-B-B.jpg" data-title="Snit B-B">
+          <img src="billeder/2-semester/K01-H3-E0X-N002-Snit-B-B.jpg" alt="Snit B-B" loading="lazy">
+        </button>
+      </div>
+
+      <h3>Tekniske-tegninger</h3>
+      <div class="gallery-grid">
+        <button type="button" data-src="billeder/2-semester/K01-H5-E01-N002-Samling-af-let-ydervæg.jpg" data-title="Detalje – facade">
+          <img src="billeder/2-semester/K01-H5-E01-N002-Samling-af-let-ydervæg.jpg" alt="Detalje – facade" loading="lazy">
+        </button>
+        <button type="button" data-src="billeder/2-semester/K01-H5-E01-N005-Murkrone-let.jpg" data-title="Detalje – installationer">
+          <img src="billeder/2-semester/K01-H5-E01-N005-Murkrone-let.jpg" alt="Detalje – installationer" loading="lazy">
+        </button>
+      </div>
+
+      <h3>Visualiseringer</h3>
+      <div class="gallery-grid">
+        <button type="button" data-src="billeder/2-semester.jpg" data-title="Visualisering">
+          <img src="billeder/2-semester.jpg" alt="Visualisering" loading="lazy">
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal Gallery -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-content">
+      <img class="modal-image" id="modalImage" src="" alt="">
+      <button class="modal-nav prev" id="prevBtn">‹</button>
+      <button class="modal-nav next" id="nextBtn">›</button>
+      <button class="modal-close" id="closeBtn">×</button>
+      <div class="modal-counter" id="modalCounter">1 / 1</div>
+      <div class="modal-title" id="modalTitle">Image Title</div>
+    </div>
   </div>
-
-  <h3>Tekniske-tegninger</h3>
-  <div class="gallery-grid">
-    <a href="billeder/2-semester/detail-01.jpg" target="_blank" rel="noopener">
-      <img src="billeder/2-semester/detail-01.jpg" alt="Detalje – facade" loading="lazy">
-    </a>
-    <a href="billeder/2-semester/detail-02.jpg" target="_blank" rel="noopener">
-      <img src="billeder/2-semester/detail-02.jpg" alt="Detalje – installationer" loading="lazy">
-    </a>
-  </div>
-
-  <h3>Visualiseringer</h3>
-  <div class="gallery-grid">
-    <a href="billeder/2-semester/vis-01.jpg" target="_blank" rel="noopener">
-      <img src="billeder/2-semester/vis-01.jpg" alt="Visualisering – fælleshus" loading="lazy">
-    </a>
-    <a href="billeder/2-semester/vis-02.jpg" target="_blank" rel="noopener">
-      <img src="billeder/2-semester/vis-02.jpg" alt="Visualisering – bebyggelse" loading="lazy">
-    </a>
-  </div>
-  </section>
-</main>
-
 
   <footer>© 2025 Dit Navn</footer>
+
+  <script>
+    class SwipeableGallery {
+      constructor() {
+        this.currentIndex = 0;
+        this.images = [];
+        this.touchStartX = 0;
+        this.touchEndX = 0;
+        this.touchStartY = 0;
+        this.touchEndY = 0;
+        this.scale = 1;
+        this.translateX = 0;
+        this.translateY = 0;
+        this.isDragging = false;
+        this.lastPinchDistance = 0;
+        
+        this.modal = document.getElementById('modalOverlay');
+        this.modalImage = document.getElementById('modalImage');
+        this.prevBtn = document.getElementById('prevBtn');
+        this.nextBtn = document.getElementById('nextBtn');
+        this.closeBtn = document.getElementById('closeBtn');
+        this.counter = document.getElementById('modalCounter');
+        this.title = document.getElementById('modalTitle');
+        
+        this.initEventListeners();
+      }
+      
+      initEventListeners() {
+        // Gallery buttons - get ALL images on the page
+        document.querySelectorAll('[data-src]').forEach((btn, index) => {
+          btn.addEventListener('click', (e) => {
+            this.openModal(index);
+          });
+        });
+        
+        // Modal controls
+        this.prevBtn.addEventListener('click', () => this.showPrevious());
+        this.nextBtn.addEventListener('click', () => this.showNext());
+        this.closeBtn.addEventListener('click', () => this.closeModal());
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+          if (!this.modal.classList.contains('active')) return;
+          
+          switch(e.key) {
+            case 'ArrowLeft': this.showPrevious(); break;
+            case 'ArrowRight': this.showNext(); break;
+            case 'Escape': this.closeModal(); break;
+          }
+        });
+        
+        // Touch/swipe events
+        this.modal.addEventListener('touchstart', (e) => {
+          if (e.touches.length === 1) {
+            this.touchStartX = e.touches[0].clientX;
+            this.touchStartY = e.touches[0].clientY;
+            this.isDragging = true;
+          } else if (e.touches.length === 2) {
+            this.lastPinchDistance = this.getPinchDistance(e.touches);
+          }
+        });
+        
+        this.modal.addEventListener('touchmove', (e) => {
+          if (e.touches.length === 1 && this.isDragging && this.scale > 1) {
+            e.preventDefault();
+            const deltaX = e.touches[0].clientX - this.touchStartX;
+            const deltaY = e.touches[0].clientY - this.touchStartY;
+            this.translateX += deltaX;
+            this.translateY += deltaY;
+            this.updateImageTransform();
+            this.touchStartX = e.touches[0].clientX;
+            this.touchStartY = e.touches[0].clientY;
+          } else if (e.touches.length === 2) {
+            e.preventDefault();
+            const pinchDistance = this.getPinchDistance(e.touches);
+            const scaleChange = pinchDistance / this.lastPinchDistance;
+            this.scale = Math.min(Math.max(this.scale * scaleChange, 0.5), 3);
+            
+            // Auto-center when zooming out to 1.0 or less
+            if (this.scale <= 1) {
+              this.scale = 1;
+              this.translateX = 0;
+              this.translateY = 0;
+            }
+            
+            this.updateImageTransform();
+            this.lastPinchDistance = pinchDistance;
+          }
+        });
+        
+        this.modal.addEventListener('touchend', (e) => {
+          if (e.touches.length === 0) {
+            this.touchEndX = e.changedTouches[0].clientX;
+            this.touchEndY = e.changedTouches[0].clientY;
+            this.isDragging = false;
+            if (this.scale === 1) {
+              this.handleSwipe();
+            }
+          }
+        });
+        
+        // Mouse wheel zoom
+        this.modal.addEventListener('wheel', (e) => {
+          e.preventDefault();
+          const zoomFactor = e.deltaY > 0 ? 0.9 : 1.1;
+          this.scale = Math.min(Math.max(this.scale * zoomFactor, 0.5), 3);
+          
+          // Auto-center when zooming out to 1.0 or less
+          if (this.scale <= 1) {
+            this.scale = 1;
+            this.translateX = 0;
+            this.translateY = 0;
+          }
+          
+          this.updateImageTransform();
+        });
+        
+        // Mouse drag (desktop)
+        this.modalImage.addEventListener('mousedown', (e) => {
+          if (this.scale > 1) {
+            this.isDragging = true;
+            this.touchStartX = e.clientX;
+            this.touchStartY = e.clientY;
+            e.preventDefault();
+          }
+        });
+        
+        document.addEventListener('mousemove', (e) => {
+          if (this.isDragging && this.scale > 1) {
+            const deltaX = e.clientX - this.touchStartX;
+            const deltaY = e.clientY - this.touchStartY;
+            this.translateX += deltaX;
+            this.translateY += deltaY;
+            this.updateImageTransform();
+            this.touchStartX = e.clientX;
+            this.touchStartY = e.clientY;
+          }
+        });
+        
+        document.addEventListener('mouseup', () => {
+          this.isDragging = false;
+        });
+        
+        // Double-click to reset zoom and center
+        this.modalImage.addEventListener('dblclick', () => {
+          this.scale = 1;
+          this.translateX = 0;
+          this.translateY = 0;
+          this.updateImageTransform();
+        });
+        
+        // Click outside to close (click anywhere in the dark area)
+        this.modal.addEventListener('click', (e) => {
+          // Close if clicking on the modal overlay (dark area) but not on the image or controls
+          if (e.target === this.modal || e.target.classList.contains('modal-content')) {
+            this.closeModal();
+          }
+        });
+      }
+      
+      openModal(clickedIndex) {
+        // Get ALL images on the page (not grouped by gallery)
+        this.images = Array.from(document.querySelectorAll('[data-src]'));
+        this.currentIndex = clickedIndex;
+        
+        // Reset zoom and position
+        this.scale = 1;
+        this.translateX = 0;
+        this.translateY = 0;
+        
+        this.showImage();
+        this.modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+      
+      closeModal() {
+        this.modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+      
+      showPrevious() {
+        this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
+        this.scale = 1;
+        this.translateX = 0;
+        this.translateY = 0;
+        this.showImage();
+      }
+      
+      showNext() {
+        this.currentIndex = (this.currentIndex + 1) % this.images.length;
+        this.scale = 1;
+        this.translateX = 0;
+        this.translateY = 0;
+        this.showImage();
+      }
+      
+      showImage() {
+        const currentImage = this.images[this.currentIndex];
+        this.modalImage.src = currentImage.dataset.src;
+        this.modalImage.alt = currentImage.dataset.title;
+        this.title.textContent = currentImage.dataset.title;
+        this.counter.textContent = `${this.currentIndex + 1} / ${this.images.length}`;
+        
+        // Reset transform
+        this.updateImageTransform();
+        
+        // Show/hide navigation buttons
+        this.prevBtn.style.display = this.images.length > 1 ? 'flex' : 'none';
+        this.nextBtn.style.display = this.images.length > 1 ? 'flex' : 'none';
+      }
+      
+      updateImageTransform() {
+        // Add smooth transition when returning to center
+        if (this.scale === 1 && (this.translateX !== 0 || this.translateY !== 0)) {
+          this.modalImage.style.transition = 'transform 0.3s ease';
+        } else {
+          this.modalImage.style.transition = 'transform 0.1s ease';
+        }
+        
+        this.modalImage.style.transform = `translate(${this.translateX}px, ${this.translateY}px) scale(${this.scale})`;
+        
+        // Reset transition after animation
+        if (this.scale === 1) {
+          setTimeout(() => {
+            this.modalImage.style.transition = 'transform 0.1s ease';
+          }, 300);
+        }
+      }
+      
+      getPinchDistance(touches) {
+        const dx = touches[0].clientX - touches[1].clientX;
+        const dy = touches[0].clientY - touches[1].clientY;
+        return Math.sqrt(dx * dx + dy * dy);
+      }
+      
+      handleSwipe() {
+        const swipeThreshold = 50;
+        const swipeDistance = this.touchEndX - this.touchStartX;
+        const swipeDistanceY = Math.abs(this.touchEndY - this.touchStartY);
+        
+        // Only handle horizontal swipes when not zoomed and vertical swipe is minimal
+        if (Math.abs(swipeDistance) > swipeThreshold && swipeDistanceY < 100 && this.scale === 1) {
+          if (swipeDistance > 0) {
+            this.showPrevious();
+          } else {
+            this.showNext();
+          }
+        }
+      }
+    }
+    
+    // Initialize gallery when DOM is loaded
+    document.addEventListener('DOMContentLoaded', () => {
+      new SwipeableGallery();
+    });
+  </script>
 </body>
 </html>
