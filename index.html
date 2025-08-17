@@ -29,7 +29,7 @@
     .nav-links a{color:var(--text); text-decoration:none; padding:10px 12px; border-radius:12px; transition:all 0.3s ease; white-space:nowrap; flex-shrink:0; font-size:15px;}
     .nav-links a:hover{background:rgba(37,99,235,0.1); color:var(--brand-2); transform:translateY(-1px)}
 
-    /* Mobile navigation improvements */
+    /* Mobile navigation adjustments */
     @media (max-width: 480px) {
       .brand{font-size:16px; max-width:120px; overflow:hidden; text-overflow:ellipsis;}
       .nav-links{gap:8px; margin-left:8px;}
@@ -37,8 +37,10 @@
     }
 
     @media (max-width: 380px) {
-      .brand{font-size:15px; max-width:100px;}
-      .nav-links a{padding:8px 8px; font-size:13px;}
+      nav{flex-wrap:wrap; gap:8px;}
+      .brand{order:1; flex-basis:100%; text-align:center; margin-bottom:4px; font-size:15px; max-width:none; overflow:visible; text-overflow:clip;}
+      .nav-links{order:2; flex-basis:100%; justify-content:center; gap:8px; margin-left:0;}
+      .nav-links a{padding:6px 8px; font-size:13px;}
     }
 
     /* Hero */
@@ -161,7 +163,7 @@
   <header>
     <div class="container">
       <nav>
-        <div class="brand">Portfolio Simon Vad Møller</div>
+        <div class="brand">Simon Vad Møller</div>
         <div class="nav-links">
           <a href="#hjem">Hjem</a>
           <a href="#om">Om Mig</a>
