@@ -12,7 +12,7 @@
 
     /* Hero */
     .hero{ border-radius:var(--radius); overflow:hidden; background:#fff }
-    .media{ aspect-ratio:16/9; background:linear-gradient(180deg,#f1f5f9,#fff) }
+    .media{ aspect-ratio:16/9; background:linear-gradient(180deg,#f1f5f9,#fff); display:flex; align-items:center; justify-content:center; }
     .media img{ width:100%; height:100%; object-fit:contain; display:block; background:#fff }
     .body{ padding:var(--space); background:#fff }
     .meta{ color:#000; font-size:18px; font-weight:600; margin-bottom:8px }
@@ -30,11 +30,75 @@
     .gallery-section h2{ margin:0 0 10px; }
     .gallery-section h3{ margin:18px 0 10px; font-size:18px; }
     .gallery-grid{ display:grid; gap:12px; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); }
-    .gallery-grid a{ display:block; border:1px solid var(--border); border-radius:12px; overflow:hidden; background:#fff; text-decoration:none; color:inherit; }
+    .gallery-grid button{
+      display:block; border:1px solid var(--border); border-radius:12px; overflow:hidden;
+      background:#fff; text-decoration:none; color:inherit; cursor:pointer; padding:0;
+      transition: transform .2s ease;
+    }
+    .gallery-grid button:hover{ transform: translateY(-2px); box-shadow:0 4px 12px rgba(0,0,0,.1); }
     .gallery-grid img{ width:100%; aspect-ratio:4/3; object-fit:cover; display:block; transition:transform .15s; }
-    .gallery-grid a:hover img{ transform:scale(1.02); }
+    .gallery-grid button:hover img{ transform:scale(1.02); }
 
     footer{ text-align:center; padding:40px 24px; color:#475569 }
+
+    /* Modal (identisk med 2. semester) */
+    .modal-overlay{
+      position:fixed; top:0; left:0; width:100vw; height:100vh;
+      background:rgba(0,0,0,0.9); z-index:1000; display:none;
+      backdrop-filter: blur(10px);
+    }
+    .modal-overlay.active{ display:flex; align-items:center; justify-content:center; }
+
+    .modal-content{
+      position:relative; width:100vw; height:100vh;
+      display:flex; align-items:center; justify-content:center;
+      touch-action: pan-x pan-y pinch-zoom;
+      overflow: hidden;
+    }
+    .modal-image{
+      max-width:100%; max-height:calc(100vh - 80px); object-fit:contain;
+      transition: transform .3s ease;
+      transform-origin:center center;
+      cursor:grab;
+      margin-top:40px;
+    }
+    .modal-image:active{ cursor:grabbing; }
+
+    .modal-nav{
+      position:absolute; top:50%; transform:translateY(-50%); z-index:15;
+      background:rgba(255,255,255,.2); border:2px solid rgba(255,255,255,.3); border-radius:50%;
+      width:54px; height:54px; font-size:24px; color:#fff; cursor:pointer;
+      backdrop-filter: blur(10px); transition: all .2s ease; display:flex; align-items:center; justify-content:center;
+    }
+    .modal-nav:hover{ background:rgba(255,255,255,.3); transform:translateY(-50%) scale(1.1); }
+    .modal-nav.prev{ left:30px; }
+    .modal-nav.next{ right:30px; }
+
+    .modal-close{
+      position:absolute; top:20px; right:20px; z-index:20;
+      background:rgba(255,255,255,.2); border:2px solid rgba(255,255,255,.3); border-radius:50%;
+      width:44px; height:44px; font-size:24px; color:#fff; cursor:pointer;
+      backdrop-filter: blur(10px); transition: all .2s ease; display:flex; align-items:center; justify-content:center;
+    }
+    .modal-close:hover{ background:rgba(255,255,255,.3); transform: scale(1.1); }
+
+    .modal-counter{
+      position:absolute; bottom:20px; left:50%; transform:translateX(-50%);
+      background:rgba(0,0,0,.7); color:#fff; padding:8px 16px; border-radius:20px; font-size:14px;
+    }
+    .modal-title{
+      position:absolute; top:0; left:0; right:0; z-index:10;
+      background:linear-gradient(180deg, rgba(0,0,0,.8) 0%, rgba(0,0,0,.4) 70%, transparent 100%);
+      color:#fff; padding:20px; font-size:16px; font-weight:500; backdrop-filter: blur(10px);
+    }
+
+    @media (max-width:768px){
+      .modal-nav{ width:44px; height:44px; font-size:20px; }
+      .modal-nav.prev{ left:15px; }
+      .modal-nav.next{ right:15px; }
+      .modal-title{ padding:15px; font-size:14px; }
+      .modal-image{ max-height:calc(100vh - 60px); margin-top:30px; }
+    }
   </style>
 </head>
 <body>
@@ -42,7 +106,7 @@
   <a class="back" href="projekter.html">← Tilbage til projekter</a>
   <div class="hero">
     <div class="media">
-      <img src="billeder/Revit-modellering.png" alt="Visualisering – Revit-modellering" loading="lazy">
+      <img src="billeder/Revit-modellering.png" alt="Visualisering – Revit-modellering" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block;background:#fff;">
     </div>
     <div class="body">
       <div class="meta">Valgfag</div>
@@ -73,45 +137,246 @@
 
     <h3>Plan/snit-tegninger</h3>
     <div class="gallery-grid" aria-label="Plan og snit – Revit-modellering">
-      <a href="revit-plan-01.jpg" target="_blank" rel="noopener">
+      <button type="button" data-src="revit-plan-01.jpg" data-title="Plan tegning – stueplan">
         <img src="revit-plan-01.jpg" alt="Plan tegning – stueplan" loading="lazy">
-      </a>
-      <a href="revit-snit-01.jpg" target="_blank" rel="noopener">
+      </button>
+      <button type="button" data-src="revit-snit-01.jpg" data-title="Snit A-A">
         <img src="revit-snit-01.jpg" alt="Snit A-A" loading="lazy">
-      </a>
-      <a href="revit-snit-02.jpg" target="_blank" rel="noopener">
+      </button>
+      <button type="button" data-src="revit-snit-02.jpg" data-title="Snit B-B">
         <img src="revit-snit-02.jpg" alt="Snit B-B" loading="lazy">
-      </a>
+      </button>
     </div>
 
     <h3>Tekniske-tegninger</h3>
     <div class="gallery-grid" aria-label="Tekniske tegninger – Revit-modellering">
-      <a href="revit-detail-01.jpg" target="_blank" rel="noopener">
+      <button type="button" data-src="revit-detail-01.jpg" data-title="Detalje – fundament/væg">
         <img src="revit-detail-01.jpg" alt="Detalje – fundament/væg" loading="lazy">
-      </a>
-      <a href="revit-detail-02.jpg" target="_blank" rel="noopener">
+      </button>
+      <button type="button" data-src="revit-detail-02.jpg" data-title="Detalje – tagfod">
         <img src="revit-detail-02.jpg" alt="Detalje – tagfod" loading="lazy">
-      </a>
-      <a href="revit-install-01.jpg" target="_blank" rel="noopener">
+      </button>
+      <button type="button" data-src="revit-install-01.jpg" data-title="Teknisk tegning – installation">
         <img src="revit-install-01.jpg" alt="Teknisk tegning – installation" loading="lazy">
-      </a>
+      </button>
     </div>
 
     <h3>Visualiseringer</h3>
     <div class="gallery-grid" aria-label="Visualiseringer – Revit-modellering">
-      <a href="billeder/rendering-nord-ost.jpg" target="_blank" rel="noopener">
+      <button type="button" data-src="billeder/rendering-nord-ost.jpg" data-title="Rendering – Nord/Øst">
         <img src="billeder/rendering-nord-ost.jpg" alt="Rendering – Nord/Øst" loading="lazy">
-      </a>
-      <a href="revit-vis-02.jpg" target="_blank" rel="noopener">
+      </button>
+      <button type="button" data-src="revit-vis-02.jpg" data-title="Interiør – ophold">
         <img src="revit-vis-02.jpg" alt="Interiør – ophold" loading="lazy">
-      </a>
-      <a href="revit-vis-03.jpg" target="_blank" rel="noopener">
+      </button>
+      <button type="button" data-src="revit-vis-03.jpg" data-title="Eksteriør – aftenlys">
         <img src="revit-vis-03.jpg" alt="Eksteriør – aftenlys" loading="lazy">
-      </a>
+      </button>
     </div>
   </section>
 
 </main>
+
+<!-- Modal (samme markup som 2. semester) -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-content">
+    <img class="modal-image" id="modalImage" src="" alt="">
+    <button class="modal-nav prev" id="prevBtn">‹</button>
+    <button class="modal-nav next" id="nextBtn">›</button>
+    <button class="modal-close" id="closeBtn">×</button>
+    <div class="modal-counter" id="modalCounter">1 / 1</div>
+    <div class="modal-title" id="modalTitle">Image Title</div>
+  </div>
+</div>
+
+<footer>© 2025 Dit Navn</footer>
+
+<script>
+  class SwipeableGallery {
+    constructor() {
+      this.currentIndex = 0;
+      this.images = [];
+      this.touchStartX = 0;
+      this.touchEndX = 0;
+      this.touchStartY = 0;
+      this.touchEndY = 0;
+      this.scale = 1;
+      this.translateX = 0;
+      this.translateY = 0;
+      this.isDragging = false;
+      this.lastPinchDistance = 0;
+
+      this.modal = document.getElementById('modalOverlay');
+      this.modalImage = document.getElementById('modalImage');
+      this.prevBtn = document.getElementById('prevBtn');
+      this.nextBtn = document.getElementById('nextBtn');
+      this.closeBtn = document.getElementById('closeBtn');
+      this.counter = document.getElementById('modalCounter');
+      this.title = document.getElementById('modalTitle');
+
+      this.initEventListeners();
+    }
+
+    initEventListeners() {
+      // Hent ALLE knapper med data-src
+      document.querySelectorAll('[data-src]').forEach((btn, index) => {
+        btn.addEventListener('click', () => this.openModal(index));
+      });
+
+      // Modal controls
+      this.prevBtn.addEventListener('click', () => this.showPrevious());
+      this.nextBtn.addEventListener('click', () => this.showNext());
+      this.closeBtn.addEventListener('click', () => this.closeModal());
+
+      // Keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if (!this.modal.classList.contains('active')) return;
+        switch(e.key) {
+          case 'ArrowLeft': this.showPrevious(); break;
+          case 'ArrowRight': this.showNext(); break;
+          case 'Escape': this.closeModal(); break;
+        }
+      });
+
+      // Touch
+      this.modal.addEventListener('touchstart', (e) => {
+        if (e.touches.length === 1) {
+          this.touchStartX = e.touches[0].clientX;
+          this.touchStartY = e.touches[0].clientY;
+          this.isDragging = true;
+        } else if (e.touches.length === 2) {
+          this.lastPinchDistance = this.getPinchDistance(e.touches);
+        }
+      });
+
+      this.modal.addEventListener('touchmove', (e) => {
+        if (e.touches.length === 1 && this.isDragging && this.scale > 1) {
+          e.preventDefault();
+          const dx = e.touches[0].clientX - this.touchStartX;
+          const dy = e.touches[0].clientY - this.touchStartY;
+          this.translateX += dx; this.translateY += dy;
+          this.updateImageTransform();
+          this.touchStartX = e.touches[0].clientX;
+          this.touchStartY = e.touches[0].clientY;
+        } else if (e.touches.length === 2) {
+          e.preventDefault();
+          const pinchDistance = this.getPinchDistance(e.touches);
+          const factor = pinchDistance / this.lastPinchDistance;
+          this.scale = Math.min(Math.max(this.scale * factor, 0.5), 3);
+          if (this.scale <= 1) { this.scale = 1; this.translateX = 0; this.translateY = 0; }
+          this.updateImageTransform();
+          this.lastPinchDistance = pinchDistance;
+        }
+      });
+
+      this.modal.addEventListener('touchend', (e) => {
+        if (e.touches.length === 0) {
+          this.touchEndX = e.changedTouches[0].clientX;
+          this.touchEndY = e.changedTouches[0].clientY;
+          this.isDragging = false;
+          if (this.scale === 1) this.handleSwipe();
+        }
+      });
+
+      // Mouse wheel zoom
+      this.modal.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        const zoomFactor = e.deltaY > 0 ? 0.9 : 1.1;
+        this.scale = Math.min(Math.max(this.scale * zoomFactor, 0.5), 3);
+        if (this.scale <= 1) { this.scale = 1; this.translateX = 0; this.translateY = 0; }
+        this.updateImageTransform();
+      });
+
+      // Mouse drag (desktop)
+      this.modalImage.addEventListener('mousedown', (e) => {
+        if (this.scale > 1) {
+          this.isDragging = true;
+          this.touchStartX = e.clientX;
+          this.touchStartY = e.clientY;
+          e.preventDefault();
+        }
+      });
+      document.addEventListener('mousemove', (e) => {
+        if (this.isDragging && this.scale > 1) {
+          const dx = e.clientX - this.touchStartX;
+          const dy = e.clientY - this.touchStartY;
+          this.translateX += dx; this.translateY += dy;
+          this.updateImageTransform();
+          this.touchStartX = e.clientX; this.touchStartY = e.clientY;
+        }
+      });
+      document.addEventListener('mouseup', () => { this.isDragging = false; });
+
+      // Dobbeltklik reset
+      this.modalImage.addEventListener('dblclick', () => {
+        this.scale = 1; this.translateX = 0; this.translateY = 0; this.updateImageTransform();
+      });
+
+      // Klik udenfor for at lukke
+      this.modal.addEventListener('click', (e) => {
+        if (e.target === this.modal || e.target.classList.contains('modal-content')) this.closeModal();
+      });
+    }
+
+    openModal(clickedIndex) {
+      this.images = Array.from(document.querySelectorAll('[data-src]'));
+      this.currentIndex = clickedIndex;
+      this.scale = 1; this.translateX = 0; this.translateY = 0;
+      this.showImage();
+      this.modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    closeModal() {
+      this.modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    showPrevious() {
+      this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
+      this.scale = 1; this.translateX = 0; this.translateY = 0;
+      this.showImage();
+    }
+    showNext() {
+      this.currentIndex = (this.currentIndex + 1) % this.images.length;
+      this.scale = 1; this.translateX = 0; this.translateY = 0;
+      this.showImage();
+    }
+    showImage() {
+      const el = this.images[this.currentIndex];
+      this.modalImage.src = el.dataset.src;
+      this.modalImage.alt = el.dataset.title || '';
+      this.title.textContent = el.dataset.title || '';
+      this.counter.textContent = `${this.currentIndex + 1} / ${this.images.length}`;
+      this.updateImageTransform();
+      this.prevBtn.style.display = this.images.length > 1 ? 'flex' : 'none';
+      this.nextBtn.style.display = this.images.length > 1 ? 'flex' : 'none';
+    }
+    updateImageTransform() {
+      if (this.scale === 1 && (this.translateX !== 0 || this.translateY !== 0)) {
+        this.modalImage.style.transition = 'transform 0.3s ease';
+      } else {
+        this.modalImage.style.transition = 'transform 0.1s ease';
+      }
+      this.modalImage.style.transform = `translate(${this.translateX}px, ${this.translateY}px) scale(${this.scale})`;
+      if (this.scale === 1) {
+        setTimeout(() => { this.modalImage.style.transition = 'transform 0.1s ease'; }, 300);
+      }
+    }
+    getPinchDistance(touches) {
+      const dx = touches[0].clientX - touches[1].clientX;
+      const dy = touches[0].clientY - touches[1].clientY;
+      return Math.sqrt(dx * dx + dy * dy);
+    }
+    handleSwipe() {
+      const threshold = 50;
+      const dx = this.touchEndX - this.touchStartX;
+      const dy = Math.abs(this.touchEndY - this.touchStartY);
+      if (Math.abs(dx) > threshold && dy < 100 && this.scale === 1) {
+        if (dx > 0) this.showPrevious(); else this.showNext();
+      }
+    }
+  }
+  document.addEventListener('DOMContentLoaded', () => new SwipeableGallery());
+</script>
 
 <footer>© 2025 Dit Navn</footer>
 </body>
