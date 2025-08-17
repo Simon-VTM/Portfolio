@@ -21,13 +21,25 @@
     .bg-section-4 { background: linear-gradient(135deg, #cbd5e1 0%, #94a3b8 100%); }
     .bg-section-5 { background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); }
 
-    /* Nav */
+    /* Nav - Fixed for mobile */
     header{position:sticky; top:0; z-index:50; background:rgba(255,255,255,0.95); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom:1px solid var(--border); box-shadow: 0 4px 20px rgba(0,0,0,0.08)}
-    nav{display:flex; align-items:center; justify-content:space-between; padding:16px 0}
-    .brand{font-weight:700; letter-spacing:.2px; color:var(--brand-2)}
-    .nav-links{display:flex; gap:18px}
-    .nav-links a{color:var(--text); text-decoration:none; padding:10px 16px; border-radius:12px; transition:all 0.3s ease}
+    nav{display:flex; align-items:center; justify-content:space-between; padding:16px 0; min-height:60px;}
+    .brand{font-weight:700; letter-spacing:.2px; color:var(--brand-2); white-space:nowrap; flex-shrink:0;}
+    .nav-links{display:flex; gap:12px; flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch;}
+    .nav-links a{color:var(--text); text-decoration:none; padding:10px 12px; border-radius:12px; transition:all 0.3s ease; white-space:nowrap; flex-shrink:0; font-size:15px;}
     .nav-links a:hover{background:rgba(37,99,235,0.1); color:var(--brand-2); transform:translateY(-1px)}
+
+    /* Mobile navigation improvements */
+    @media (max-width: 480px) {
+      .brand{font-size:16px; max-width:120px; overflow:hidden; text-overflow:ellipsis;}
+      .nav-links{gap:8px; margin-left:8px;}
+      .nav-links a{padding:8px 10px; font-size:14px; min-width:fit-content;}
+    }
+
+    @media (max-width: 380px) {
+      .brand{font-size:15px; max-width:100px;}
+      .nav-links a{padding:8px 8px; font-size:13px;}
+    }
 
     /* Hero */
     .hero{padding:80px 0 60px}
