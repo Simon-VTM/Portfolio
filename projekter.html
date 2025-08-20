@@ -149,6 +149,20 @@
     .card-link:focus-visible .card{ box-shadow:0 0 0 3px rgba(37,99,235,.35) }
     .actions{ display:none }
 
+    /* Disabled card styles */
+    .card-disabled {
+      opacity: 0.6;
+      cursor: not-allowed !important;
+      pointer-events: none;
+    }
+    .card-disabled .card {
+      cursor: not-allowed !important;
+    }
+    .card-disabled:hover .card {
+      transform: none !important;
+      box-shadow: none !important;
+    }
+
     #semestre .grid{ grid-template-columns: repeat(2, minmax(0,1fr)); gap:16px; align-items: stretch;}
     #valgfag  .grid{ grid-template-columns: repeat(2, minmax(0,1fr)); gap:16px; align-items: stretch;}
     #semestre .grid > *, #valgfag .grid > *{ min-width:0; height: 100%;}
@@ -172,16 +186,25 @@
     .lightbox{
       position:fixed; inset:0; background:rgba(0,0,0,.88);
       display:none; align-items:center; justify-content:center; z-index:9999;
+      padding:32px 24px; /* plads rundt om scenen så info kan stå under */
     }
     .lightbox.open{ display:flex; }
+
+    /* Saml billede + info i en lodret kolonne */
+    .lb-stage{
+      display:flex; flex-direction:column; align-items:center; gap:12px;
+      max-width:92vw; max-height:88vh;
+    }
+
     .lb-img{
-      max-width:92vw; max-height:82vh; object-fit:contain;
+      max-width:92vw; max-height:76vh; object-fit:contain;
       border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,.6);
       will-change: transform;
       transition: transform .12s ease-out;
       cursor: default;
       background:#111;
     }
+
     .lb-btn{
       position:absolute; top:50%; transform:translateY(-50%);
       width:54px; height:54px; border-radius:50%; border:1px solid rgba(255,255,255,.35);
@@ -197,18 +220,17 @@
       padding:6px 10px; border-radius:10px; font-size:14px;
     }
 
-    /* Info-panel til højre for billedet */
+    /* Info-panelet UNDER billedet (mørkere baggrund) */
     .lb-info{
-      position:absolute;
-      right: clamp(80px, 7vw, 120px);
-      top:50%; transform: translateY(-50%);
-      width:min(340px, 28vw);
-      background: rgba(255,255,255,.08);
-      border:1px solid rgba(255,255,255,.25);
-      border-radius:14px;
-      color:#fff; padding:16px 18px;
-      box-shadow: 0 12px 40px rgba(0,0,0,.35);
-      backdrop-filter: blur(6px);
+      position: static !important;
+      width: min(900px, 92vw);
+      margin-top: 6px;
+      background: rgba(17,17,17,.78);
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 12px;
+      color:#fff; padding: 14px 16px;
+      box-shadow: 0 10px 28px rgba(0,0,0,.38);
+      backdrop-filter: blur(4px);
     }
     .lb-title{ margin:0 0 8px; font-size:18px; font-weight:800; }
     .lb-desc{ margin:0 0 10px; font-size:14px; line-height:1.5; opacity:.95; }
@@ -223,8 +245,7 @@
     .zoom-hud{ display:none !important; }
 
     @media (max-width: 820px){
-      .lb-info{ bottom: 28px; top:auto; transform:none; width: calc(100vw - 120px); right:60px; }
-      .lb-next{ right: 16px; } .lb-prev{ left: 16px; }
+      .lb-info{ width:100%; }
     }
   </style>
 </head>
@@ -280,7 +301,7 @@
             </div>
             <div class="slide-text">
               <h2 class="slide-title">1. Semester Enfamiliehus</h2>
-              <p class="slide-description">Et tværfagligt projekt med fokus på myndighedsprojekt, bygningsfysik og materialevalg for et enfamiliehus i 1½ plan.</p>
+              <p class="slide-description">På 1. semester blev der udarbejdet skitseforslag, projektforslag, myndighedsprojekt efter BR18 og lokalplan samt indledende udbudsprojekt for et enfamiliehus i 1½ plan.</p>
               <div class="slide-tags">
                 <span class="slide-tag">Myndighedsprojekt</span>
                 <span class="slide-tag">Bygningsfysik</span>
@@ -318,8 +339,10 @@
               </div>
             </div>
             <div class="slide-text">
-              <h2 class="slide-title">Tæt-lavt Boligområde</h2>
-              <p class="slide-description">Projekteret et komplet boligområde med fælleshus, fokus på bæredygtighed og tekniske installationer.</p>
+              <h2 class="slide-title">2. Semester Tæt-lavt boligområde</h2>
+              <p class="slide-description">På 2. semester blev der arbejdet med projektering af et tæt-lavt boligområde med fælleshus. 
+                Opgaven omfattede forslagsprojekt, myndighedsprojekt efter BR18 og lokalplan samt indledende udbudsprojekt, 
+                med fokus på arealudnyttelse, bæredygtige løsninger, energi og tilgængelighed.</p>
               <div class="slide-tags">
                 <span class="slide-tag">Bæredygtighed</span>
                 <span class="slide-tag">Tekniske installationer</span>
@@ -361,8 +384,10 @@
               </div>
             </div>
             <div class="slide-text">
-              <h2 class="slide-title">Træelementer & Betonsandwich</h2>
-              <p class="slide-description">Administrationsbygning i træelementer og produktions-/lagerbygning med præfabrikerede betonelementer.</p>
+              <h2 class="slide-title">3. Semester Industri- og kontor-byggeri</h2>
+              <p class="slide-description">På 3. semester blev der arbejdet med projektering af en administrations-, produktions- og lagerbygning. 
+                Opgaven omfattede forslagsprojekt, myndighedsprojekt efter BR18, udbuds- 
+                og udførelsesprojekt med fokus på industrielt byggeri, præfabrikerede komponenter og energikrav.</p>
               <div class="slide-tags">
                 <span class="slide-tag">Træelementer</span>
                 <span class="slide-tag">Grønt tag</span>
@@ -404,7 +429,7 @@
               </div>
             </div>
             <div class="slide-text">
-              <h2 class="slide-title">Graff's Hus - Esbjerg</h2>
+              <h2 class="slide-title">4. Semester Graff's Hus - Esbjerg</h2>
               <p class="slide-description">Randbebyggelse i fire etager med fokus på BR18, DGNB-krav, ventilation og tekniske installationer.</p>
               <div class="slide-tags">
                 <span class="slide-tag">BR18</span>
@@ -463,7 +488,6 @@
                 <div class="project-image active">
                   <img src="billeder/valgfag-dis/2 Hjørnet fra fugleflugt 2.png" alt="Visualisering" loading="lazy">
                 </div>
-                <!-- Tilføj/ret disse filer hvis du har andre billeder til valgfaget -->
                 <div class="project-image">
                   <img src="billeder/valgfag-dis/Beliggenhedsplan.jpg" alt="Beliggenhedsplan" loading="lazy">
                 </div>
@@ -473,6 +497,9 @@
                  <div class="project-image">
                   <img src="billeder/valgfag-dis/Indretningsplan.jpg" alt="plantegning" loading="lazy">
                 </div>
+                <div class="project-image">
+                  <img src="billeder/valgfag-dis/17 90 m2 lejlighed.png" alt="Visualisering - indretning" loading="lazy">
+                </div>
               </div>
               <button class="project-image-arrow prev" onclick="changeProjectImage(6, -1)">‹</button>
               <button class="project-image-arrow next" onclick="changeProjectImage(6, 1)">›</button>
@@ -481,6 +508,7 @@
                 <button class="image-dot" onclick="showProjectImage(6, 2)"></button>
                 <button class="image-dot" onclick="showProjectImage(6, 3)"></button>
                 <button class="image-dot" onclick="showProjectImage(6, 4)"></button>
+                <button class="image-dot" onclick="showProjectImage(6, 5)"></button>
               </div>
             </div>
             <div class="slide-text">
@@ -494,7 +522,6 @@
             </div>
           </div>
         </div>
-
       </div>
 
       <!-- Navigation arrows -->
@@ -529,7 +556,9 @@
             <div class="thumb-overlay">1. semester • 1½ plan enfamiliehus</div>
           </div>
           <div class="inner">
-            <p class="text">På første semester blev der arbejdet med et tværfagligt projekt, hvor opgaven var at projektere et Enfamiliehus i 1½ plan – fra idé og skitse til myndighedsprojekt. Der blev opnået kendskab til grundlæggende byggetekniske discipliner, materialevalg, konstruktionsprincipper og bygningsfysik.</p>
+            <p class="text">På 1. semester blev der arbejdet med udarbejdelse af skitseforslag, projektforslag, 
+        myndighedsprojekt i henhold til BR18 og lokalplan samt indledende udbudsprojekt for et enfamiliehus i 1½ plan. 
+        Arbejdet gav indblik i grundlæggende byggetekniske discipliner, herunder materialevalg, konstruktionsprincipper og bygningsfysik.</p>
             <div class="chips">
               <span class="chip">Myndighedsprojekt</span>
               <span class="chip">Bygningsfysik</span>
@@ -547,13 +576,15 @@
             <div class="thumb-overlay">2. semester • Tæt-lavt boligområde & fælleshus</div>
           </div>
           <div class="inner">
-            <p class="text">På andet semester blev der arbejdet med et tværfagligt projekt, hvor opgaven var at projektere et tæt-lavt boligområde med tilhørende fælleshus. Projektet omfattede både boliger i to etager, heraf handicapvenlige enheder, samt fællesfaciliteter med kælder. Der blev arbejdet med situationsplaner, bygningsdesign, materialevalg, bæredygtighedsløsninger og tekniske installationer. Arbejdet omfattede faserne forslag, myndighedsprojekt og udbudsprojekt, med fokus på både arkitektonisk udtryk, funktionalitet, energikrav og opfyldelse af bygherrekrav.</p>
+            <p class="text">På 2. semester blev der arbejdet med projektering af et tæt-lavt boligområde med tilhørende fælleshus. 
+        Projektet omfattede tre boliger i to etager, hvoraf to skulle være sammenhængende og indrettet som handicapvenlige, 
+        samt et fælleshus med kælder, stue- og 1. sal.
+        Arbejdet omfattede udarbejdelse af forslagsprojekt, myndighedsprojekt i henhold til BR18 og lokalplan samt udbudsprojekt, 
+        med fokus på arealudnyttelse, konstruktioner, materialevalg og bæredygtige løsninger.</p>
             <div class="chips">
               <span class="chip">Situationsplan</span>
               <span class="chip">Bygningsdesign</span>
               <span class="chip">Bæredygtighed</span>
-              <span class="chip">Tekniske installationer</span>
-              <span class="chip">Udbudsprojekt</span>
               <span class="chip">Energikrav</span>
             </div>
           </div>
@@ -568,13 +599,14 @@
             <div class="thumb-overlay">3. semester • Administrationsbygning og Produktions- og lagerbygningen</div>
           </div>
           <div class="inner">
-            <p class="text">På tredje semester blev der arbejdet med et tværfagligt projekt, hvor opgaven var at projektere en administrationsbygning i to etager med facader, indvendige skillevægge, etagedæk og tagkonstruktion udført i præfabrikerede træelementer med grøn tagdækning. Facaden skulle bestå af mindst 25 % træbaserede materialer, og elementerne skulle kunne genbruges 1:1. Projektet omfattede også en produktions- og lagerbygning i én etage med højt til loftet, opført i præfabrikerede betonsandwichelementer i facaden og betonelementer i tagkonstruktionen. Arbejdet blev udført gennem faserne forslag, myndighedsprojekt, udbudsprojekt og udførelsesprojekt.</p>
+            <p class="text">På 3. semester blev der arbejdet med projektering af en administrations-, produktions- og lagerbygning for en industrivirksomhed. 
+                            Projektet omfattede forslagsprojekt, myndighedsprojekt, udbudsprojekt og udførelsesprojekt med fokus på industrielle byggemetoder, 
+                            præfabrikerede byggekomponenter og energikrav.</p>
             <div class="chips">
               <span class="chip">Træelementer</span>
               <span class="chip">Grønt tag</span>
-              <span class="chip">Betonsandwich</span>
-              <span class="chip">Udbudsprojekt</span>
-              <span class="chip">Udførelsesprojekt</span>
+              <span class="chip">Betonelementer</span>
+              <span class="chip">Tekniske installationer</span>
             </div>
           </div>
         </article>
@@ -588,14 +620,16 @@
             <div class="thumb-overlay">4. semester • Graff's Hus – Esbjerg</div>
           </div>
           <div class="inner">
-            <p class="text">På fjerde semester blev der arbejdet videre med projektet Graff's Hus i Esbjerg – en randbebyggelse i fire etager med kælder, indeholdende butikker, restaurant, kontorer og boliger. Projektet tog udgangspunkt i dispositionsforslaget fra valgfaget Fra byggeprogram til dispositionsforslag, som blev videreudviklet til forslags-, myndigheds- og udbudsprojekt. Der blev arbejdet med projektering efter BR18, DGNB-krav og bæredygtige løsninger, herunder valg af materialer og konstruktioner. Projektarbejdet omfattede både konstruktionsmæssige løsninger og tekniske installationer, med særligt fokus på ventilation – herunder dimensionering, placering af aggregater og kanalføring – samt koordinering med øvrige installationer. Opgaven omfattede blandt andet hoved- og detailtegninger, statiske beregninger, energiberegning, brandstrategi, arbejdsmiljøplan, bygningsdelsbeskrivelser.</p>
+            <p class="text">På 4. semester blev der arbejdet videre med et dispositionsforslag fra valgfaget Byggeprogram til dispositionsforslag. 
+              Projektet omfattede udarbejdelse af projektforslag, myndighedsprojekt efter BR18 og lokalplan samt udbudsprojekt. 
+              Bygningen rummer kælder med teknik og depot, stueetage med erhverv og restaurant samt tre etager med boliger og erhverv. 
+              Kombinationen af funktioner stillede krav til arkitektur, brandsikkerhed, tilgængelighed og integration af tekniske installationer.</p>
             <div class="chips">
               <span class="chip">BR18</span>
               <span class="chip">DGNB</span>
-              <span class="chip">Ventilation</span>
-              <span class="chip">Konstruktionsløsninger</span>
+              <span class="chip">Tekniske installationer</span>
+              <span class="chip">LCAbyg</span>
               <span class="chip">Energiberegning</span>
-              <span class="chip">Brandstrategi</span>
               <span class="chip">Arbejdsmiljø</span>
               <span class="chip">Bygningsdelsbeskrivelser</span>
             </div>
@@ -622,16 +656,16 @@
                 <span class="chip">Modulbyggeri</span>
                 <span class="chip">Træskelet</span>
                 <span class="chip">3D-visualisering</span>
-                <span class="chip">Lokalplankrav</span>
               </div>
             </div>
           </article>
         </a>
 
-        <!-- Sikkerhed -->
-        <a class="card-link" href="valgfag-sikkerhed.html">
+        <!-- Sikkerhed - DISABLED -->
+        <div class="card-disabled">
           <article class="card" data-type="valgfag">
-            <div class="thumb">
+            <div class="thumb" aria-hidden="true">
+              <img src="billeder/valgfag-sikkerhed/Byggepladsplan_page-0001.jpg" alt="s" loading="lazy">
               <div class="thumb-overlay">Valgfag: Sikkerhed</div>
             </div>
             <div class="inner">
@@ -644,7 +678,7 @@
               </div>
             </div>
           </article>
-        </a>
+        </div>
 
         <!-- Fra byggeprogram til dispositionsforslag -->
         <a class="card-link" href="valgfag-dispositionsforslag.html">
@@ -659,6 +693,7 @@
                 <span class="chip">Bygherreprogram</span>
                 <span class="chip">Lokalplan</span>
                 <span class="chip">BR18</span>
+                <span class="chip">3D-visualisering</span>
               </div>
             </div>
           </article>
@@ -681,16 +716,19 @@
   <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Projektbilleder">
     <button class="lb-btn lb-close" aria-label="Luk">✕</button>
     <button class="lb-btn lb-prev" aria-label="Forrige">‹</button>
-    <img class="lb-img" alt="">
+
+    <!-- NY: billede + info i én lodret "stage" -->
+    <div class="lb-stage" role="group" aria-label="Billedvisning">
+      <img class="lb-img" alt="">
+      <div class="lb-info" aria-live="polite">
+        <h3 class="lb-title"></h3>
+        <p class="lb-desc"></p>
+        <a class="lb-more" href="#" aria-label="Se mere om projektet">Se mere →</a>
+      </div>
+    </div>
+
     <button class="lb-btn lb-next" aria-label="Næste">›</button>
     <div class="lb-counter" aria-live="polite"></div>
-
-    <!-- Info-panel (titel, kort tekst og link) -->
-    <div class="lb-info" aria-live="polite">
-      <h3 class="lb-title"></h3>
-      <p class="lb-desc"></p>
-      <a class="lb-more" href="#" aria-label="Se mere om projektet">Se mere →</a>
-    </div>
   </div>
 
   <script>
@@ -700,7 +738,7 @@
     const dots = document.querySelectorAll('.nav-dot');
 
     // Project image indices - each project starts at image 1
-    const projectImageIndices = { 1:1, 2:1, 3:1, 4:1, 5:1 };
+    const projectImageIndices = { 1:1, 2:1, 3:1, 4:1, 5:1, 6:1 };
 
     function showSlide(n) {
       if (n > slides.length) slideIndex = 1;
@@ -714,7 +752,7 @@
     }
 
     // --- Stabil autoplay med setTimeout (nulstilles hver gang) ---
-    const AUTOPLAY_MS = 8000; // <-- justér hastighed her
+    const AUTOPLAY_MS = 15000; // <-- justér hastighed her
     let autoTimer = null;
     function scheduleAuto(){
       clearTimeout(autoTimer);
@@ -779,7 +817,7 @@
         }
       });
     }
-    setInterval(autoAdvanceProjectImages, 3000);
+    setInterval(autoAdvanceProjectImages, 5000);
 
     // ======= Lightbox + info =======
     const lightboxEl = document.getElementById('lightbox');
@@ -796,9 +834,9 @@
 
     // Metadata pr. slide (titel/tekst/link)
     const slideMeta = {
-      1: { title: "1. Semester Enfamiliehus", desc: "Myndighedsprojekt, bygningsfysik og materialevalg for et enfamiliehus i 1½ plan.", url: "1-semester.html" },
-      2: { title: "Tæt-lavt Boligområde", desc: "Komplet boligområde med fælleshus – fokus på bæredygtighed og tekniske installationer.", url: "2-semester.html" },
-      3: { title: "Træelementer & Betonsandwich", desc: "Administration i træelementer og produktions-/lagerbygning i betonelementer.", url: "3-semester.html" },
+      1: { title: "1. Semester Enfamiliehus", desc: "På 1. semester blev der arbejdet med udarbejdelse af skitseforslag, projektforslag, myndighedsprojekt...", url: "1-semester.html" },
+      2: { title: "Tæt-lavt Boligområde", desc: "På 2. semester blev der arbejdet med projektering af et tæt-lavt boligområde med tilhørende fælleshus.", url: "2-semester.html" },
+      3: { title: "Træelementer & Betonsandwich", desc: "På 3. semester blev der arbejdet med projektering af en administrations-, produktions- og lagerbygning.", url: "3-semester.html" },
       4: { title: "Graff's Hus – Esbjerg", desc: "Randbebyggelse i fire etager. BR18, DGNB, ventilation og tekniske installationer.", url: "4-semester.html" },
       5: { title: "Revit-modellering", desc: "Tiny house som modulbyggeri i træskelet med realistiske 3D-visualiseringer.", url: "valgfag-revit.html" },
       6: { title: "Fra byggeprogram til dispositionsforslag", desc: "Dispositionsforslag for Graff's Hus – hovedtegninger, visualiseringer, materialer og overslag.", url: "valgfag-dispositionsforslag.html" },

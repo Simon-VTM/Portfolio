@@ -29,7 +29,7 @@
     .card{ background:#fff; padding:var(--space); border-radius:var(--radius); }
     .full-span{ grid-column: 1 / -1; }
 
-    /* Gallery */
+    /* Galleri */
     .gallery-section h2{ margin:0 0 10px; }
     .gallery-section h3{ margin:18px 0 10px; font-size:18px; }
     .gallery-grid{ display:grid; gap:12px; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); }
@@ -42,21 +42,19 @@
     .gallery-grid img{ width:100%; aspect-ratio:4/3; object-fit:cover; display:block; transition:transform .15s; }
     .gallery-grid button:hover img{ transform:scale(1.02); }
 
-    /* Modal (identisk med 2. semester) */
+    /* Modal */
     .modal-overlay{ 
       position:fixed; top:0; left:0; width:100vw; height:100vh; 
       background:rgba(0,0,0,0.9); z-index:1000; display:none;
       backdrop-filter: blur(10px);
     }
     .modal-overlay.active{ display:flex; align-items:center; justify-content:center; }
-    
     .modal-content{ 
       position:relative; width:100vw; height:100vh; 
       display:flex; align-items:center; justify-content:center;
       touch-action: pan-x pan-y pinch-zoom;
       overflow: hidden;
     }
-    
     .modal-image{ 
       max-width:100%; max-height:calc(100vh - 80px); object-fit:contain; 
       transition: transform 0.3s ease;
@@ -64,9 +62,7 @@
       cursor: grab;
       margin-top: 40px;
     }
-    
     .modal-image:active{ cursor: grabbing; }
-
     .modal-nav{ 
       position:absolute; top:50%; transform:translateY(-50%); z-index:15;
       background:rgba(255,255,255,0.2); border:2px solid rgba(255,255,255,0.3); border-radius:50%; 
@@ -77,7 +73,6 @@
     .modal-nav:hover{ background:rgba(255,255,255,0.3); transform:translateY(-50%) scale(1.1); }
     .modal-nav.prev{ left:30px; }
     .modal-nav.next{ right:30px; }
-    
     .modal-close{ 
       position:absolute; top:20px; right:20px; z-index:20;
       background:rgba(255,255,255,0.2); border:2px solid rgba(255,255,255,0.3); border-radius:50%; 
@@ -86,20 +81,17 @@
       display:flex; align-items:center; justify-content:center;
     }
     .modal-close:hover{ background:rgba(255,255,255,0.3); transform: scale(1.1); }
-
     .modal-counter{ 
       position:absolute; bottom:20px; left:50%; transform:translateX(-50%);
       background:rgba(0,0,0,0.7); color:white; padding:8px 16px; 
       border-radius:20px; font-size:14px; backdrop-filter: blur(10px);
     }
-
     .modal-title{ 
       position:absolute; top:0; left:0; right:0; z-index:10;
       background:linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 70%, transparent 100%); 
       color:white; padding:20px; font-size:16px; font-weight:500;
       backdrop-filter: blur(10px);
     }
-
     @media (max-width: 768px) {
       .modal-nav{ width:44px; height:44px; font-size:20px; }
       .modal-nav.prev{ left:15px; }
@@ -107,6 +99,22 @@
       .modal-title{ padding:15px; font-size:14px; }
       .modal-image{ max-height:calc(100vh - 60px); margin-top: 30px; }
     }
+
+    /* Pager (forrige/næste) */
+    .pager{
+      position:sticky; bottom:0; z-index:40;
+      background:rgba(248,250,252,0.85);
+      backdrop-filter: blur(8px);
+      border-top:1px solid var(--border);
+      margin-top:24px; padding:12px 0;
+    }
+    .pager .inner{ max-width:1000px; margin:0 auto; padding:0 24px; display:flex; gap:12px; justify-content:space-between; align-items:center; }
+    .pager a.btn{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 14px; border:1px solid var(--border); border-radius:12px; background:#fff; text-decoration:none;
+      transition:transform .15s, box-shadow .15s;
+    }
+    .pager a.btn:hover{ transform:translateY(-1px); box-shadow:0 6px 18px rgba(0,0,0,.08); }
   </style>
 </head>
 <body>
@@ -123,7 +131,7 @@
         <h1>Administrationsbygning i træ + produktions-/lagerbygning</h1>
         <div class="chips">
           <span class="chip">Træelementer</span><span class="chip">Grønt tag</span>
-          <span class="chip">Betonsandwich</span><span class="chip">Udbud</span><span class="chip">Udførelse</span>
+          <span class="chip">Betonelementer</span><span class="chip">Tekniske installationer</span>
         </div>
       </div>
     </div>
@@ -132,30 +140,29 @@
   <main class="grid">
     <section class="card">
       <h2 style="margin-top:0;">Projektoversigt</h2>
-      <p>Der blev projekteret en administrationsbygning i to etager opført i
-      præfabrikerede træelementer med grønt tag, hvor facadekravet var min. 25 %
-      træbaserede materialer og elementer designet til 1:1-genbrug. Derudover blev der
-      projekteret en produktions- og lagerbygning i én etage med højt til loftet,
-      opført i præfabrikerede betonsandwichelementer og betonelement-tag.
-      Arbejdet gik fra forslag over myndighed og udbud til udførelsesprojekt.</p>
+      <p>På 3. semester blev der arbejdet med projektering af en administrations-, produktions- og lagerbygning for en industrivirksomhed. 
+        Projektet omfattede forslagsprojekt, myndighedsprojekt, udbudsprojekt og udførelsesprojekt med fokus på industrielle byggemetoder, 
+        præfabrikerede byggekomponenter og energikrav.</p>
 
       <h3>Nøgleopgaver</h3>
       <ul>
-        <li>Elementprojektering i træ (facader, dæk, vægge, tag)</li>
-        <li>Design for adskillelse og 1:1-genbrug</li>
-        <li>Grønt tag og bygningsfysik</li>
-        <li>Projektering af hal i betonsandwichelementer</li>
+        <li>Team projekt</li>
+        <li>Projektering af administrations-, produktions- og lagerbygning</li>
+        <li>Myndigheds- og udbudsprojekt iht. BR18</li>
+        <li>Udførelsesprojekt med detaljer og beskrivelser</li>
+        <li>Anvendelse af præfabrikerede betonelementer og træelementer</li>
         <li>Samlingsdetaljer, beskrivelser og mængder</li>
-        <li>Udbuds- og udførelsesprojekt</li>
+        <li>Energiberegninger og overholdelse af bygningsreglementets krav</li>
+        <li>Tekniske installationer</li>
       </ul>
     </section>
 
     <section class="card">
       <h2 style="margin-top:0;">Fakta</h2>
       <ul>
-        <li><strong>Type:</strong> Administrationsbygning + produktions-/lagerbygning</li>
-        <li><strong>Fokus:</strong> Præfabrikation, materialevalg (træ/beton), bæredygtighed</li>
-        <li><strong>Roller/værktøjer:</strong> Revit, elementdetaljer, beskrivelser</li>
+        <li><strong>Adresse:</strong> Kattegatvej 7-9, 6715 Esbjerg N</li>
+        <li><strong>Bygningstype:</strong> Administrations-, produktions- og lagerbygning</li>
+        <li><strong>Roller/værktøjer:</strong> Revit, elementdetaljer, beskrivelser, AutoCAD, Twinmotion, LCAbyg, Be18, LCCbyg, MEP, Sigma Entreprise</li>
       </ul>
     </section>
 
@@ -175,9 +182,6 @@
         </button>
         <button type="button" data-src="billeder/3-semester/K01_H1_E0X_N007_Tagplan Produktions-Lagerbygning.jpg" data-title="Tagplan Produktions-Lagerbygning">
           <img src="billeder/3-semester/K01_H1_E0X_N007_Tagplan Produktions-Lagerbygning.jpg" alt="Tagplan Produktions-Lagerbygning" loading="lazy">
-        </button>
-        <button type="button" data-src="billeder/3-semester/K01_H1_E01_N002_1. sal lager-produktionsbygning.jpg" data-title="1. sal Lager- og Produktionsbygning">
-          <img src="billeder/3-semester/K01_H1_E01_N002_1. sal lager-produktionsbygning.jpg" alt="1. sal Lager- og Produktionsbygning" loading="lazy">
         </button>
       </div>
 
@@ -252,13 +256,21 @@
     </section>
   </main>
 
+  <!-- Pager: Forrige/Næste -->
+  <nav class="pager" aria-label="Projektnavigation">
+    <div class="inner">
+      <a class="btn" href="2-semester.html" rel="prev" aria-label="Forrige projekt: 2. semester">← Forrige: 2. semester</a>
+      <a class="btn" href="4-semester.html" rel="next" aria-label="Næste projekt: 4. semester">Næste: 4. semester →</a>
+    </div>
+  </nav>
+
   <!-- Modal -->
-  <div class="modal-overlay" id="modalOverlay">
+  <div class="modal-overlay" id="modalOverlay" aria-hidden="true">
     <div class="modal-content">
       <img class="modal-image" id="modalImage" src="" alt="">
-      <button class="modal-nav prev" id="prevBtn">‹</button>
-      <button class="modal-nav next" id="nextBtn">›</button>
-      <button class="modal-close" id="closeBtn">×</button>
+      <button class="modal-nav prev" id="prevBtn" aria-label="Forrige billede">‹</button>
+      <button class="modal-nav next" id="nextBtn" aria-label="Næste billede">›</button>
+      <button class="modal-close" id="closeBtn" aria-label="Luk">×</button>
       <div class="modal-counter" id="modalCounter">1 / 1</div>
       <div class="modal-title" id="modalTitle">Image Title</div>
     </div>
@@ -280,7 +292,7 @@
         this.translateY = 0;
         this.isDragging = false;
         this.lastPinchDistance = 0;
-        
+
         this.modal = document.getElementById('modalOverlay');
         this.modalImage = document.getElementById('modalImage');
         this.prevBtn = document.getElementById('prevBtn');
@@ -288,35 +300,39 @@
         this.closeBtn = document.getElementById('closeBtn');
         this.counter = document.getElementById('modalCounter');
         this.title = document.getElementById('modalTitle');
-        
+
         this.initEventListeners();
       }
-      
+
       initEventListeners() {
-        // Gallery buttons - get ALL images on the page
         document.querySelectorAll('[data-src]').forEach((btn, index) => {
-          btn.addEventListener('click', (e) => {
-            this.openModal(index);
-          });
+          btn.addEventListener('click', () => this.openModal(index));
         });
-        
-        // Modal controls
+
         this.prevBtn.addEventListener('click', () => this.showPrevious());
         this.nextBtn.addEventListener('click', () => this.showNext());
         this.closeBtn.addEventListener('click', () => this.closeModal());
-        
-        // Keyboard navigation
+
+        // Piletaster: billede-navigation hvis modal er åben, ellers side-navigation
         document.addEventListener('keydown', (e) => {
-          if (!this.modal.classList.contains('active')) return;
-          
-          switch(e.key) {
-            case 'ArrowLeft': this.showPrevious(); break;
-            case 'ArrowRight': this.showNext(); break;
-            case 'Escape': this.closeModal(); break;
+          const modalOpen = this.modal.classList.contains('active');
+          if (modalOpen) {
+            if (e.key === 'ArrowLeft') this.showPrevious();
+            if (e.key === 'ArrowRight') this.showNext();
+            if (e.key === 'Escape') this.closeModal();
+          } else {
+            if (e.key === 'ArrowLeft') {
+              const prev = document.querySelector('.pager a[rel="prev"]');
+              if (prev) window.location.href = prev.getAttribute('href');
+            }
+            if (e.key === 'ArrowRight') {
+              const next = document.querySelector('.pager a[rel="next"]');
+              if (next) window.location.href = next.getAttribute('href');
+            }
           }
         });
-        
-        // Touch/swipe events
+
+        // Touch zoom/drag
         this.modal.addEventListener('touchstart', (e) => {
           if (e.touches.length === 1) {
             this.touchStartX = e.touches[0].clientX;
@@ -326,197 +342,140 @@
             this.lastPinchDistance = this.getPinchDistance(e.touches);
           }
         });
-        
+
         this.modal.addEventListener('touchmove', (e) => {
           if (e.touches.length === 1 && this.isDragging && this.scale > 1) {
             e.preventDefault();
-            const deltaX = e.touches[0].clientX - this.touchStartX;
-            const deltaY = e.touches[0].clientY - this.touchStartY;
-            this.translateX += deltaX;
-            this.translateY += deltaY;
+            const dx = e.touches[0].clientX - this.touchStartX;
+            const dy = e.touches[0].clientY - this.touchStartY;
+            this.translateX += dx; this.translateY += dy;
             this.updateImageTransform();
             this.touchStartX = e.touches[0].clientX;
             this.touchStartY = e.touches[0].clientY;
           } else if (e.touches.length === 2) {
             e.preventDefault();
-            const pinchDistance = this.getPinchDistance(e.touches);
-            const scaleChange = pinchDistance / this.lastPinchDistance;
+            const pinch = this.getPinchDistance(e.touches);
+            const scaleChange = pinch / this.lastPinchDistance;
             this.scale = Math.min(Math.max(this.scale * scaleChange, 0.5), 3);
-            
-            // Auto-center when zooming out to 1.0 or less
-            if (this.scale <= 1) {
-              this.scale = 1;
-              this.translateX = 0;
-              this.translateY = 0;
-            }
-            
+            if (this.scale <= 1) { this.scale = 1; this.translateX = 0; this.translateY = 0; }
             this.updateImageTransform();
-            this.lastPinchDistance = pinchDistance;
+            this.lastPinchDistance = pinch;
           }
         });
-        
+
         this.modal.addEventListener('touchend', (e) => {
           if (e.touches.length === 0) {
             this.touchEndX = e.changedTouches[0].clientX;
             this.touchEndY = e.changedTouches[0].clientY;
             this.isDragging = false;
-            if (this.scale === 1) {
-              this.handleSwipe();
-            }
+            if (this.scale === 1) this.handleSwipe();
           }
         });
-        
-        // Mouse wheel zoom
+
+        // Wheel zoom
         this.modal.addEventListener('wheel', (e) => {
           e.preventDefault();
-          const zoomFactor = e.deltaY > 0 ? 0.9 : 1.1;
-          this.scale = Math.min(Math.max(this.scale * zoomFactor, 0.5), 3);
-          
-          // Auto-center when zooming out to 1.0 or less
-          if (this.scale <= 1) {
-            this.scale = 1;
-            this.translateX = 0;
-            this.translateY = 0;
-          }
-          
+          const z = e.deltaY > 0 ? 0.9 : 1.1;
+          this.scale = Math.min(Math.max(this.scale * z, 0.5), 3);
+          if (this.scale <= 1) { this.scale = 1; this.translateX = 0; this.translateY = 0; }
           this.updateImageTransform();
         });
-        
-        // Mouse drag (desktop)
+
+        // Mouse drag
         this.modalImage.addEventListener('mousedown', (e) => {
           if (this.scale > 1) {
             this.isDragging = true;
-            this.touchStartX = e.clientX;
-            this.touchStartY = e.clientY;
+            this.touchStartX = e.clientX; this.touchStartY = e.clientY;
             e.preventDefault();
           }
         });
-        
         document.addEventListener('mousemove', (e) => {
           if (this.isDragging && this.scale > 1) {
-            const deltaX = e.clientX - this.touchStartX;
-            const deltaY = e.clientY - this.touchStartY;
-            this.translateX += deltaX;
-            this.translateY += deltaY;
+            const dx = e.clientX - this.touchStartX;
+            const dy = e.clientY - this.touchStartY;
+            this.translateX += dx; this.translateY += dy;
             this.updateImageTransform();
-            this.touchStartX = e.clientX;
-            this.touchStartY = e.clientY;
+            this.touchStartX = e.clientX; this.touchStartY = e.clientY;
           }
         });
-        
-        document.addEventListener('mouseup', () => {
-          this.isDragging = false;
-        });
-        
-        // Double-click to reset zoom and center
+        document.addEventListener('mouseup', () => { this.isDragging = false; });
+
+        // Dobbeltklik: reset zoom
         this.modalImage.addEventListener('dblclick', () => {
-          this.scale = 1;
-          this.translateX = 0;
-          this.translateY = 0;
-          this.updateImageTransform();
+          this.scale = 1; this.translateX = 0; this.translateY = 0; this.updateImageTransform();
         });
-        
-        // Click outside to close (click anywhere in the dark area)
+
+        // Klik udenfor for at lukke
         this.modal.addEventListener('click', (e) => {
-          // Close if clicking on the modal overlay (dark area) but not on the image or controls
-          if (e.target === this.modal || e.target.classList.contains('modal-content')) {
-            this.closeModal();
-          }
+          if (e.target === this.modal || e.target.classList.contains('modal-content')) this.closeModal();
         });
       }
-      
+
       openModal(clickedIndex) {
-        // Get ALL images on the page (not grouped by gallery)
         this.images = Array.from(document.querySelectorAll('[data-src]'));
         this.currentIndex = clickedIndex;
-        
-        // Reset zoom and position
-        this.scale = 1;
-        this.translateX = 0;
-        this.translateY = 0;
-        
+        this.scale = 1; this.translateX = 0; this.translateY = 0;
         this.showImage();
         this.modal.classList.add('active');
         document.body.style.overflow = 'hidden';
+        this.modal.setAttribute('aria-hidden','false');
       }
-      
+
       closeModal() {
         this.modal.classList.remove('active');
         document.body.style.overflow = '';
+        this.modal.setAttribute('aria-hidden','true');
       }
-      
+
       showPrevious() {
         this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
-        this.scale = 1;
-        this.translateX = 0;
-        this.translateY = 0;
+        this.scale = 1; this.translateX = 0; this.translateY = 0;
         this.showImage();
       }
-      
+
       showNext() {
         this.currentIndex = (this.currentIndex + 1) % this.images.length;
-        this.scale = 1;
-        this.translateX = 0;
-        this.translateY = 0;
+        this.scale = 1; this.translateX = 0; this.translateY = 0;
         this.showImage();
       }
-      
+
       showImage() {
-        const currentImage = this.images[this.currentIndex];
-        this.modalImage.src = currentImage.dataset.src;
-        this.modalImage.alt = currentImage.dataset.title;
-        this.title.textContent = currentImage.dataset.title;
+        const node = this.images[this.currentIndex];
+        this.modalImage.src = node.dataset.src;
+        this.modalImage.alt = node.dataset.title || '';
+        this.title.textContent = node.dataset.title || '';
         this.counter.textContent = `${this.currentIndex + 1} / ${this.images.length}`;
-        
-        // Reset transform
         this.updateImageTransform();
-        
-        // Show/hide navigation buttons
         this.prevBtn.style.display = this.images.length > 1 ? 'flex' : 'none';
         this.nextBtn.style.display = this.images.length > 1 ? 'flex' : 'none';
       }
-      
+
       updateImageTransform() {
-        // Add smooth transition when returning to center
         if (this.scale === 1 && (this.translateX !== 0 || this.translateY !== 0)) {
           this.modalImage.style.transition = 'transform 0.3s ease';
         } else {
           this.modalImage.style.transition = 'transform 0.1s ease';
         }
-        
         this.modalImage.style.transform = `translate(${this.translateX}px, ${this.translateY}px) scale(${this.scale})`;
-        
-        // Reset transition after animation
-        if (this.scale === 1) {
-          setTimeout(() => {
-            this.modalImage.style.transition = 'transform 0.1s ease';
-          }, 300);
-        }
+        if (this.scale === 1) setTimeout(() => { this.modalImage.style.transition = 'transform 0.1s ease'; }, 300);
       }
-      
+
       getPinchDistance(touches) {
         const dx = touches[0].clientX - touches[1].clientX;
         const dy = touches[0].clientY - touches[1].clientY;
-        return Math.sqrt(dx * dx + dy * dy);
+        return Math.hypot(dx, dy);
       }
-      
+
       handleSwipe() {
-        const swipeThreshold = 50;
-        const swipeDistance = this.touchEndX - this.touchStartX;
-        const swipeDistanceY = Math.abs(this.touchEndY - this.touchStartY);
-        
-        // Only handle horizontal swipes when not zoomed and vertical swipe is minimal
-        if (Math.abs(swipeDistance) > swipeThreshold && swipeDistanceY < 100 && this.scale === 1) {
-          if (swipeDistance > 0) {
-            this.showPrevious();
-          } else {
-            this.showNext();
-          }
+        const threshold = 50;
+        const dx = this.touchEndX - this.touchStartX;
+        const dy = Math.abs(this.touchEndY - this.touchStartY);
+        if (Math.abs(dx) > threshold && dy < 100 && this.scale === 1) {
+          if (dx > 0) this.showPrevious(); else this.showNext();
         }
       }
     }
-    
-    // Initialize gallery when DOM is loaded
+
     document.addEventListener('DOMContentLoaded', () => {
       new SwipeableGallery();
     });

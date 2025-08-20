@@ -99,6 +99,28 @@
       .modal-title{ padding:15px; font-size:14px; }
       .modal-image{ max-height:calc(100vh - 60px); margin-top:30px; }
     }
+
+    /* Pager (forrige/næste) */
+.pager{ 
+  position:sticky; bottom:0; z-index:40; 
+  background:rgba(248,250,252,0.85); backdrop-filter: blur(8px); 
+  border-top:1px solid var(--border); margin-top:24px; padding:12px 0; 
+}
+.pager .inner{ 
+  max-width:1000px; margin:0 auto; padding:0 24px; 
+  display:flex; gap:12px; justify-content:space-between; align-items:center; 
+}
+.pager a.btn{ 
+  display:inline-flex; align-items:center; gap:8px; 
+  padding:10px 14px; border:1px solid var(--border); border-radius:12px; 
+  background:#fff; text-decoration:none; 
+  transition:transform .15s, box-shadow .15s; 
+}
+.pager a.btn:hover{ 
+  transform:translateY(-1px); 
+  box-shadow:0 6px 18px rgba(0,0,0,.08); 
+}
+
   </style>
 </head>
 <body>
@@ -195,6 +217,15 @@
   </section>
 
 </main>
+
+<!-- Pager: Forrige/Næste -->
+<nav class="pager" aria-label="Projektnavigation">
+  <div class="inner">
+    <a class="btn" href="valgfag-dispositionsforslag.html" rel="prev" aria-label="Forrige projekt: Byggeprogram til dispositionsforslag">← Forrige: Byggeprogram til dispositionsforslag</a>
+    <a class="btn" href="projekter.html" rel="next" aria-label="Tilbage: projekter">Tilbage: projekter →</a>
+  </div>
+</nav>
+
 
 <!-- Modal (samme markup som 2. semester) -->
 <div class="modal-overlay" id="modalOverlay">

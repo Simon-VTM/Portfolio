@@ -29,7 +29,7 @@
     .card{ background:#fff; padding:var(--space); border-radius:var(--radius); }
     .full-span{ grid-column: 1 / -1; }
 
-    /* Gallery */
+    /* Galleri */
     .gallery-section h2{ margin:0 0 10px; }
     .gallery-section h3{ margin:18px 0 10px; font-size:18px; }
     .gallery-grid{ display:grid; gap:12px; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); }
@@ -64,7 +64,6 @@
       cursor: grab;
       margin-top: 40px;
     }
-    
     .modal-image:active{ cursor: grabbing; }
 
     .modal-nav{ 
@@ -107,6 +106,22 @@
       .modal-title{ padding:15px; font-size:14px; }
       .modal-image{ max-height:calc(100vh - 60px); margin-top: 30px; }
     }
+
+    /* Pager (forrige/næste) */
+    .pager{
+      position:sticky; bottom:0; z-index:40;
+      background:rgba(248,250,252,0.85);
+      backdrop-filter: blur(8px);
+      border-top:1px solid var(--border);
+      margin-top:24px; padding:12px 0;
+    }
+    .pager .inner{ max-width:1000px; margin:0 auto; padding:0 24px; display:flex; gap:12px; justify-content:space-between; align-items:center; }
+    .pager a.btn{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 14px; border:1px solid var(--border); border-radius:12px; background:#fff; text-decoration:none;
+      transition:transform .15s, box-shadow .15s;
+    }
+    .pager a.btn:hover{ transform:translateY(-1px); box-shadow:0 6px 18px rgba(0,0,0,.08); }
   </style>
 </head>
 <body>
@@ -124,8 +139,8 @@
         <h1>Tæt-lavt boligområde & fælleshus</h1>
         <div class="chips">
           <span class="chip">Situationsplan</span><span class="chip">Bygningsdesign</span>
-          <span class="chip">Bæredygtighed</span><span class="chip">Tekniske installationer</span>
-          <span class="chip">Udbudsprojekt</span><span class="chip">Energikrav</span>
+          <span class="chip">Bæredygtighed</span><span class="chip">Energikrav</span>
+          <span class="chip">Udbudsprojekt</span>
         </div>
       </div>
     </div>
@@ -134,30 +149,30 @@
   <main class="grid">
     <section class="card">
       <h2 style="margin-top:0;">Projektoversigt</h2>
-      <p>På andet semester blev der projekteret et tæt-lavt boligområde med tilhørende
-      fælleshus. Projektet omfattede boliger i to etager – heraf handicapvenlige
-      enheder – samt fællesfaciliteter med kælder. Der blev arbejdet med
-      situationsplaner, bygningsdesign, materialevalg, bæredygtighedsløsninger og
-      tekniske installationer gennem faserne forslag, myndighed og udbud – med fokus
-      på arkitektonisk udtryk, funktionalitet, energikrav og bygherrekrav.</p>
+      <p>På 2. semester blev der arbejdet med projektering af et tæt-lavt boligområde med tilhørende fælleshus. 
+        Projektet omfattede tre boliger i to etager, hvoraf to skulle være sammenhængende og indrettet som handicapvenlige, 
+        samt et fælleshus med kælder, stue- og 1. sal.
+        Arbejdet omfattede udarbejdelse af forslagsprojekt, myndighedsprojekt i henhold til BR18 og lokalplan samt udbudsprojekt, 
+        med fokus på arealudnyttelse, konstruktioner, materialevalg og bæredygtige løsninger.</p>
 
       <h3>Nøgleopgaver</h3>
       <ul>
-        <li>Stedanalyse og situationsplan</li>
-        <li>Boligtypologi, adgangsforhold og tilgængelighed</li>
-        <li>Projektering af fælleshus (kælder og fællesfunktioner)</li>
+        <li>Team projekt</li>
+        <li>Udarbejdelse af situationsplaner med boliger, parkering og fællesfaciliteter</li>
+        <li>Forslagsprojekt og myndighedsprojekt iht. BR18 og lokalplan</li>
+        <li>Udbudsprojekt inkl. økonomiske overslag og tidsplan</li>
         <li>Bæredygtighedstiltag og energikrav</li>
-        <li>Koordinering af tekniske installationer</li>
-        <li>Forslag-, myndigheds- og udbudsprojekt</li>
+        <li>Bygningsfysik: U-værdier, varmetabsberegning, brandkrav og egenlastberegning</li>
+        <li>Modellering og dokumentation i Revit</li>
       </ul>
     </section>
 
     <section class="card">
       <h2 style="margin-top:0;">Fakta</h2>
       <ul>
-        <li><strong>Type:</strong> Tæt-lav bebyggelse + fælleshus</li>
-        <li><strong>Fokus:</strong> Funktionalitet, energikrav, bygherrekrav</li>
-        <li><strong>Roller/værktøjer:</strong> Revit, energiberegning, installationer</li>
+        <li><strong>Adresse:</strong> Sønderparken, 6740 Bramming</li>
+        <li><strong>Bygningstype:</strong> Tæt-lav bebyggelse og fælleshus</li>
+        <li><strong>Roller/værktøjer:</strong> Revit, energiberegning, Twinmotion, LCAbyg, Sigma Entreprise</li>
       </ul>
     </section>
 
@@ -189,7 +204,7 @@
         </button>
       </div>
 
-<h3>Facade- og Snit-tegninger</h3>
+      <h3>Facade- og Snit-tegninger</h3>
       <div class="gallery-grid">
         <button type="button" data-src="billeder/2-semester/K01-H2-E0X-N001-Facade-Ost-og-vest.jpg" data-title="Facade Øst og Vest">
           <img src="billeder/2-semester/K01-H2-E0X-N001-Facade-Ost-og-vest.jpg" alt="Facade Øst og Vest" loading="lazy">
@@ -219,8 +234,8 @@
         <button type="button" data-src="billeder/2-semester/K01-H1-E0X-N003-Kloakplan.jpg" data-title="Kloakplan">
           <img src="billeder/2-semester/K01-H1-E0X-N003-Kloakplan.jpg" alt="Kloakplan" loading="lazy">
         </button>
-        <button type="button" data-src="billeder/2-semester/K01-H1-E0X-N004-Regnvandsplan.jpg" data-title="Kloakplan">
-          <img src="billeder/2-semester/K01-H1-E0X-N004-Regnvandsplan.jpg" alt="Kloakplan" loading="lazy">
+        <button type="button" data-src="billeder/2-semester/K01-H1-E0X-N004-Regnvandsplan.jpg" data-title="Regnvandsplan">
+          <img src="billeder/2-semester/K01-H1-E0X-N004-Regnvandsplan.jpg" alt="Regnvandsplan" loading="lazy">
         </button>
         <button type="button" data-src="billeder/2-semester/K01_H1_ET_N002 - Spærplan bolig - _page-0001.jpg" data-title="Spærplan Bolig">
           <img src="billeder/2-semester/K01_H1_ET_N002 - Spærplan bolig - _page-0001.jpg" alt="Spærplan Bolig" loading="lazy">
@@ -251,13 +266,21 @@
     </section>
   </main>
 
+  <!-- Pager: Forrige/Næste -->
+  <nav class="pager" aria-label="Projektnavigation">
+    <div class="inner">
+      <a class="btn" href="1-semester.html" rel="prev" aria-label="Forrige projekt: 1. semester">← Forrige: 1. semester</a>
+      <a class="btn" href="3-semester.html" rel="next" aria-label="Næste projekt: 3. semester">Næste: 3. semester →</a>
+    </div>
+  </nav>
+
   <!-- Modal Gallery -->
-  <div class="modal-overlay" id="modalOverlay">
+  <div class="modal-overlay" id="modalOverlay" aria-hidden="true">
     <div class="modal-content">
       <img class="modal-image" id="modalImage" src="" alt="">
-      <button class="modal-nav prev" id="prevBtn">‹</button>
-      <button class="modal-nav next" id="nextBtn">›</button>
-      <button class="modal-close" id="closeBtn">×</button>
+      <button class="modal-nav prev" id="prevBtn" aria-label="Forrige billede">‹</button>
+      <button class="modal-nav next" id="nextBtn" aria-label="Næste billede">›</button>
+      <button class="modal-close" id="closeBtn" aria-label="Luk">×</button>
       <div class="modal-counter" id="modalCounter">1 / 1</div>
       <div class="modal-title" id="modalTitle">Image Title</div>
     </div>
@@ -304,14 +327,24 @@
         this.nextBtn.addEventListener('click', () => this.showNext());
         this.closeBtn.addEventListener('click', () => this.closeModal());
         
-        // Keyboard navigation
+        // Keyboard navigation (modal åben => billede-navigation, ellers side-navigation)
         document.addEventListener('keydown', (e) => {
-          if (!this.modal.classList.contains('active')) return;
-          
-          switch(e.key) {
-            case 'ArrowLeft': this.showPrevious(); break;
-            case 'ArrowRight': this.showNext(); break;
-            case 'Escape': this.closeModal(); break;
+          const modalOpen = this.modal.classList.contains('active');
+          if (modalOpen) {
+            switch(e.key) {
+              case 'ArrowLeft': this.showPrevious(); break;
+              case 'ArrowRight': this.showNext(); break;
+              case 'Escape': this.closeModal(); break;
+            }
+          } else {
+            if (e.key === 'ArrowLeft') {
+              const prev = document.querySelector('.pager a[rel="prev"]');
+              if (prev) window.location.href = prev.getAttribute('href');
+            }
+            if (e.key === 'ArrowRight') {
+              const next = document.querySelector('.pager a[rel="next"]');
+              if (next) window.location.href = next.getAttribute('href');
+            }
           }
         });
         
@@ -342,7 +375,6 @@
             const scaleChange = pinchDistance / this.lastPinchDistance;
             this.scale = Math.min(Math.max(this.scale * scaleChange, 0.5), 3);
             
-            // Auto-center when zooming out to 1.0 or less
             if (this.scale <= 1) {
               this.scale = 1;
               this.translateX = 0;
@@ -371,7 +403,6 @@
           const zoomFactor = e.deltaY > 0 ? 0.9 : 1.1;
           this.scale = Math.min(Math.max(this.scale * zoomFactor, 0.5), 3);
           
-          // Auto-center when zooming out to 1.0 or less
           if (this.scale <= 1) {
             this.scale = 1;
             this.translateX = 0;
@@ -417,7 +448,6 @@
         
         // Click outside to close (click anywhere in the dark area)
         this.modal.addEventListener('click', (e) => {
-          // Close if clicking on the modal overlay (dark area) but not on the image or controls
           if (e.target === this.modal || e.target.classList.contains('modal-content')) {
             this.closeModal();
           }
@@ -425,7 +455,7 @@
       }
       
       openModal(clickedIndex) {
-        // Get ALL images on the page (not grouped by gallery)
+        // Get ALL images on the page (not grouped)
         this.images = Array.from(document.querySelectorAll('[data-src]'));
         this.currentIndex = clickedIndex;
         
@@ -437,11 +467,13 @@
         this.showImage();
         this.modal.classList.add('active');
         document.body.style.overflow = 'hidden';
+        this.modal.setAttribute('aria-hidden','false');
       }
       
       closeModal() {
         this.modal.classList.remove('active');
         document.body.style.overflow = '';
+        this.modal.setAttribute('aria-hidden','true');
       }
       
       showPrevious() {
@@ -463,8 +495,8 @@
       showImage() {
         const currentImage = this.images[this.currentIndex];
         this.modalImage.src = currentImage.dataset.src;
-        this.modalImage.alt = currentImage.dataset.title;
-        this.title.textContent = currentImage.dataset.title;
+        this.modalImage.alt = currentImage.dataset.title || '';
+        this.title.textContent = currentImage.dataset.title || '';
         this.counter.textContent = `${this.currentIndex + 1} / ${this.images.length}`;
         
         // Reset transform
@@ -476,16 +508,13 @@
       }
       
       updateImageTransform() {
-        // Add smooth transition when returning to center
+        // Smooth transition when snapping back to center
         if (this.scale === 1 && (this.translateX !== 0 || this.translateY !== 0)) {
           this.modalImage.style.transition = 'transform 0.3s ease';
         } else {
           this.modalImage.style.transition = 'transform 0.1s ease';
         }
-        
         this.modalImage.style.transform = `translate(${this.translateX}px, ${this.translateY}px) scale(${this.scale})`;
-        
-        // Reset transition after animation
         if (this.scale === 1) {
           setTimeout(() => {
             this.modalImage.style.transition = 'transform 0.1s ease';
@@ -503,8 +532,6 @@
         const swipeThreshold = 50;
         const swipeDistance = this.touchEndX - this.touchStartX;
         const swipeDistanceY = Math.abs(this.touchEndY - this.touchStartY);
-        
-        // Only handle horizontal swipes when not zoomed and vertical swipe is minimal
         if (Math.abs(swipeDistance) > swipeThreshold && swipeDistanceY < 100 && this.scale === 1) {
           if (swipeDistance > 0) {
             this.showPrevious();
@@ -515,7 +542,7 @@
       }
     }
     
-    // Initialize gallery when DOM is loaded
+    // Init
     document.addEventListener('DOMContentLoaded', () => {
       new SwipeableGallery();
     });

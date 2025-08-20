@@ -2,7 +2,7 @@
 <html lang="da">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Valgfag – Fra program til dispositionsforslag</title>
+  <title>Valgfag – Fra Byggeprogram til dispositionsforslag</title>
   <style>
     :root{ --space:20px; --radius:16px; --border:#e6e8eb; }
     body{ font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial; margin:0; color:#0f172a; background:#f8fafc }
@@ -103,6 +103,28 @@
       .modal-title{ padding:15px; font-size:14px; }
       .modal-image{ max-height:calc(100vh - 60px); margin-top: 30px; }
     }
+
+    /* Pager (forrige/næste) */
+.pager{ 
+  position:sticky; bottom:0; z-index:40; 
+  background:rgba(248,250,252,0.85); backdrop-filter: blur(8px); 
+  border-top:1px solid var(--border); margin-top:24px; padding:12px 0; 
+}
+.pager .inner{ 
+  max-width:1000px; margin:0 auto; padding:0 24px; 
+  display:flex; gap:12px; justify-content:space-between; align-items:center; 
+}
+.pager a.btn{ 
+  display:inline-flex; align-items:center; gap:8px; 
+  padding:10px 14px; border:1px solid var(--border); border-radius:12px; 
+  background:#fff; text-decoration:none; 
+  transition:transform .15s, box-shadow .15s; 
+}
+.pager a.btn:hover{ 
+  transform:translateY(-1px); 
+  box-shadow:0 6px 18px rgba(0,0,0,.08); 
+}
+
   </style>
 </head>
 <body>
@@ -115,7 +137,7 @@
     </div>
     <div class="body">
       <div class="meta">Valgfag</div>
-      <h1>Fra program til dispositionsforslag</h1>
+      <h1>Fra Byggeprogram til dispositionsforslag</h1>
       <div class="chips"><span class="chip">Bygherreprogram</span><span class="chip">Lokalplan</span><span class="chip">BR18</span></div>
     </div>
   </div>
@@ -193,6 +215,14 @@
     </div>
   </section>
 </main>
+
+<!-- Pager: Forrige/Næste -->
+<nav class="pager" aria-label="Projektnavigation">
+  <div class="inner">
+    <a class="btn" href="4-semester.html" rel="prev" aria-label="Forrige projekt: 4. semester">← Forrige: 4. semester</a>
+    <a class="btn" href="valgfag-revit.html" rel="next" aria-label="Næste projekt: Valgfag – Revit">Næste: Valgfag – Revit →</a>
+  </div>
+</nav>
 
 <!-- Modal (samme markup som 2. semester) -->
 <div class="modal-overlay" id="modalOverlay">
